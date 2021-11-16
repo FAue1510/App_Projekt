@@ -14,6 +14,10 @@
         <activity android:name="activity.SignUpActivity123"></activity>
         <activity android:name="activity.SignUpActivity_2"></activity>
         <activity android:name="activity.DataViewActivity"></activity>
+
+        <activity android:name="classy.SignUpActivity"></activity>
+        <activity android:name="classy.Splash"></activity>
+        <activity android:name="classy.AboutYouActivity"></activity>
         <activity
             android:name="classy.SignInActivity"
             android:exported="true">

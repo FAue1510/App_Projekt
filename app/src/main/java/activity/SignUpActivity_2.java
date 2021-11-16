@@ -91,8 +91,8 @@ public class SignUpActivity_2 extends Activity {
                                         if (task.isSuccessful()) {
                                             Toast.makeText(SignUpActivity_2.this, "Registration successful", Toast.LENGTH_LONG).show();
                                             //Switches to the start screen after successful completion of registration
-                                            Intent intent = new Intent(getApplicationContext(), StartActivity.class);
-                                            startActivity(intent);
+                                            //Intent intent = new Intent(getApplicationContext(), STARTACTIVITY_DELETE_READY.class);
+                                            //startActivity(intent);
                                         }else{
                                             Toast.makeText(SignUpActivity_2.this, "Registration failed", Toast.LENGTH_LONG).show();
                                         }

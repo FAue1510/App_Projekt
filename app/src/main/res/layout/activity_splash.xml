@@ -29,7 +29,7 @@
         android:layout_marginTop="@dimen/margin_15"
         android:max="100" />
 
-    <fontsmaterialuiux.cairoTextView
+    <fontsUI.cairoTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

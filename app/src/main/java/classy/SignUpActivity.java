@@ -1,40 +1,40 @@
 package classy;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 
 import com.example.a21q4_app_projekt.R;
 
-import fontsmaterialuiux.cairoButton;
-import fontsmaterialuiux.cairoEditText;
-import fontsmaterialuiux.cairoTextView;
+import fontsUI.cairoButton;
+import fontsUI.cairoEditText;
+import fontsUI.cairoTextView;
 
 
-public class SignUpActivity extends AppCompatActivity implements View.OnClickListener
+public class SignUpActivity extends Activity implements View.OnClickListener
 {
 
-    cairoEditText _nameEditText,_emailEditText,_passwordEditText;
-    cairoButton _signUpButton;
-    cairoTextView _login;
+    cairoEditText nameEditText, emailEditText, passwordEditText;
+    cairoButton signUpButton;
+    cairoTextView login;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
         /////*     initialize view   */////
-        _login = findViewById(R.id.id_login_TextView);
-        _nameEditText = findViewById(R.id.id_fullName_EditText);
-        _emailEditText = findViewById(R.id.id_email_EditText);
-        _passwordEditText = findViewById(R.id.id_password_EditText);
-        _signUpButton = findViewById(R.id.id_signUp_Button);
+        login = findViewById(R.id.id_login_TextView);
+        nameEditText = findViewById(R.id.id_fullName_EditText);
+        emailEditText = findViewById(R.id.id_email_EditText);
+        passwordEditText = findViewById(R.id.id_password_EditText);
+        signUpButton = findViewById(R.id.id_signUp_Button);
 
 
 
         /////*     On Click         */////
-        _login.setOnClickListener(this);
-        _signUpButton.setOnClickListener(this);
+        login.setOnClickListener(this);
+        signUpButton.setOnClickListener(this);
 
 
     }
@@ -44,13 +44,13 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View v)
     {
-        if (v == _login)
+        if (v == login)
         {
             Intent intent = new Intent(this, SignInActivity.class);
             startActivity(intent);
             overridePendingTransition(R.anim.from_left_in, R.anim.from_right_out);
         }
-        if (v==_signUpButton)
+        if (v== signUpButton)
         {
             signupfunction();
         }
@@ -63,9 +63,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     {
 
         /////*   Get  Email  && Name  && Password    */////
-        String fullName = _nameEditText.getText().toString();
-        String email = _emailEditText.getText().toString();
-        String password = _passwordEditText.getText().toString();
+        String fullName = nameEditText.getText().toString();
+        String email = emailEditText.getText().toString();
+        String password = passwordEditText.getText().toString();
 
         /////*   Check if email and password written and valid   */////
         if (!validate())
@@ -83,35 +83,35 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     {
         boolean valid = true;
 
-        String fullName = _nameEditText.getText().toString();
-        String email = _emailEditText.getText().toString();
-        String password = _passwordEditText.getText().toString();
+        String fullName = nameEditText.getText().toString();
+        String email = emailEditText.getText().toString();
+        String password = passwordEditText.getText().toString();
 
         if (fullName.isEmpty())
         {
-            _nameEditText.setError(getString(R.string.enteryourname));
+            nameEditText.setError(getString(R.string.enteryourname));
             valid = false;
         } else
         {
-            _nameEditText.setError(null);
+            nameEditText.setError(null);
         }
 
         if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches())
         {
-            _emailEditText.setError(getString(R.string.validemail));
+            emailEditText.setError(getString(R.string.validemail));
             valid = false;
         } else
         {
-            _emailEditText.setError(null);
+            emailEditText.setError(null);
         }
 
-        if (password.isEmpty() || password.length() < 6 || password.length() > 12)
+        if (password.isEmpty())
         {
-            _passwordEditText.setError(getString(R.string.validpassword));
+            passwordEditText.setError(getString(R.string.validpassword));
             valid = false;
         } else
         {
-            _passwordEditText.setError(null);
+            passwordEditText.setError(null);
         }
 
         return valid;
@@ -120,6 +120,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     {
         /////*   Sign Up : success  */////
         Intent intent = new Intent(this, AboutYouActivity.class);
+        intent.putExtra("email", emailEditText.getText().toString());
+        intent.putExtra("full_name", nameEditText.getText().toString());
+        intent.putExtra("password", passwordEditText.getText().toString());
         startActivity(intent);
         overridePendingTransition(R.anim.from_right_in, R.anim.from_left_out);
 

@@ -1,28 +1,28 @@
-package fontsmaterialuiux;
+package fontsUI;
 
 import android.content.Context;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
+import android.widget.Button;
 
-import androidx.appcompat.widget.AppCompatEditText;
+import com.example.a21q4_app_projekt.R;
 
-public class cairoEditText extends AppCompatEditText
+public class cairoButton  extends Button
 {
 
-
-    public cairoEditText(Context context)
+    public cairoButton(Context context)
     {
         super(context);
         init();
     }
 
-    public cairoEditText(Context context, AttributeSet attrs)
+    public cairoButton(Context context, AttributeSet attrs)
     {
-        super(context, attrs);
+        this(context, attrs, R.attr.borderlessButtonStyle);
         init();
     }
 
-    public cairoEditText(Context context, AttributeSet attrs, int defStyleAttr)
+    public cairoButton(Context context, AttributeSet attrs, int defStyleAttr)
     {
         super(context, attrs, defStyleAttr);
         init();
@@ -32,9 +32,9 @@ public class cairoEditText extends AppCompatEditText
     {
         if (!isInEditMode())
         {
+            setTextSize(18);
             Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "fonts/Cairo-Regular.ttf");
             setTypeface(tf);
         }
     }
-
 }

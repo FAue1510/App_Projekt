@@ -9,13 +9,13 @@
     tools:ignore="HardcodedText">
 
 
-    <fontsmaterialuiux.cairoTextView
+    <fontsUI.cairoTextView
         android:id="@+id/id_aboutyou_TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/marign_54"
+        android:layout_marginStart="40dp"
         android:layout_marginLeft="@dimen/marign_54"
-        android:layout_marginTop="@dimen/marign_46"
+        android:layout_marginTop="40dp"
         android:contentDescription="For more visit www.materialuiux.com"
         android:text="@string/aboutyou"
         android:textColor="@color/signupsignintextcolor"
@@ -27,15 +27,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/id_aboutyou_TextView"
-        android:layout_marginStart="@dimen/marign_66"
-        android:layout_marginLeft="@dimen/marign_66"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
         android:layout_marginTop="@dimen/marign_46"
-        android:layout_marginEnd="@dimen/marign_64"
-        android:layout_marginRight="@dimen/marign_64"
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="40dp"
         android:contentDescription="For more visit www.materialuiux.com"
         android:padding="@dimen/padding_8">
 
-        <fontsmaterialuiux.cairoTextView
+        <fontsUI.cairoTextView
             android:layout_width="183dp"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -67,27 +67,29 @@
         android:layout_above="@+id/id_done_Button"
         android:layout_below="@+id/id_uploadPicture_RelativeLayout"
         android:layout_centerInParent="true"
-        android:layout_marginLeft="@dimen/marign_69"
+        android:layout_marginLeft="40dp"
         android:layout_marginTop="@dimen/marign_26"
-        android:layout_marginRight="@dimen/marign_69"
+        android:layout_marginRight="40dp"
         android:contentDescription="For more visit www.materialuiux.com">
 
-        <fontsmaterialuiux.cairoEditText
+        <fontsUI.cairoEditText
             android:id="@+id/id_userName_EditText"
             style="@style/editText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
+            android:layout_marginLeft="@dimen/marign_5"
             android:hint="@string/username"
             android:minWidth="@dimen/width_180"
             android:paddingBottom="@dimen/marign_10"
             android:textSize="@dimen/textsize_20" />
 
-        <fontsmaterialuiux.cairoTextView
+        <fontsUI.cairoTextView
             android:id="@+id/id_pickYourDate_TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/id_userName_EditText"
+            android:layout_marginLeft="@dimen/marign_5"
             android:layout_marginTop="@dimen/marign_22"
             android:contentDescription="For more visit www.materialuiux.com"
             android:text="@string/pickYourDate"
@@ -127,20 +129,21 @@
         </LinearLayout>
 
 
-        <fontsmaterialuiux.cairoTextView
+        <fontsUI.cairoTextView
             android:id="@+id/id_iam_TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/id_pickYourDate_LinearLayout"
-            android:contentDescription="For more visit www.materialuiux.com"
+            android:layout_marginLeft="@dimen/marign_5"
             android:layout_marginTop="@dimen/marign_24"
+            android:contentDescription="For more visit www.materialuiux.com"
             android:text="@string/iam"
             android:textSize="@dimen/textsize_20" />
 
         <classy.CustomSwitch.customSwitch
             android:id="@+id/id_gender_customSwitch"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="80dp"
             android:layout_below="@+id/id_iam_TextView"
             android:layout_marginTop="@dimen/marign_8"
             android:contentDescription="For more visit www.materialuiux.com"
@@ -157,7 +160,7 @@
     </RelativeLayout>
 
 
-    <fontsmaterialuiux.cairoButton
+    <fontsUI.cairoButton
         android:id="@+id/id_done_Button"
         android:layout_width="@dimen/height_50"
         android:contentDescription="For more visit www.materialuiux.com"
@@ -166,5 +169,5 @@
         android:layout_centerInParent="true"
         android:layout_marginTop="@dimen/marign_27"
         android:layout_marginBottom="@dimen/marign_18"
-        android:background="@drawable/ic_done_background" />
+        android:background="@drawable/ic_next_background" />
 </RelativeLayout>

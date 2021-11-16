@@ -1,27 +1,28 @@
-package fontsmaterialuiux;
+package fontsUI;
 
 import android.content.Context;
 import android.graphics.Typeface;
-import androidx.appcompat.widget.AppCompatTextView;
 import android.util.AttributeSet;
 
+import androidx.appcompat.widget.AppCompatEditText;
 
-public class cairoTextView extends AppCompatTextView
+public class cairoEditText extends AppCompatEditText
 {
 
-    public cairoTextView(Context context)
+
+    public cairoEditText(Context context)
     {
         super(context);
         init();
     }
 
-    public cairoTextView(Context context, AttributeSet attrs)
+    public cairoEditText(Context context, AttributeSet attrs)
     {
         super(context, attrs);
         init();
     }
 
-    public cairoTextView(Context context, AttributeSet attrs, int defStyleAttr)
+    public cairoEditText(Context context, AttributeSet attrs, int defStyleAttr)
     {
         super(context, attrs, defStyleAttr);
         init();
@@ -35,4 +36,5 @@ public class cairoTextView extends AppCompatTextView
             setTypeface(tf);
         }
     }
+
 }
