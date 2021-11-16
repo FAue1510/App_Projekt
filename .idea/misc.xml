@@ -3,15 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Max/AndroidRepositoryApp/App_Projekt/app/src/main/res/layout/activity_dataview.xml" value="0.36666666666666664" />
-        <entry key="..\:/Max/AndroidRepositoryApp/App_Projekt/app/src/main/res/layout/activity_home.xml" value="0.22708333333333333" />
-        <entry key="..\:/Max/AndroidRepositoryApp/App_Projekt/app/src/main/res/layout/activity_sign_up.xml" value="0.36666666666666664" />
-        <entry key="..\:/Max/AndroidRepositoryApp/App_Projekt/app/src/main/res/layout/activity_sign_up_2.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/FAue/AndroidStudioProjects/21Q4_App_Projekt/app/src/main/res/layout/activity_home.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/FAue/AndroidStudioProjects/21Q4_App_Projekt/app/src/main/res/layout/activity_main.xml" value="0.1793478260869565" />
         <entry key="..\:/Users/FAue/AndroidStudioProjects/21Q4_App_Projekt/app/src/main/res/layout/activity_sign_up.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/FAue/AndroidStudioProjects/21Q4_App_Projekt/app/src/main/res/layout/activity_sign_up_2.xml" value="0.24728260869565216" />
         <entry key="..\:/Users/FAue/AndroidStudioProjects/21Q4_App_Projekt/app/src/main/res/layout/activity_start.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/flori/AndroidStudioProjects/App_Projekt/app/src/main/res/layout/activity_dataview.xml" value="0.3541666666666667" />
+        <entry key="..\:/Users/flori/AndroidStudioProjects/App_Projekt/app/src/main/res/layout/activity_home.xml" value="0.3541666666666667" />
+        <entry key="..\:/Users/flori/AndroidStudioProjects/App_Projekt/app/src/main/res/layout/activity_sign_up.xml" value="0.3541666666666667" />
+        <entry key="..\:/Users/flori/AndroidStudioProjects/App_Projekt/app/src/main/res/layout/activity_sign_up_2.xml" value="0.33" />
+        <entry key="..\:/Users/flori/AndroidStudioProjects/App_Projekt/app/src/main/res/layout/activity_start.xml" value="0.3541666666666667" />
       </map>
     </option>
   </component>
