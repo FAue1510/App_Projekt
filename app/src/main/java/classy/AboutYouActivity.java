@@ -19,6 +19,7 @@ import classy.CustomDatePicker.DatePicker;
 import classy.CustomSwitch.customSwitch;
 import fontsUI.cairoButton;
 import fontsUI.cairoEditText;
+import model.Account;
 
 
 public class AboutYouActivity extends Activity implements View.OnClickListener
@@ -30,12 +31,26 @@ public class AboutYouActivity extends Activity implements View.OnClickListener
     cairoButton doneButton;
     Button uploadPictureButton;
     customSwitch genderCustomSwitch;
+
+    Account ac = Account.getInstance();
+
+    String fullName;
+    String email;
+    String password;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_you);
+
+        if(savedInstanceState == null) {
+            Bundle extra = getIntent().getExtras();
+            password = extra.getString("password");
+            email = extra.getString("email");
+            fullName = extra.getString("username");
+        }
 
         /////*     initialize view   */////
         uploadPictureButton = findViewById(R.id.id_uploadPicture_Button);
