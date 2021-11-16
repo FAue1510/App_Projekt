@@ -30,7 +30,7 @@ public class StartActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_start);
+        setContentView(R.layout.activity_sign_in);
 
         prefs = this.getPreferences(Context.MODE_PRIVATE);
 
@@ -38,8 +38,8 @@ public class StartActivity extends Activity {
         prefs.edit().putBoolean("signedin", false).commit();
         //------------------------------------------
 
-        edt_username = findViewById(R.id.edt_email_start);
-        edt_password = findViewById(R.id.edt_password_start);
+        //edt_username = findViewById(R.id.edt_email_start);
+        //edt_password = findViewById(R.id.edt_password_start);
 
         if(prefs.getBoolean("signedin", false)){
             Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
@@ -66,7 +66,7 @@ public class StartActivity extends Activity {
     }
 
     public void signup_click(View view) {
-        Intent intent = new Intent(getApplicationContext(), SignUpActivity.class);
+        Intent intent = new Intent(getApplicationContext(), SignUpActivity123.class);
         startActivity(intent);
 
     }

@@ -11,11 +11,11 @@
         android:theme="@style/Theme.21Q4_App_Projekt"
         android:usesCleartextTraffic="true">
         <activity android:name="activity.HomeActivity"></activity>
-        <activity android:name="activity.SignUpActivity"></activity>
+        <activity android:name="activity.SignUpActivity123"></activity>
         <activity android:name="activity.SignUpActivity_2"></activity>
         <activity android:name="activity.DataViewActivity"></activity>
         <activity
-            android:name="activity.StartActivity"
+            android:name="classy.SignInActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

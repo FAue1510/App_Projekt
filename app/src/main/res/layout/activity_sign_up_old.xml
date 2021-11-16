@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="activity.HomeActivity">
+    tools:context="activity.SignUpActivity123"
+    android:background="@drawable/backgroud">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,61 +20,71 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <EditText
-            android:id="@+id/edt_search"
+            android:id="@+id/edt_email_signup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/edittext_start_layout"
-            android:ems="10"
-            android:hint="Search"
-            android:importantForAutofill="no"
-            android:inputType="text"
-            android:minHeight="48dp"
-            android:padding="10dip"
-            android:textAlignment="inherit"
-            android:textSize="18sp"
-            tools:ignore="TextContrastCheck" />
-
-        <EditText
-            android:id="@+id/edt_fachbereich"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/edittext_start_layout"
-            android:ems="10"
-            android:hint="Fachbereich"
-            android:importantForAutofill="no"
-            android:inputType="text"
-            android:minHeight="48dp"
-            android:padding="10dip"
-            android:textAlignment="inherit"
-            android:textSize="18sp"
-            tools:ignore="TextContrastCheck" />
-
-        <EditText
-            android:id="@+id/edt_umkreis"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/edittext_start_layout"
-            android:ems="10"
-            android:hint="Umkreis"
-            android:importantForAutofill="no"
-            android:inputType="text"
-            android:minHeight="48dp"
-            android:padding="10dip"
-            android:textAlignment="inherit"
-            android:textSize="18sp"
-            tools:ignore="TextContrastCheck" />
-
-        <DatePicker
-            android:id="@+id/sp_date"
-            android:layout_width="match_parent"
-            android:layout_height="180dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:calendarViewShown="false"
-            android:datePickerMode="spinner"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/edittext_start_layout"
             android:ems="10"
+            android:hint="@string/edt_email"
+            android:importantForAutofill="no"
+            android:inputType="text|textEmailAddress"
+            android:minHeight="48dp"
+            android:padding="10dip"
+            android:textAlignment="inherit"
+            android:textSize="18sp"
+            tools:ignore="TextContrastCheck" />
+
+        <EditText
+            android:id="@+id/edt_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/edittext_start_layout"
+            android:ems="10"
+            android:hint="@string/edt_username"
             android:importantForAutofill="no"
             android:inputType="text"
+            android:minHeight="48dp"
+            android:padding="10dip"
+            android:textAlignment="inherit"
+            android:textSize="18sp"
+            tools:ignore="TextContrastCheck" />
+
+        <EditText
+            android:id="@+id/edt_password_signup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/edittext_start_layout"
+            android:ems="10"
+            android:hint="@string/edt_password"
+            android:importantForAutofill="no"
+            android:inputType="textPassword"
+            android:minHeight="48dp"
+            android:padding="10dip"
+            android:textAlignment="inherit"
+            android:textSize="18sp"
+            tools:ignore="TextContrastCheck" />
+
+        <EditText
+            android:id="@+id/edt_password_proof"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/edittext_start_layout"
+            android:ems="10"
+            android:hint="@string/edt_password_proof"
+            android:importantForAutofill="no"
+            android:inputType="textPassword"
             android:minHeight="48dp"
             android:padding="10dip"
             android:textAlignment="inherit"
@@ -81,13 +92,18 @@
             tools:ignore="TextContrastCheck" />
 
         <Button
-            android:id="@+id/bt_search"
+            android:id="@+id/btn_continue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="search_click"
-            android:text="Search" />
+            android:layout_marginTop="10dp"
+            android:background="@drawable/button_start_layout"
+            android:onClick="continue_click"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="@string/btn_continue"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
 
 
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

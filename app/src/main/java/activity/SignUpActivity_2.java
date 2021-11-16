@@ -39,7 +39,7 @@ public class SignUpActivity_2 extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up_2);
+        setContentView(R.layout.activity_sign_up_2_old);
 
         if(savedInstanceState == null) {
             Bundle extra = getIntent().getExtras();

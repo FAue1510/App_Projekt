@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/backgroud"
+    tools:context="classy.AboutYouActivity"
+    tools:ignore="HardcodedText">
+
+
+    <fontsmaterialuiux.cairoTextView
+        android:id="@+id/id_aboutyou_TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marign_54"
+        android:layout_marginLeft="@dimen/marign_54"
+        android:layout_marginTop="@dimen/marign_46"
+        android:contentDescription="For more visit www.materialuiux.com"
+        android:text="@string/aboutyou"
+        android:textColor="@color/signupsignintextcolor"
+        android:textSize="@dimen/textsize_30"
+        android:textStyle="bold" />
+
+    <RelativeLayout
+        android:id="@+id/id_uploadPicture_RelativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/id_aboutyou_TextView"
+        android:layout_marginStart="@dimen/marign_66"
+        android:layout_marginLeft="@dimen/marign_66"
+        android:layout_marginTop="@dimen/marign_46"
+        android:layout_marginEnd="@dimen/marign_64"
+        android:layout_marginRight="@dimen/marign_64"
+        android:contentDescription="For more visit www.materialuiux.com"
+        android:padding="@dimen/padding_8">
+
+        <fontsmaterialuiux.cairoTextView
+            android:layout_width="183dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginEnd="@dimen/marign_2"
+            android:layout_marginRight="@dimen/marign_2"
+            android:layout_toEndOf="@+id/id_uploadPicture_Button"
+            android:layout_toRightOf="@+id/id_uploadPicture_Button"
+            android:contentDescription="For more visit www.materialuiux.com"
+            android:text="@string/uploadphoto"
+            android:textColor="@color/secondarytext"
+            android:textSize="@dimen/textsize_14" />
+
+        <Button
+            android:id="@+id/id_uploadPicture_Button"
+            android:layout_width="@dimen/size_39"
+            android:layout_height="@dimen/size_39"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/ic_upload_background"
+            android:contentDescription="For more visit www.materialuiux.com" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/id_done_Button"
+        android:layout_below="@+id/id_uploadPicture_RelativeLayout"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="@dimen/marign_69"
+        android:layout_marginTop="@dimen/marign_26"
+        android:layout_marginRight="@dimen/marign_69"
+        android:contentDescription="For more visit www.materialuiux.com">
+
+        <fontsmaterialuiux.cairoEditText
+            android:id="@+id/id_userName_EditText"
+            style="@style/editText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:hint="@string/username"
+            android:minWidth="@dimen/width_180"
+            android:paddingBottom="@dimen/marign_10"
+            android:textSize="@dimen/textsize_20" />
+
+        <fontsmaterialuiux.cairoTextView
+            android:id="@+id/id_pickYourDate_TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/id_userName_EditText"
+            android:layout_marginTop="@dimen/marign_22"
+            android:contentDescription="For more visit www.materialuiux.com"
+            android:text="@string/pickYourDate"
+            android:textColor="@color/secondarytext"
+            android:textSize="@dimen/textsize_20" />
+
+        <LinearLayout
+            android:id="@+id/id_pickYourDate_LinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:layout_below="@+id/id_pickYourDate_TextView"
+            android:layout_marginLeft="@dimen/marign_5"
+            android:layout_marginTop="@dimen/marign_14"
+            android:layout_marginRight="@dimen/marign_5"
+            android:background="@drawable/rect"
+            android:contentDescription="For more visit www.materialuiux.com"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <classy.CustomDatePicker.DatePicker
+                android:id="@+id/id_day_DatePicker"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:contentDescription="For more visit www.materialuiux.com" />
+
+            <classy.CustomDatePicker.DatePicker
+                android:id="@+id/id_month_DatePicker"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:contentDescription="For more visit www.materialuiux.com" />
+
+            <classy.CustomDatePicker.DatePicker
+                android:id="@+id/id_year_DatePicker"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:contentDescription="For more visit www.materialuiux.com" />
+        </LinearLayout>
+
+
+        <fontsmaterialuiux.cairoTextView
+            android:id="@+id/id_iam_TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/id_pickYourDate_LinearLayout"
+            android:contentDescription="For more visit www.materialuiux.com"
+            android:layout_marginTop="@dimen/marign_24"
+            android:text="@string/iam"
+            android:textSize="@dimen/textsize_20" />
+
+        <classy.CustomSwitch.customSwitch
+            android:id="@+id/id_gender_customSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/id_iam_TextView"
+            android:layout_marginTop="@dimen/marign_8"
+            android:contentDescription="For more visit www.materialuiux.com"
+            app:isw_active_tint_icon_left="@android:color/transparent"
+            app:isw_active_tint_icon_right="@android:color/transparent"
+            app:isw_background_color="@color/colorPrimaryDark"
+            app:isw_icon_left="@drawable/female"
+            app:isw_icon_right="@drawable/male"
+            app:isw_icon_size="@dimen/swithc_icon_size"
+            app:isw_inactive_tint_icon_left="@android:color/transparent"
+            app:isw_inactive_tint_icon_right="@android:color/transparent" />
+
+
+    </RelativeLayout>
+
+
+    <fontsmaterialuiux.cairoButton
+        android:id="@+id/id_done_Button"
+        android:layout_width="@dimen/height_50"
+        android:contentDescription="For more visit www.materialuiux.com"
+        android:layout_height="@dimen/height_50"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="@dimen/marign_27"
+        android:layout_marginBottom="@dimen/marign_18"
+        android:background="@drawable/ic_done_background" />
+</RelativeLayout>

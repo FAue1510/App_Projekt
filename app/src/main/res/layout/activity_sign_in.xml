@@ -6,111 +6,81 @@
     android:background="@drawable/backgroud"
     android:clipToPadding="false"
     android:contentDescription="For more visit www.materialuiux.com"
-    tools:context=".SignUpActivity"
+    tools:context="classy.SignUpActivity"
     tools:ignore="HardcodedText">
 
     <fontsmaterialuiux.cairoTextView
         android:id="@+id/id_SignIn_TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
         android:layout_marginLeft="50dp"
         android:layout_marginTop="76dp"
-        android:text="@string/sign_up"
         android:contentDescription="For more visit www.materialuiux.com"
+        android:text="@string/sign_in"
         android:textColor="@color/signupsignintextcolor"
-        android:textSize="@dimen/textsize_28"
+        android:textSize="28sp"
         android:textStyle="bold"
-        android:layout_marginStart="50dp" />
+        tools:ignore="HardcodedText" />
 
-    <!--  -->
+    <!-- Sign In Layout -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/id_signUp_Button"
+        android:layout_above="@+id/id_SignUP_TextView"
         android:layout_below="@+id/id_SignIn_TextView"
         android:layout_gravity="center"
         android:layout_marginLeft="51dp"
         android:layout_marginTop="27dp"
         android:layout_marginRight="51dp"
         android:layout_marginBottom="27dp"
-        android:contentDescription="For more visit www.materialuiux.com"
         android:background="@drawable/rect"
+        android:contentDescription="For more visit www.materialuiux.com"
         android:orientation="vertical">
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/id_Nume_textInputLayout"
-            android:layout_width="match_parent"
-            android:layout_height="63dp"
-            android:layout_marginLeft="@dimen/marign_23"
-            android:layout_marginTop="@dimen/marign_33"
-            android:layout_marginRight="@dimen/marign_23"
-            android:background="@null"
-            android:contentDescription="For more visit www.materialuiux.com">
 
-            <fontsmaterialuiux.cairoEditText
-                android:id="@+id/id_fullName_EditText"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@null"
-                android:contentDescription="For more visit www.materialuiux.com"
-                android:hint="@string/full_name"
-                android:textColor="@color/primarytext"
-                android:textSize="@dimen/textsize_18"
-                tools:ignore="ContentDescription" />
-
-        </android.support.design.widget.TextInputLayout>
-
-        <View
-            android:id="@+id/id_view_1"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginLeft="@dimen/marign_23"
-            android:layout_marginTop="@dimen/marign_2"
-            android:layout_marginRight="@dimen/marign_23"
-            android:background="@color/linecolor"
-            android:contentDescription="For more visit www.materialuiux.com" />
-
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/id_Email_textInputLayout"
             android:layout_width="match_parent"
             android:layout_height="63dp"
-            android:layout_marginLeft="@dimen/marign_23"
-            android:layout_marginTop="@dimen/marign_4"
-            android:layout_marginRight="@dimen/marign_23"
+            android:layout_marginLeft="23dp"
+            android:layout_marginTop="33dp"
+            android:layout_marginRight="23dp"
             android:background="@null"
-            android:contentDescription="For more visit www.materialuiux.com">
+            android:contentDescription="For more visit www.materialuiux.com"
+            tools:ignore="HardcodedText">
 
             <fontsmaterialuiux.cairoEditText
                 android:id="@+id/id_email_EditText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@null"
-                android:contentDescription="For more visit www.materialuiux.com"
                 android:hint="@string/email"
+                android:textAlignment="center"
                 android:textColor="@color/primarytext"
-                android:textSize="@dimen/textsize_18"
+                android:textSize="18sp"
                 tools:ignore="ContentDescription" />
 
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <View
-            android:id="@+id/id_view_2"
+            android:id="@+id/id_view_1"
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:layout_marginLeft="@dimen/marign_23"
-            android:layout_marginTop="@dimen/marign_2"
-            android:layout_marginRight="@dimen/marign_23"
+            android:layout_marginLeft="23dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="23dp"
             android:background="@color/linecolor"
             android:contentDescription="For more visit www.materialuiux.com" />
 
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/id_Password_textInputLayout"
             android:layout_width="match_parent"
             android:layout_height="63dp"
-            android:layout_marginLeft="@dimen/marign_23"
-            android:layout_marginTop="@dimen/marign_4"
-            android:layout_marginRight="@dimen/marign_23"
+            android:layout_marginLeft="23dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="23dp"
             android:background="@null"
             android:contentDescription="For more visit www.materialuiux.com">
 
@@ -119,64 +89,73 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@null"
-                android:contentDescription="For more visit www.materialuiux.com"
                 android:hint="@string/password"
                 android:inputType="textPassword"
                 android:textColor="@color/primarytext"
-                android:textSize="@dimen/textsize_18"
+                android:textSize="18sp"
                 tools:ignore="ContentDescription" />
 
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <View
-            android:id="@+id/id_view_3"
+            android:id="@+id/id_view_2"
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:layout_marginLeft="@dimen/marign_23"
-            android:layout_marginTop="@dimen/marign_2"
-            android:layout_marginRight="@dimen/marign_23"
+            android:layout_marginLeft="23dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="23dp"
             android:background="@color/linecolor"
             android:contentDescription="For more visit www.materialuiux.com" />
 
+        <fontsmaterialuiux.cairoTextView
+            android:id="@+id/id_forgetPassword_TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="4dp"
+            android:contentDescription="For more visit www.materialuiux.com"
+            android:text="@string/forgot_password"
+            android:textColor="@color/secondarytext"
+            android:textSize="18sp"
+            tools:ignore="RtlHardcoded" />
+
+        <fontsmaterialuiux.cairoButton
+            android:id="@+id/id_signIn_Button"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:layout_marginLeft="23dp"
+            android:layout_marginTop="@dimen/marign_16"
+            android:layout_marginRight="23dp"
+            android:background="@drawable/rectsignin"
+            android:contentDescription="For more visit www.materialuiux.com"
+            android:text="@string/sign_in"
+            android:textAllCaps="false"
+            android:textColor="@color/thirdtext"
+            android:textStyle="bold"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <fontsmaterialuiux.cairoTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/marign_26"
+            android:contentDescription="For more visit www.materialuiux.com"
+            android:text="@string/orsigninusing"
+            android:textColor="@color/secondarytext"
+            android:textSize="@dimen/textsize_14" />
+
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginTop="@dimen/marign_8"
             android:contentDescription="For more visit www.materialuiux.com"
-            android:orientation="horizontal">
-
-            <fontsmaterialuiux.cairoTextView
-                android:id="@+id/id_login_TextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/marign_26"
-                android:layout_marginRight="@dimen/marign_4"
-                android:text="@string/sign_in"
-                android:textColor="@color/signupsignintextcolor"
-                android:textSize="@dimen/textsize_16"
-                android:contentDescription="For more visit www.materialuiux.com"
-                android:textStyle="bold"
-                android:layout_marginEnd="@dimen/marign_4" />
-
-            <fontsmaterialuiux.cairoTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/marign_26"
-                android:text="@string/orsignupusing"
-                android:contentDescription="For more visit www.materialuiux.com"
-                android:textColor="@color/secondarytext"
-                android:textSize="@dimen/textsize_14" />
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:contentDescription="For more visit www.materialuiux.com"
-            android:layout_marginTop="@dimen/marign_27">
+            android:padding="@dimen/padding_16">
 
             <Button
                 android:layout_width="@dimen/width_50"
@@ -185,8 +164,8 @@
                 android:layout_marginTop="@dimen/marign_4"
                 android:layout_marginRight="@dimen/marign_22"
                 android:layout_marginBottom="@dimen/marign_22"
-                android:contentDescription="For more visit www.materialuiux.com"
                 android:background="@drawable/ic_facebook_background"
+                android:contentDescription="For more visit www.materialuiux.com"
                 tools:ignore="ButtonStyle" />
 
             <Button
@@ -197,8 +176,9 @@
                 android:layout_marginEnd="@dimen/marign_22"
                 android:layout_marginRight="@dimen/marign_22"
                 android:layout_marginBottom="@dimen/marign_22"
+                android:background="@drawable/ic_google_background"
                 android:contentDescription="For more visit www.materialuiux.com"
-                android:background="@drawable/ic_google_background" />
+                tools:ignore="ButtonStyle" />
 
             <Button
                 android:layout_width="@dimen/width_50"
@@ -208,19 +188,24 @@
                 android:layout_marginEnd="@dimen/marign_22"
                 android:layout_marginRight="@dimen/marign_22"
                 android:layout_marginBottom="@dimen/marign_22"
+                android:background="@drawable/ic_twitter_background"
                 android:contentDescription="For more visit www.materialuiux.com"
-                android:background="@drawable/ic_twitter_background" />
+                tools:ignore="ButtonStyle" />
         </LinearLayout>
     </LinearLayout>
 
-    <fontsmaterialuiux.cairoButton
-        android:id="@+id/id_signUp_Button"
-        android:layout_width="@dimen/width_50"
-        android:layout_height="@dimen/height_50"
+    <!-- Sign up  -->
+    <fontsmaterialuiux.cairoTextView
+        android:id="@+id/id_SignUP_TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
-        android:layout_marginBottom="@dimen/marign_18"
-        android:background="@drawable/ic_next_background"
-        android:contentDescription="For more visit www.materialuiux.com" />
+        android:layout_marginBottom="18dp"
+        android:contentDescription="For more visit www.materialuiux.com"
+        android:text="@string/sign_up"
+        android:textColor="@color/signupsignintextcolor"
+        android:textSize="@dimen/textsize_18"
+        android:textStyle="bold" />
 
 </RelativeLayout>
