@@ -23,7 +23,7 @@ public class DataViewActivity extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dataview);
 
-        manager = ProfManager.getInstance(getApplicationContext());
+        manager = ProfManager.getInstance();
 
         recyclerView = findViewById(R.id.rvProfs);
         recyclerView.setHasFixedSize(false);    //erhöht etwas die Performance
@@ -36,4 +36,6 @@ public class DataViewActivity extends Activity{
         adapter = new ProfListAdapter(getApplicationContext(), manager.getDozentenList());
         recyclerView.setAdapter(adapter);
     }
+
+
 }

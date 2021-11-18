@@ -1,6 +1,7 @@
 package model;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.a21q4_app_projekt.R;
 
 import java.util.List;
+
+import activity.ProfActivity;
 
 public class ProfListAdapter extends RecyclerView.Adapter<ProfListAdapter.ViewHolder> {
 
@@ -47,7 +50,10 @@ public class ProfListAdapter extends RecyclerView.Adapter<ProfListAdapter.ViewHo
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, "Klicken funktioniert", Toast.LENGTH_LONG).show();
+                //Toast.makeText(context, "Klicken funktioniert", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(context, ProfActivity.class);
+                intent.putExtra("id", prof.getid());
+                context.startActivity(intent);
             }
         });
     }

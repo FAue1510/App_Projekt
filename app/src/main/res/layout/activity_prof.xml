@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/backgroud"
+    tools:context="activity.ProfActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/id_buchen_Button"
+        android:layout_below="@+id/id_Details_TextView"
+        android:layout_gravity="center"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="27dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="27dp"
+        android:background="@drawable/rect"
+        android:contentDescription="For more visit www.materialuiux.com"
+        android:orientation="vertical">
+
+        <fontsUI.cairoTextView
+            android:id="@+id/id_Subject_TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="fontsUI.cairoTextView" />
+
+        <fontsUI.cairoTextView
+            android:id="@+id/id_Name_TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="fontsUI.cairoTextView" />
+
+        <fontsUI.cairoTextView
+            android:id="@+id/id_Str_TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="fontsUI.cairoTextView" />
+
+        <fontsUI.cairoTextView
+            android:id="@+id/id_OrtPLZ_TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="fontsUI.cairoTextView" />
+
+        <fontsUI.cairoTextView
+            android:id="@+id/id_Email_TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="fontsUI.cairoTextView" />
+
+        <fontsUI.cairoTextView
+            android:id="@+id/id_Birth_TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="fontsUI.cairoTextView" />
+    </LinearLayout>
+
+    <fontsUI.cairoTextView
+        android:id="@+id/id_Details_TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="76dp"
+        android:text="Details"
+        android:textColor="@color/signupsignintextcolor"
+        android:textSize="@dimen/textsize_28"
+        android:textStyle="bold" />
+
+    <fontsUI.cairoButton
+        android:id="@+id/id_buchen_Button"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="18dp"
+        android:background="@drawable/rectsignin"
+        android:text="Buchen"
+        android:textAllCaps="false"
+        android:textColor="@color/thirdtext" />
+
+</RelativeLayout>

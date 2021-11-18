@@ -11,15 +11,14 @@ public class ProfManager {
     private Context context;
     private static ProfManager instance;
 
-    private ProfManager(Context context) {
-        this.context = context;
+    private ProfManager() {
         list = new Vector<>();
         addTestData();
     }
 
-    public static ProfManager getInstance(Context context) {
+    public static ProfManager getInstance() {
         if (instance == null) {
-            instance = new ProfManager(context);
+            instance = new ProfManager();
         }
         return instance;
     }
@@ -30,6 +29,15 @@ public class ProfManager {
 
     public List<Professors> getDozentenList() {
         return list;
+    }
+
+    public Professors getProf(String id) {
+        for (Professors p : list) {
+            if (p.getid().equals(id)) {
+                return p;
+            }
+        }
+        return null;
     }
 
     private void addTestData() {
