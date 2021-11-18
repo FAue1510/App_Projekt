@@ -25,6 +25,8 @@ public class HomeActivity extends Activity {
     DatePicker sp_date;
     EditText edt_fachbereich;
 
+    Button btnTestAnsicht;
+
     Professors ProfList[];
 
 
@@ -37,6 +39,8 @@ public class HomeActivity extends Activity {
         edt_umkreis = findViewById(R.id.edt_umkreis);
         //sp_date = findViewById(R.id.sp_date);
         edt_fachbereich = findViewById(R.id.edt_fachbereich);
+
+        btnTestAnsicht = findViewById(R.id.btnTestAnsicht);
     }
 
     public void search_click(View view) {
@@ -70,5 +74,10 @@ public class HomeActivity extends Activity {
 
     public void switchToProfile(View view) {
         Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+    }
+
+    public void TestAnsichtClick(View view) {
+        Intent intent = new Intent(this, DataViewActivity.class);
+        startActivity(intent);
     }
 }

@@ -79,6 +79,13 @@
             android:onClick="search_click"
             android:text="Search" />
 
+        <Button
+            android:id="@+id/btnTestAnsicht"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Test Ansicht"
+            android:onClick="TestAnsichtClick"/>
+
 
     </LinearLayout>
 
