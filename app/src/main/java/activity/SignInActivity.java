@@ -122,6 +122,7 @@ public class SignInActivity extends Activity implements View.OnClickListener {
     }
 
     private void Login() {
-        Toast.makeText(this, "TODO: GET IN ANOTHER VIEW", Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(SignInActivity.this, HomeActivity.class);
+        startActivity(intent);
     }
 }
