@@ -202,4 +202,16 @@
         <item>30</item>
         <item>31</item>
     </string-array>
+
+    <string-array name="km">
+        <item>Unbegrenzt</item>
+        <item>1km</item>
+        <item>4km</item>
+        <item>8km</item>
+        <item>10km</item>
+        <item>20km</item>
+        <item>40km</item>
+        <item>80km</item>
+        <item>100km</item>
+    </string-array>
 </resources>
