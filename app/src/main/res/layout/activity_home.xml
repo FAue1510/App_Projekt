@@ -19,6 +19,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <Button
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SWITCH TO PROFILE"
+            android:onClick="switchToProfile" />
+
         <EditText
             android:id="@+id/edt_search"
             android:layout_width="match_parent"
