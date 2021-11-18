@@ -34,7 +34,7 @@ public class HomeActivity extends Activity {
 
         edt_search = findViewById(R.id.edt_search);
         edt_umkreis = findViewById(R.id.edt_umkreis);
-        sp_date = findViewById(R.id.sp_date);
+        //sp_date = findViewById(R.id.sp_date);
         edt_fachbereich = findViewById(R.id.edt_fachbereich);
     }
 

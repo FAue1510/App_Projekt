@@ -24,8 +24,12 @@
 
     <string name="set_password">Set Password</string>
     <string name="full_name">Vorname Nachname</string>
+    <string name="street">Straße</string>
     <string name="email">E-mail</string>
+    <string name="postalCode">Postleitzahl</string>
+    <string name="housenumber">Hausnummer</string>
     <string name="password">Passwort</string>
+    <string name="city">Stadt</string>
     <string name="sign_in">Einloggen</string>
     <string name="don_t_have_an_account">Keinen Account?</string>
     <string name="sign_up">Registrieren</string>
@@ -49,6 +53,7 @@
     <string name="orsigninusing">oder einloggen mit</string>
     <string name="orsignupusing">oder registrieren mit</string>
     <string name="aboutyou">Über dich</string>
+    <string name="address">Adresse</string>
     <string name="uploadphoto">Upload your best recent picture</string>
     <string name="pickYourDate">Pick your date of birth</string>
     <string name="username">Benutzername</string>

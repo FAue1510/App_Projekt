@@ -1,5 +1,6 @@
-package classy;
+package activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -8,10 +9,7 @@ import android.widget.ProgressBar;
 
 import com.example.a21q4_app_projekt.R;
 
-/**
- * for more visit http://materialuiux.com
- */
-public class Splash extends AppCompatActivity {
+public class Splash extends Activity {
     private ProgressBar mProgressBar;
     private int progressStatus = 0;
 

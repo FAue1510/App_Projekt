@@ -1,4 +1,4 @@
-package classy;
+package activity;
 
 import android.app.Activity;
 import android.content.Context;
@@ -68,7 +68,7 @@ public class SignInActivity extends Activity implements View.OnClickListener {
         }
 
         if(v == signUpTextView) {
-            Intent i = new Intent(this, classy.SignUpActivity.class);
+            Intent i = new Intent(this, SignUpActivity.class);
             startActivity(i);
             overridePendingTransition(R.anim.from_right_in, R.anim.from_left_out);
         }

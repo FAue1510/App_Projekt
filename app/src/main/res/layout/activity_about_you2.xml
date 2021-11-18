@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="activity.AboutYouActivity2"
+    android:background="@drawable/backgroud"
+    tools:ignore="HardcodedText">
+
+    <fontsUI.cairoTextView
+        android:id="@+id/id_address_TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="@dimen/marign_54"
+        android:layout_marginTop="80dp"
+        android:text="@string/address"
+        android:textColor="@color/signupsignintextcolor"
+        android:textSize="@dimen/textsize_30"
+        android:textStyle="bold" />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/id_signUp_final_Button"
+        android:layout_below="@+id/id_address_TextView"
+        android:layout_gravity="center"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="26dp"
+        android:background="@drawable/rect">
+
+        <LinearLayout
+            android:id="@+id/id_container_scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/id_street_textInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="63dp"
+                android:layout_marginLeft="@dimen/marign_23"
+                android:layout_marginTop="@dimen/marign_10"
+                android:layout_marginRight="@dimen/marign_23"
+                android:background="@null">
+
+                <fontsUI.cairoEditText
+                    android:id="@+id/id_street_EditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:hint="@string/street"
+                    android:textColor="@color/primarytext"
+                    android:textSize="@dimen/textsize_18"
+                    tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <View
+                android:id="@+id/id_view_0.1"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginLeft="@dimen/marign_23"
+                android:layout_marginTop="@dimen/marign_4"
+                android:layout_marginRight="@dimen/marign_23"
+                android:background="@color/linecolor" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/id_housenumber_textInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="63dp"
+                android:layout_marginLeft="@dimen/marign_23"
+                android:layout_marginTop="@dimen/marign_10"
+                android:layout_marginRight="@dimen/marign_23"
+                android:background="@null">
+
+                <fontsUI.cairoEditText
+                    android:id="@+id/id_housenumber_EditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:hint="@string/housenumber"
+                    android:inputType="number"
+                    android:textColor="@color/primarytext"
+                    android:textSize="@dimen/textsize_18"
+                    tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <View
+                android:id="@+id/id_view_0"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginLeft="@dimen/marign_23"
+                android:layout_marginTop="@dimen/marign_4"
+                android:layout_marginRight="@dimen/marign_23"
+                android:background="@color/linecolor" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/id_postalCode_textInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="63dp"
+                android:layout_marginLeft="@dimen/marign_23"
+                android:layout_marginTop="@dimen/marign_10"
+                android:layout_marginRight="@dimen/marign_23"
+                android:background="@null">
+
+                <fontsUI.cairoEditText
+                    android:id="@+id/id_postalCode_EditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:hint="@string/postalCode"
+                    android:inputType="numberSigned"
+                    android:textColor="@color/primarytext"
+                    android:textSize="@dimen/textsize_18"
+                    tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <View
+                android:id="@+id/id_view_1"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginLeft="@dimen/marign_23"
+                android:layout_marginTop="@dimen/marign_4"
+                android:layout_marginRight="@dimen/marign_23"
+                android:background="@color/linecolor" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/id_city_textInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="63dp"
+                android:layout_marginLeft="@dimen/marign_23"
+                android:layout_marginTop="@dimen/marign_10"
+                android:layout_marginRight="@dimen/marign_23"
+                android:background="@null">
+
+                <fontsUI.cairoEditText
+                    android:id="@+id/id_city_EditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:hint="@string/city"
+                    android:textColor="@color/primarytext"
+                    android:textSize="@dimen/textsize_18"
+                    tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <View
+                android:id="@+id/id_view_2"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginLeft="@dimen/marign_23"
+                android:layout_marginTop="@dimen/marign_4"
+                android:layout_marginRight="@dimen/marign_23"
+                android:background="@color/linecolor"
+                android:contentDescription="For more visit www.materialuiux.com" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <fontsUI.cairoButton
+        android:id="@+id/id_signUp_final_Button"
+        android:layout_width="@dimen/width_50"
+        android:layout_height="@dimen/height_50"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="@dimen/marign_18"
+        android:background="@drawable/ic_done_background"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+</RelativeLayout>

@@ -6,7 +6,7 @@
     android:background="@drawable/splash_screen_bg"
     android:contentDescription="For more ui/ux visit www.materialuiux.com"
     android:orientation="vertical"
-    tools:context="classy.Splash"
+    tools:context="activity.Splash"
     tools:ignore="HardcodedText">
 
 
@@ -15,7 +15,7 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_centerInParent="true"
-        android:src="@drawable/matirialuiux"
+        android:src="@drawable/logo_start"
         tools:ignore="ContentDescription" />
 
 
@@ -28,16 +28,5 @@
         android:layout_centerInParent="true"
         android:layout_marginTop="@dimen/margin_15"
         android:max="100" />
-
-    <fontsUI.cairoTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerInParent="true"
-        android:layout_marginBottom="@dimen/margin_40"
-        android:gravity="center"
-        android:text="@string/designed"
-        android:textColor="@color/white"
-        android:textSize="18sp" />
 
 </RelativeLayout>

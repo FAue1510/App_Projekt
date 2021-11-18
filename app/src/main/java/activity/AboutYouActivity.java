@@ -1,4 +1,4 @@
-package classy;
+package activity;
 
 
 import android.app.Activity;
@@ -19,7 +19,6 @@ import classy.CustomDatePicker.DatePicker;
 import classy.CustomSwitch.customSwitch;
 import fontsUI.cairoButton;
 import fontsUI.cairoEditText;
-import model.Account;
 
 
 public class AboutYouActivity extends Activity implements View.OnClickListener
@@ -31,8 +30,6 @@ public class AboutYouActivity extends Activity implements View.OnClickListener
     cairoButton doneButton;
     Button uploadPictureButton;
     customSwitch genderCustomSwitch;
-
-    Account ac = Account.getInstance();
 
     String fullName;
     String email;
@@ -49,7 +46,7 @@ public class AboutYouActivity extends Activity implements View.OnClickListener
             Bundle extra = getIntent().getExtras();
             password = extra.getString("password");
             email = extra.getString("email");
-            fullName = extra.getString("username");
+            fullName = extra.getString("full_name");
         }
 
         /////*     initialize view   */////
@@ -105,31 +102,39 @@ public class AboutYouActivity extends Activity implements View.OnClickListener
     private void complete()
     {
         /////*   Get  Email && Password    */////
-        String _gender = "";
+        String gender = "";
 
-        String _username = userNameEditText.getText().toString();
+        String username = userNameEditText.getText().toString();
         String getGender = genderCustomSwitch.getChecked().toString();
-        String _day = dayDatePicker.getSeletedItem();
-        String _month = monthDatePicker.getSeletedItem();
-        String _year = yearDatePicker.getSeletedItem();
-        String dateofbirth = _day + " " + _month + " " + _year ;
+        String day = dayDatePicker.getSeletedItem();
+        String month = monthDatePicker.getSeletedItem();
+        String year = yearDatePicker.getSeletedItem();
+        String dateofbirth = day + "." + month + "." + year ;
         if (getGender.equals("LEFT")){
-            _gender = "female";
+            gender = "Frau";
         }else {
-            _gender = "male";
+            gender = "Mann";
         }
 
         /////*   Check if username ,gender and date of birth  are entered     */////
-        if (!validate(_username, _gender,dateofbirth)) {
+        if (!validate(username, gender,dateofbirth)) {
             return;
         } else {
-            Login(_username, _gender,dateofbirth);
+            switchToAboutYou2(username, gender,dateofbirth, fullName, email, password);
         }
     }
 
-    private void Login(String username, String gender, String dateofbirth)
+    private void switchToAboutYou2(String username, String gender, String dateofbirth, String fullName, String email, String password)
     {
-        Toast.makeText(this, "success" + username + " " + gender + " " +dateofbirth, Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(getApplicationContext(), AboutYouActivity2.class);
+        intent.putExtra("email", email);
+        intent.putExtra("full_name", fullName);
+        intent.putExtra("password", password);
+        intent.putExtra("username", username);
+        intent.putExtra("gender", gender);
+        intent.putExtra("dateofbirth", dateofbirth);
+        startActivity(intent);
+        overridePendingTransition(R.anim.from_right_in, R.anim.from_left_out);
     }
 
 
@@ -144,12 +149,12 @@ public class AboutYouActivity extends Activity implements View.OnClickListener
         }
         if (gender.isEmpty())
         {
-            Toast.makeText(this, "please select your gender", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Bitte Geschlecht auswählen", Toast.LENGTH_LONG).show();
             valid = false;
         }
         if (dateofbirth.equals(""))
         {
-            Toast.makeText(this, "please select your gender", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Bitte Geburtsdatum auswählen", Toast.LENGTH_LONG).show();
             valid = false;
         }
 

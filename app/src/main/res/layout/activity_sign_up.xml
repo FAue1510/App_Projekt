@@ -6,7 +6,7 @@
     android:background="@drawable/backgroud"
     android:clipToPadding="false"
     android:contentDescription="For more visit www.materialuiux.com"
-    tools:context="classy.SignUpActivity"
+    tools:context="activity.SignUpActivity"
     tools:ignore="HardcodedText">
 
     <fontsUI.cairoTextView
