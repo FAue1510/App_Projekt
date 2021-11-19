@@ -17,20 +17,22 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">>
+        app:layout_constraintTop_toTopOf="parent">
 
 
         <Button
             android:id="@+id/btn_order"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Meine Bestellungen" />
+            android:text="Meine Bestellungen"
+            android:onClick="switchToOrder"/>
 
         <Button
             android:id="@+id/btn_data"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Persönliche Daten" />
+            android:text="Persönliche Daten"
+            android:onClick="switchToPersonalData"/>
 
         <Button
             android:id="@+id/btn_settings"
