@@ -40,6 +40,10 @@ public class ProfManager {
         return null;
     }
 
+    public void deleteList() {
+        list.clear();
+    }
+
     private void addTestData() {
         list.add(new Professors("test1@test.de", "Peter", "Parker", "x", "Teststr.", "1", "33101", "Paderborn", "Apfel", "1"));
         list.add(new Professors("test2@test.de", "Bruce", "Banner", "x", "Teststra.", "1", "33102", "Paderborn", "Birne", "2"));
