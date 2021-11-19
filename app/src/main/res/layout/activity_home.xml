@@ -19,6 +19,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <Button
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SWITCH TO PROFILE"
+            android:onClick="switchToProfile" />
+
         <EditText
             android:id="@+id/edt_search"
             android:layout_width="match_parent"
@@ -71,6 +78,13 @@
             android:layout_height="wrap_content"
             android:onClick="search_click"
             android:text="Search" />
+
+        <Button
+            android:id="@+id/btnTestAnsicht"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Test Ansicht"
+            android:onClick="TestAnsichtClick"/>
 
 
     </LinearLayout>

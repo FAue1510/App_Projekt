@@ -12,6 +12,12 @@
         android:theme="@style/Theme.21Q4_App_Projekt"
         android:usesCleartextTraffic="true">
         <activity
+            android:name="activity.ProfActivity"
+            android:exported="false" />
+        <activity
+            android:name="activity.ProfileActivity"
+            android:exported="false" />
+        <activity
             android:name="activity.AboutYouActivity2"
             android:exported="false" />
         <activity android:name="activity.HomeActivity" />
