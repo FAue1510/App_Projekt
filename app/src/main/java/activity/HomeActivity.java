@@ -107,4 +107,9 @@ public class HomeActivity extends Activity {
 
         return null;
     }
+
+    public void switchProfile_click(View view){
+        Intent intent = new Intent(HomeActivity.this, ProfileActivity.class);
+        startActivity(intent);
+    }
 }
