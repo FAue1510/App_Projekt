@@ -16,8 +16,18 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
     }
 
+    public void switchToPersonalData(View view) {
+        Intent intent = new Intent(getApplicationContext(), PersonalDataActivity.class);
+        startActivity(intent);
+    }
+
+    public void switchToOrder(View view) {
+        Intent intent = new Intent(getApplicationContext(), OrderActivity.class);
+        startActivity(intent);
+    }
+
     public void switchToSettings(View view) {
-        //Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
-        //startActivity(intent);
+        Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+        startActivity(intent);
     }
 }

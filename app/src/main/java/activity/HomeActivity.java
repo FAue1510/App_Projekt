@@ -1,20 +1,28 @@
 package activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
+
 import com.example.a21q4_app_projekt.R;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import model.Professors;
 
@@ -25,10 +33,12 @@ public class HomeActivity extends Activity {
     DatePicker sp_date;
     EditText edt_fachbereich;
 
-    Button btnTestAnsicht;
-
     Professors ProfList[];
 
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    String TAG = "PROFESSORS";
+
+    private FusedLocationProviderClient fusedLocationClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,44 +50,66 @@ public class HomeActivity extends Activity {
         //sp_date = findViewById(R.id.sp_date);
         edt_fachbereich = findViewById(R.id.edt_fachbereich);
 
-        btnTestAnsicht = findViewById(R.id.btnTestAnsicht);
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
     }
 
     public void search_click(View view) {
-        DatabaseReference mDatabaseRef =FirebaseDatabase.getInstance().getReference("professors");
-        Query query=mDatabaseRef.orderByChild("firstName").equalTo(edt_search.getText().toString());
-        query.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                for (DataSnapshot data:dataSnapshot.getChildren()){
-
-                    String test = data.child("firstName").getValue(String.class);
-
-                    Professors models=data.getValue(Professors.class);
-                    String latitude=models.getFirstName();
-                    String longitude=models.getLastName();
-
-                }
-
+        Query search = db.collection("professors");
+        //Query for departments
+        if (!edt_fachbereich.getText().toString().equals(""))
+            search = search.whereArrayContains("departments", edt_fachbereich.getText().toString());
+        //Query for lat und long
+        if (!edt_umkreis.getText().toString().equals("")) {
+            double r = Double.parseDouble(edt_umkreis.getText().toString())/110;
+            search = search.whereLessThanOrEqualTo("lat",getGeolocation().getLatitude() + r)
+                    .whereGreaterThanOrEqualTo("lat", getGeolocation().getLatitude() - r);
+            search = search.whereLessThanOrEqualTo("long", getGeolocation().getLongitude() + r)
+                    .whereGreaterThanOrEqualTo("long", getGeolocation().getLongitude() - r);
+        }
+        //Query for firstName and lastName
+        if (!edt_search.getText().toString().equals("")) {
+            //Search for firstName and lastName
+            if (edt_search.getText().toString().contains(" ")) {
+                search = search.whereEqualTo("firstName", edt_search.getText().toString().split(" ")[0]);
+                search = search.whereEqualTo("lastName", edt_search.getText().toString().split(" ")[1]);
+            } else {
+                //Search for firstName or lastName
+                readData(search.whereEqualTo("firstName", edt_search.getText().toString()));
+                readData(search.whereEqualTo("lastName", edt_search.getText().toString()));
+                //go to next view
+                Intent intent = new Intent(HomeActivity.this, DataViewActivity.class);
+                startActivity(intent);
+                return;
             }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
+        }
+        readData(search);
+        //go to next view
         Intent intent = new Intent(HomeActivity.this, DataViewActivity.class);
         startActivity(intent);
     }
 
-    public void switchToProfile(View view) {
-        Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+    private void readData(Query query) {
+        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Log.d(TAG, document.getId() + " => " + document.getData());
+                    }
+                } else {
+                    Log.d(TAG, "Error getting documents: ", task.getException());
+                }
+            }
+        });
     }
 
-    public void TestAnsichtClick(View view) {
-        Intent intent = new Intent(this, DataViewActivity.class);
+    private Location getGeolocation() {
+
+        return null;
+    }
+
+    public void switchProfile_click(View view){
+        Intent intent = new Intent(HomeActivity.this, ProfileActivity.class);
         startActivity(intent);
     }
 }
