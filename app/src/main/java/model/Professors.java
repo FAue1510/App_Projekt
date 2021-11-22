@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Professors {
 
     private String id;
@@ -11,9 +13,9 @@ public class Professors {
     private String houseNumber;
     private String plz;
     private String city;
-    private String subject;
+    private ArrayList<String> departments;
 
-    public Professors(String email, String firstName, String lastName, String birthday, String street, String houseNumber, String plz, String city, String subject, String id){
+    public Professors(String email, String firstName, String lastName, String birthday, String street, String houseNumber, String plz, String city, ArrayList<String> departments, String id){
 
         this.id = id;
         this.email = email;
@@ -24,7 +26,7 @@ public class Professors {
         this.houseNumber = houseNumber;
         this.plz = plz;
         this.city = city;
-        this.subject = subject;
+        this.departments = departments;
 
     }
 
@@ -55,7 +57,5 @@ public class Professors {
     public String getCity() {
         return city;
     }
-    public String getSubject() {
-        return subject;
-    }
+    public ArrayList<String> getDepartments() { return departments; }
 }

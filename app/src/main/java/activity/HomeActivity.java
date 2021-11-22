@@ -24,6 +24,9 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import model.Professors;
 
 public class HomeActivity extends Activity {
@@ -33,7 +36,7 @@ public class HomeActivity extends Activity {
     DatePicker sp_date;
     EditText edt_fachbereich;
 
-    Professors ProfList[];
+    List<Professors> Profs;
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     String TAG = "PROFESSORS";
@@ -95,6 +98,19 @@ public class HomeActivity extends Activity {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         Log.d(TAG, document.getId() + " => " + document.getData());
+                        Professors prof = new Professors(
+                                document.get("email").toString(),
+                                document.get("firstName").toString(),
+                                document.get("lastName").toString(),
+                                document.get("birthday").toString(),
+                                document.get("street").toString(),
+                                document.get("housenumber").toString(),
+                                document.get("postalCode").toString(),
+                                document.get("city").toString(),
+                                ((ArrayList<String>) document.get("departments")),
+                                document.getId()
+                        );
+                        //Profs.add(prof);
                     }
                 } else {
                     Log.d(TAG, "Error getting documents: ", task.getException());

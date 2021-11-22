@@ -2,6 +2,7 @@ package model;
 
 import android.content.Context;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
@@ -41,8 +42,10 @@ public class ProfManager {
     }
 
     private void addTestData() {
-        list.add(new Professors("test1@test.de", "Peter", "Parker", "x", "Teststr.", "1", "33101", "Paderborn", "Apfel", "1"));
-        list.add(new Professors("test2@test.de", "Bruce", "Banner", "x", "Teststra.", "1", "33102", "Paderborn", "Birne", "2"));
-        list.add(new Professors("test3@test.de", "Tony", "Stark", "x", "Teststraße", "1", "33103", "Paderborn", "Spinat", "3"));
+        ArrayList<String> departments = new ArrayList<String>();
+        departments.add("test");
+        list.add(new Professors("test1@test.de", "Peter", "Parker", "x", "Teststr.", "1", "33101", "Paderborn", departments, "1"));
+        list.add(new Professors("test2@test.de", "Bruce", "Banner", "x", "Teststra.", "1", "33102", "Paderborn", departments, "2"));
+        list.add(new Professors("test3@test.de", "Tony", "Stark", "x", "Teststraße", "1", "33103", "Paderborn", departments, "3"));
     }
 }

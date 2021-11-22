@@ -25,7 +25,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     public void switchToOrder(View view) {
-        Intent intent = new Intent(getApplicationContext(), OrderActivity.class);
+        Intent intent = new Intent(getApplicationContext(), MyOrdersActivity.class);
         startActivity(intent);
     }
 

@@ -9,7 +9,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDelegate;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -132,11 +131,11 @@ public class SignInActivity extends Activity implements View.OnClickListener {
     }
 
     private void Login() {
-        readData(db.collection("users").whereEqualTo("userUID",Auth.getCurrentUser().getUid()));
+        readUser(db.collection("users").whereEqualTo("userUID",Auth.getCurrentUser().getUid()));
         Intent intent = new Intent(SignInActivity.this, HomeActivity.class);
         startActivity(intent);
     }
-    private void readData(Query query) {
+    private void readUser(Query query) {
         query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {

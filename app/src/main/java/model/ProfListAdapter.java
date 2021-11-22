@@ -6,13 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a21q4_app_projekt.R;
 
+import java.util.Arrays;
 import java.util.List;
 
 import activity.ProfActivity;
@@ -44,7 +44,7 @@ public class ProfListAdapter extends RecyclerView.Adapter<ProfListAdapter.ViewHo
         holder.tvName.setText(prof.getFirstName());
         holder.tvAdress.setText(String.format("%s %s, %s, %s", prof.getStreet(), prof.getHouseNumber(),
                                                                 prof.getPlz(), prof.getCity()));
-        holder.tvSubject.setText(prof.getSubject());
+        holder.tvSubject.setText(Arrays.toString(prof.getDepartments().toArray()));
         holder.tvEmail.setText(prof.getBirthday());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
