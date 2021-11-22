@@ -1,11 +1,21 @@
 package activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.a21q4_app_projekt.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
 
 import fontsUI.cairoTextView;
+import model.Order;
 import model.ProfManager;
 import model.Professors;
 
@@ -37,5 +47,10 @@ public class ProfActivity extends AppCompatActivity {
         id_Ort_TextView.setText(prof.getPlz() + " " + prof.getCity());
         id_Birth_TextView.setText(prof.getBirthday());
         id_Email_TextView.setText(prof.getEmail());
+    }
+    public void order_OnClick(View view){
+        Intent intent = new Intent(ProfActivity.this, OrderActivity.class);
+        intent.putExtra("id",prof.getid());
+        startActivity(intent);
     }
 }

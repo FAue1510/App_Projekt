@@ -78,6 +78,7 @@
         android:layout_centerInParent="true"
         android:layout_marginBottom="18dp"
         android:background="@drawable/rectsignin"
+        android:onClick="order_OnClick"
         android:text="Buchen"
         android:textAllCaps="false"
         android:textColor="@color/thirdtext" />
