@@ -3,7 +3,11 @@ package activity;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.a21q4_app_projekt.R;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+
+import java.util.Arrays;
 
 import fontsUI.cairoTextView;
 import model.ProfManager;
@@ -32,10 +36,15 @@ public class ProfActivity extends AppCompatActivity {
         prof = manager.getProf(getIntent().getStringExtra("id"));
 
         id_Name_TextView.setText(prof.getFirstName() + " " + prof.getLastName());
-        id_Subject_TextView.setText(prof.getSubject());
+        id_Subject_TextView.setText(Arrays.toString(prof.getDepartments().toArray()));
         id_Str_TextView.setText(prof.getStreet() + " " + prof.getHouseNumber());
         id_Ort_TextView.setText(prof.getPlz() + " " + prof.getCity());
         id_Birth_TextView.setText(prof.getBirthday());
         id_Email_TextView.setText(prof.getEmail());
+    }
+    public void order_OnClick(View view){
+        Intent intent = new Intent(ProfActivity.this, OrderActivity.class);
+        intent.putExtra("id",prof.getid());
+        startActivity(intent);
     }
 }

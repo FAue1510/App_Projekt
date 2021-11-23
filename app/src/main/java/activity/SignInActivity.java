@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDelegate;
+
 import android.view.View;
 import android.widget.Toast;
 
@@ -16,10 +17,15 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import fontsUI.cairoButton;
 import fontsUI.cairoEditText;
 import fontsUI.cairoTextView;
+import model.Account;
 
 
 public class SignInActivity extends Activity implements View.OnClickListener {
@@ -35,6 +41,9 @@ public class SignInActivity extends Activity implements View.OnClickListener {
     SharedPreferences prefs;
 
     FirebaseAuth Auth = FirebaseAuth.getInstance();
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+    Account ac = Account.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,7 +131,33 @@ public class SignInActivity extends Activity implements View.OnClickListener {
     }
 
     private void Login() {
+        readUser(db.collection("users").whereEqualTo("userUID",Auth.getCurrentUser().getUid()));
         Intent intent = new Intent(SignInActivity.this, HomeActivity.class);
         startActivity(intent);
+    }
+    private void readUser(Query query) {
+        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        ac.setAccount(
+                                document.get("userUID").toString(),
+                                document.get("username").toString(),
+                                document.get("email").toString(),
+                                document.get("firstName").toString(),
+                                document.get("lastName").toString(),
+                                document.get("birthday").toString(),
+                                document.get("city").toString(),
+                                document.get("street").toString(),
+                                document.get("houseNumber").toString(),
+                                document.get("plz").toString()
+                        );
+                    }
+                } else {
+                    Toast.makeText(getApplicationContext(), "Error getting documents: ", Toast.LENGTH_LONG);
+                }
+            }
+        });
     }
 }

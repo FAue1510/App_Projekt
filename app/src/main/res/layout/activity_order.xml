@@ -7,4 +7,111 @@
     android:layout_height="match_parent"
     tools:context="activity.OrderActivity">
 
-  </androidx.constraintlayout.widget.ConstraintLayout>
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/edt_street_b"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittext_start_layout"
+        android:ems="10"
+        android:hint="Straße"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:minHeight="48dp"
+        android:padding="10dip"
+        android:textAlignment="inherit"
+        android:textSize="18sp"
+        tools:ignore="TextContrastCheck" />
+
+    <EditText
+        android:id="@+id/edt_houseNumbere_b"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittext_start_layout"
+        android:ems="10"
+        android:hint="Hausnummer"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:minHeight="48dp"
+        android:padding="10dip"
+        android:textAlignment="inherit"
+        android:textSize="18sp"
+        tools:ignore="TextContrastCheck" />
+
+    <EditText
+        android:id="@+id/edt_plz_b"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittext_start_layout"
+        android:ems="10"
+        android:hint="Postleitzahl"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:minHeight="48dp"
+        android:padding="10dip"
+        android:textAlignment="inherit"
+        android:textSize="18sp"
+        tools:ignore="TextContrastCheck" />
+
+    <EditText
+        android:id="@+id/edt_city_b"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittext_start_layout"
+        android:ems="10"
+        android:hint="Stadt"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:minHeight="48dp"
+        android:padding="10dip"
+        android:textAlignment="inherit"
+        android:textSize="18sp"
+        tools:ignore="TextContrastCheck" />
+
+    <CalendarView
+        android:id="@+id/cv_clender"
+        android:layout_width="match_parent"
+        android:layout_height="294dp" />
+
+    <EditText
+        android:id="@+id/edt_description_b"
+        android:layout_width="match_parent"
+        android:layout_height="144dp"
+        android:background="@drawable/edittext_start_layout"
+        android:ems="10"
+        android:hint="Bemerkung"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:minHeight="48dp"
+        android:padding="10dip"
+        android:textAlignment="inherit"
+        android:textSize="18sp"
+        tools:ignore="TextContrastCheck" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+      <Button
+          android:id="@+id/b_cancel_b"
+          android:layout_width="209dp"
+          android:layout_height="wrap_content"
+          android:onClick="cancel_OnClick"
+          android:text="Abrechen" />
+
+      <Button
+          android:id="@+id/b_order_b"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:onClick="order_OnClick2"
+          android:text="Buchen" />
+    </LinearLayout>
+
+  </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
