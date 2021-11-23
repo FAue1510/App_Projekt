@@ -47,6 +47,7 @@ public class MyOrdersActivity extends Activity {
                                 document.get("street").toString(),
                                 document.get("houseNumber").toString(),
                                 document.get("plz").toString(),
+                                (document.get("date").toString()),
                                 document.get("description").toString()
                         ));
                     }
