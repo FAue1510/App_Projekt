@@ -2,6 +2,8 @@ package activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
+import android.view.WindowManager;
 
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,6 +24,7 @@ public class DataViewActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dataview);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         manager = ProfManager.getInstance();
 

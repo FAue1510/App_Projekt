@@ -3,9 +3,11 @@ package activity;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.a21q4_app_projekt.R;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 
 import java.util.Arrays;
 
@@ -13,7 +15,7 @@ import fontsUI.cairoTextView;
 import model.ProfManager;
 import model.Professors;
 
-public class ProfActivity extends AppCompatActivity {
+public class ProfActivity extends Activity {
 
     private cairoTextView id_Subject_TextView, id_Name_TextView, id_Birth_TextView, id_Str_TextView, id_Ort_TextView, id_Email_TextView;
     private ProfManager manager;
@@ -23,6 +25,7 @@ public class ProfActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prof);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         manager = ProfManager.getInstance();
 
