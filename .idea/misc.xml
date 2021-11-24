@@ -14,23 +14,28 @@
         <entry key="..\:/Users/Patri/AndroidStudioProjects/App_Projekt/app/src/main/res/layout/activity_sign_in.xml" value="0.20572916666666666" />
         <entry key="..\:/Users/Patri/AndroidStudioProjects/App_Projekt/app/src/main/res/layout/row_item_dozent.xml" value="0.25" />
         <entry key="..\:/Users/Patri/AndroidStudioProjects/App_Projekt/app/src/main/res/layout/row_item_prof.xml" value="0.33" />
+        <entry key="..\:/Users/flori/AndroidStudioProjects/App_Projekt/app/src/main/res/drawable-anydpi/ic_profile_picture.xml" value="0.24930555555555556" />
+        <entry key="..\:/Users/flori/AndroidStudioProjects/App_Projekt/app/src/main/res/drawable/button_start_layout.xml" value="0.24930555555555556" />
         <entry key="..\:/Users/flori/AndroidStudioProjects/App_Projekt/app/src/main/res/drawable/ic_done_background.xml" value="0.3828125" />
         <entry key="..\:/Users/flori/AndroidStudioProjects/App_Projekt/app/src/main/res/drawable/ic_facebook_background.xml" value="0.22135416666666666" />
         <entry key="..\:/Users/flori/AndroidStudioProjects/App_Projekt/app/src/main/res/drawable/ic_google_background.xml" value="0.3828125" />
         <entry key="..\:/Users/flori/AndroidStudioProjects/App_Projekt/app/src/main/res/drawable/ic_next_background.xml" value="0.22135416666666666" />
+        <entry key="..\:/Users/flori/AndroidStudioProjects/App_Projekt/app/src/main/res/drawable/ic_search_background.xml" value="0.24930555555555556" />
         <entry key="..\:/Users/flori/AndroidStudioProjects/App_Projekt/app/src/main/res/drawable/ic_twitter_background.xml" value="0.22135416666666666" />
         <entry key="..\:/Users/flori/AndroidStudioProjects/App_Projekt/app/src/main/res/drawable/ic_upload_background.xml" value="0.22135416666666666" />
+        <entry key="..\:/Users/flori/AndroidStudioProjects/App_Projekt/app/src/main/res/drawable/image_corner.xml" value="0.24930555555555556" />
         <entry key="..\:/Users/flori/AndroidStudioProjects/App_Projekt/app/src/main/res/drawable/rectsignin.xml" value="0.22135416666666666" />
         <entry key="..\:/Users/flori/AndroidStudioProjects/App_Projekt/app/src/main/res/layout/activity_about_you.xml" value="0.33" />
         <entry key="..\:/Users/flori/AndroidStudioProjects/App_Projekt/app/src/main/res/layout/activity_dataview.xml" value="0.3541666666666667" />
-        <entry key="..\:/Users/flori/AndroidStudioProjects/App_Projekt/app/src/main/res/layout/activity_home.xml" value="0.3541666666666667" />
+        <entry key="..\:/Users/flori/AndroidStudioProjects/App_Projekt/app/src/main/res/layout/activity_home.xml" value="0.25" />
+        <entry key="..\:/Users/flori/AndroidStudioProjects/App_Projekt/app/src/main/res/layout/activity_home_2.xml" value="0.275" />
         <entry key="..\:/Users/flori/AndroidStudioProjects/App_Projekt/app/src/main/res/layout/activity_my_orders.xml" value="0.275" />
         <entry key="..\:/Users/flori/AndroidStudioProjects/App_Projekt/app/src/main/res/layout/activity_order.xml" value="0.275" />
         <entry key="..\:/Users/flori/AndroidStudioProjects/App_Projekt/app/src/main/res/layout/activity_personal_data.xml" value="0.275" />
         <entry key="..\:/Users/flori/AndroidStudioProjects/App_Projekt/app/src/main/res/layout/activity_prof.xml" value="0.275" />
         <entry key="..\:/Users/flori/AndroidStudioProjects/App_Projekt/app/src/main/res/layout/activity_profile.xml" value="0.275" />
-        <entry key="..\:/Users/flori/AndroidStudioProjects/App_Projekt/app/src/main/res/layout/activity_sign_in.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/flori/AndroidStudioProjects/App_Projekt/app/src/main/res/layout/activity_sign_up.xml" value="0.3541666666666667" />
+        <entry key="..\:/Users/flori/AndroidStudioProjects/App_Projekt/app/src/main/res/layout/activity_sign_in.xml" value="0.25" />
+        <entry key="..\:/Users/flori/AndroidStudioProjects/App_Projekt/app/src/main/res/layout/activity_sign_up.xml" value="0.25" />
         <entry key="..\:/Users/flori/AndroidStudioProjects/App_Projekt/app/src/main/res/layout/activity_sign_up_2.xml" value="0.33" />
         <entry key="..\:/Users/flori/AndroidStudioProjects/App_Projekt/app/src/main/res/layout/activity_splash.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/flori/AndroidStudioProjects/App_Projekt/app/src/main/res/layout/activity_start.xml" value="0.3541666666666667" />

@@ -33,6 +33,7 @@
     <string name="sign_in">Einloggen</string>
     <string name="don_t_have_an_account">Keinen Account?</string>
     <string name="sign_up">Registrieren</string>
+    <string name="search">Dozenten suchen</string>
     <string name="enteryourname">Namen eingeben</string>
     <string name="validemail">Eine valide E-Mail eingeben</string>
     <string name="validpassword">Ein valides Passwort eingeben</string>

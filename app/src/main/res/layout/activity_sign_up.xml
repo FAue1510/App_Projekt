@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     android:background="@drawable/backgroud"
     android:clipToPadding="false"
-    android:contentDescription="For more visit www.materialuiux.com"
     tools:context="activity.SignUpActivity"
     tools:ignore="HardcodedText">
 
