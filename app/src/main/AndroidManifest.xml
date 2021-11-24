@@ -23,12 +23,12 @@
         <activity android:name="activity.HomeActivity" />
         <activity android:name="activity.DataViewActivity" />
         <activity android:name="activity.SignUpActivity" />
-        <activity android:name="activity.Splash" />
+        <activity android:name="activity.SignInActivity" />
         <activity android:name="activity.AboutYouActivity" />
         <activity android:name="activity.OrderActivity" />
         <activity android:name="activity.MyOrdersActivity" />
         <activity
-            android:name="activity.SignInActivity"
+            android:name="activity.Splash"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

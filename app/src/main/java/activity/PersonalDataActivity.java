@@ -2,11 +2,12 @@ package activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.os.Bundle;
 import com.example.a21q4_app_projekt.R;
 import model.Account;
 
-public class PersonalDataActivity extends AppCompatActivity {
+public class PersonalDataActivity extends Activity {
 
     private Account acc;
     public String name;

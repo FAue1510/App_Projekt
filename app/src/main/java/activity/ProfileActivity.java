@@ -2,6 +2,7 @@ package activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,7 +10,7 @@ import android.view.View;
 import com.example.a21q4_app_projekt.R;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class ProfileActivity extends AppCompatActivity {
+public class ProfileActivity extends Activity {
 
     FirebaseAuth Auth = FirebaseAuth.getInstance();
 
