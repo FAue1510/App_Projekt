@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 
 import com.example.a21q4_app_projekt.R;
 
@@ -18,10 +19,18 @@ public class SignUpActivity extends Activity implements View.OnClickListener
     cairoEditText nameEditText, emailEditText, passwordEditText;
     cairoButton signUpButton;
     cairoTextView login;
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.from_left_in, R.anim.from_right_out);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         /////*     initialize view   */////
         login = findViewById(R.id.id_login_TextView);

@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.example.a21q4_app_projekt.R;
@@ -46,9 +47,16 @@ public class SignInActivity extends Activity implements View.OnClickListener {
     Account ac = Account.getInstance();
 
     @Override
+    public void onBackPressed() {
+        finish();
+        System.exit(0);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         prefs = this.getPreferences(Context.MODE_PRIVATE);
         prefs.edit().putBoolean("signedin", false).commit();
@@ -134,6 +142,7 @@ public class SignInActivity extends Activity implements View.OnClickListener {
         readUser(db.collection("users").whereEqualTo("userUID",Auth.getCurrentUser().getUid()));
         Intent intent = new Intent(SignInActivity.this, HomeActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.from_right_in, R.anim.from_left_out);
     }
     private void readUser(Query query) {
         query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
