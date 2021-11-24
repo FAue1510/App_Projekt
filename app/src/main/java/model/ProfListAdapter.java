@@ -44,7 +44,7 @@ public class ProfListAdapter extends RecyclerView.Adapter<ProfListAdapter.ViewHo
         holder.tvName.setText(prof.getFirstName());
         holder.tvAdress.setText(String.format("%s %s, %s, %s", prof.getStreet(), prof.getHouseNumber(),
                                                                 prof.getPlz(), prof.getCity()));
-        holder.tvSubject.setText(Arrays.toString(prof.getDepartments().toArray()));
+        holder.tvSubject.setText(prof.getDepartments().get(0));
         holder.tvEmail.setText(prof.getBirthday());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {

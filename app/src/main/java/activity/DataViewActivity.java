@@ -40,5 +40,11 @@ public class DataViewActivity extends Activity{
         recyclerView.setAdapter(adapter);
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        adapter.notifyDataSetChanged();
+    }
+
 
 }
