@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/backgroud"
+    android:clipToPadding="false"
+    tools:context="activity.HomeActivity"
+    tools:ignore="HardcodedText">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/img_profile_picture"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/ic_profile_picture"
+        app:civ_border_width="2dp"
+        app:civ_border_color="#FF000000"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="30dp"/>
+
+    <fontsUI.cairoTextView
+        android:id="@+id/id_SignIn_TextView"
+        android:layout_below="@+id/img_profile_picture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/search"
+        android:textColor="@color/signupsignintextcolor"
+        android:textSize="@dimen/textsize_28"
+        android:textStyle="bold" />
+
+    <!--  -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/id_search_Button"
+        android:layout_below="@+id/id_SignIn_TextView"
+        android:layout_gravity="center"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="27dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="27dp"
+        android:background="@drawable/rect"
+        android:orientation="vertical">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/id_Nume_textInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="63dp"
+            android:layout_marginLeft="@dimen/marign_23"
+            android:layout_marginTop="@dimen/marign_33"
+            android:layout_marginRight="@dimen/marign_23"
+            android:background="@null">
+
+            <fontsUI.cairoEditText
+                android:id="@+id/id_fullName_EditText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:hint="@string/full_name"
+                android:textColor="@color/primarytext"
+                android:textSize="@dimen/textsize_18"
+                tools:ignore="ContentDescription" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <View
+            android:id="@+id/id_view_1"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginLeft="@dimen/marign_23"
+            android:layout_marginTop="@dimen/marign_2"
+            android:layout_marginRight="@dimen/marign_23"
+            android:background="@color/linecolor"/>
+
+
+    </LinearLayout>
+
+    <fontsUI.cairoButton
+        android:id="@+id/id_search_Button"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="@dimen/marign_18"
+        android:background="@drawable/ic_search_background"/>
+
+</RelativeLayout>
