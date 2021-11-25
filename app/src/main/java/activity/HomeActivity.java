@@ -27,6 +27,7 @@ import java.util.List;
 
 import classy.CustomDatePicker.DatePicker;
 import database.ProfSQLiteOpenHelper;
+import model.ProfManager;
 import model.Professors;
 
 public class HomeActivity extends Activity {
@@ -34,6 +35,7 @@ public class HomeActivity extends Activity {
     DatePicker departmentPicker, circlingPicker;
 
     List<Professors> Profs;
+    ProfManager manager;
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     String TAG = "PROFESSORS";
@@ -45,6 +47,8 @@ public class HomeActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        manager = ProfManager.getInstance();
 
         departmentPicker = findViewById(R.id.id_department_picker);
         circlingPicker = findViewById(R.id.id_circling_picker);
@@ -87,7 +91,9 @@ public class HomeActivity extends Activity {
                 return;
             }
         }*/
-        readData(search);
+        //readData(search);
+
+        manager.addProfList(new ProfSQLiteOpenHelper(getApplicationContext()).readAll());
         //go to next view
         Intent intent = new Intent(HomeActivity.this, DataViewActivity.class);
         startActivity(intent);

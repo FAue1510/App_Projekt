@@ -2,21 +2,21 @@ package database;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Vector;
 
-import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.Toast;
 
 import model.Professors;
 
 public class ProfSQLiteOpenHelper extends SQLiteOpenHelper{
+    Context context;
     public static final String DATABASE = "Professors.sqlite";
     public static final int CURRENT_VERSION = 1;
 
@@ -41,13 +41,14 @@ public class ProfSQLiteOpenHelper extends SQLiteOpenHelper{
             COL_PROF_HOUSENUMBER,
             COL_PROF_POSTALCODE,
             COL_PROF_CITY,
-            COL_PROF_DEPARTMENTS  //Fehlerpotenzial
+            COL_PROF_DEPARTMENTS
     };
 
 
     public ProfSQLiteOpenHelper(Context context) {
         super(context, DATABASE, null, CURRENT_VERSION);
         // TODO Auto-generated constructor stub
+        this.context = context;
     }
 
 
@@ -87,11 +88,12 @@ public class ProfSQLiteOpenHelper extends SQLiteOpenHelper{
 
     }
 
-    public boolean insertProf(Professors prof) {
+    public void insertProf(Professors prof) {
         SQLiteDatabase db = getWritableDatabase();
 
         ContentValues values = new ContentValues();
 
+        values.put(COL_PROF_ID, prof.getid());
         values.put(COL_PROF_EMAIL, prof.getEmail());
         values.put(COL_PROF_FIRSTNAME, prof.getFirstName());
         values.put(COL_PROF_LASTNAME, prof.getLastName());
@@ -106,23 +108,38 @@ public class ProfSQLiteOpenHelper extends SQLiteOpenHelper{
             departs += "," + s;
         }
         departs.replaceFirst(",", "");
-        values.put(COL_PROF_DEPARTMENTS, departs);    //Fehlerpotenzial
+        values.put(COL_PROF_DEPARTMENTS, departs);
 
         long _id = db.insert(TABLE_PROF, null, values);
         db.close();
-
-        return _id != 1;
+        /*
+        if (_id != 1) {
+            Toast.makeText(context, prof.getFirstName() + " hinzugefügt!", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(context, prof.getFirstName() + " nicht hinzugefügt!", Toast.LENGTH_SHORT).show();
+        }*/
     }
 
     public List<Professors> readAll() {
+        //Toast.makeText(context, "Test", Toast.LENGTH_LONG).show();
         SQLiteDatabase db = getReadableDatabase();
         List<Professors> profs = new Vector<>();
 
         Cursor c = db.query(TABLE_PROF, COLS_PROF, null, null, null, null, null);
 
         c.moveToFirst();
+
+        int i = 1;
         while (!c.isAfterLast()) {
-            profs.add(convertToProf(c));
+            //try {
+            //    profs.add(convertToProf(c));
+            //} catch (Exception e) {
+            //    e.printStackTrace();
+            //    Toast.makeText(context, "Fehler readAll()", Toast.LENGTH_LONG).show();
+            //}
+            profs.add(convertToProf(c, i));
+            i++;
+
             c.moveToNext();
         }
         db.close();
@@ -130,19 +147,21 @@ public class ProfSQLiteOpenHelper extends SQLiteOpenHelper{
         return profs;
     }
 
-    private Professors convertToProf(Cursor c) {
-        String _id = c.getString(c.getColumnIndex(COL_PROF_ID));
-        String email = c.getString(c.getColumnIndex(COL_PROF_EMAIL));
-        String firstName = c.getString(c.getColumnIndex(COL_PROF_FIRSTNAME));
-        String lastName = c.getString(c.getColumnIndex(COL_PROF_LASTNAME));
-        String birth = c.getString(c.getColumnIndex(COL_PROF_BIRTHDAY));
-        String street = c.getString(c.getColumnIndex(COL_PROF_STREET));
-        String housenumber = c.getString(c.getColumnIndex(COL_PROF_HOUSENUMBER));
-        String plz = c.getString(c.getColumnIndex(COL_PROF_POSTALCODE));
-        String city = c.getString(c.getColumnIndex(COL_PROF_CITY));
-        List<String> departments = Arrays.asList(c.getString(c.getColumnIndex(COL_PROF_DEPARTMENTS)).split(","));
+    private Professors convertToProf(Cursor c, int i) {
+        //Toast.makeText(context, "scheiße " + i, Toast.LENGTH_SHORT).show();
 
-        return new Professors(email, firstName, lastName, birth, street, housenumber, plz, city, (ArrayList<String>) departments, _id);
+        String _id = c.getString(c.getColumnIndexOrThrow(COL_PROF_FIRSTNAME));
+        String email = c.getString(c.getColumnIndexOrThrow(COL_PROF_EMAIL));
+        String firstName = c.getString(c.getColumnIndexOrThrow(COL_PROF_FIRSTNAME));
+        String lastName = c.getString(c.getColumnIndexOrThrow(COL_PROF_LASTNAME));
+        String birth = c.getString(c.getColumnIndexOrThrow(COL_PROF_BIRTHDAY));
+        String street = c.getString(c.getColumnIndexOrThrow(COL_PROF_STREET));
+        String housenumber = c.getString(c.getColumnIndexOrThrow(COL_PROF_HOUSENUMBER));
+        String plz = c.getString(c.getColumnIndexOrThrow(COL_PROF_POSTALCODE));
+        String city = c.getString(c.getColumnIndexOrThrow(COL_PROF_CITY));
+        List<String> departments = Arrays.asList(c.getString(c.getColumnIndexOrThrow(COL_PROF_DEPARTMENTS)).split(","));
+
+        return new Professors(email, firstName, lastName, birth, street, housenumber, plz, city, departments, _id);
     }
 
 }

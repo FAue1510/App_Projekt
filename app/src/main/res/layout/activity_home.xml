@@ -148,6 +148,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
         android:layout_marginBottom="@dimen/marign_18"
-        android:background="@drawable/ic_search_background"/>
+        android:background="@drawable/ic_search_background"
+        android:onClick="search_click"/>
 
 </RelativeLayout>
