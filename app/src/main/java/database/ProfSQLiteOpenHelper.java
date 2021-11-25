@@ -1,10 +1,12 @@
 package database;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Vector;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -28,7 +30,7 @@ public class ProfSQLiteOpenHelper extends SQLiteOpenHelper{
     public static final String COL_PROF_HOUSENUMBER = "housenumber";
     public static final String COL_PROF_POSTALCODE = "postalCode";
     public static final String COL_PROF_CITY = "city";
-    public static final List<String> COL_PROF_DEPARTMENTS = Collections.singletonList("departments");
+    public static final String COL_PROF_DEPARTMENTS = "departments";
 
     public static final String[] COLS_PROF = {COL_PROF_ID,
             COL_PROF_EMAIL,
@@ -39,7 +41,7 @@ public class ProfSQLiteOpenHelper extends SQLiteOpenHelper{
             COL_PROF_HOUSENUMBER,
             COL_PROF_POSTALCODE,
             COL_PROF_CITY,
-            String.valueOf(COL_PROF_DEPARTMENTS)  //Fehlerpotenzial
+            COL_PROF_DEPARTMENTS  //Fehlerpotenzial
     };
 
 
@@ -52,7 +54,7 @@ public class ProfSQLiteOpenHelper extends SQLiteOpenHelper{
     @Override
     public void onCreate(SQLiteDatabase db) {
         String createTable = String.format("CREATE TABLE %s ("
-                        + "%s TEXT PRIMARY KEY, "   //evtl autoincrement raus und als TEXT
+                        + "%s TEXT PRIMARY KEY, "
                         + "%s TEXT NOT NULL, "
                         + "%s TEXT NOT NULL, "
                         + "%s TEXT NOT NULL, "
@@ -85,7 +87,7 @@ public class ProfSQLiteOpenHelper extends SQLiteOpenHelper{
 
     }
 
-    public boolean inserProf(Professors prof) {
+    public boolean insertProf(Professors prof) {
         SQLiteDatabase db = getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -98,7 +100,13 @@ public class ProfSQLiteOpenHelper extends SQLiteOpenHelper{
         values.put(COL_PROF_HOUSENUMBER, prof.getHouseNumber());
         values.put(COL_PROF_POSTALCODE, prof.getPlz());
         values.put(COL_PROF_CITY, prof.getCity());
-        values.put(String.valueOf(COL_PROF_DEPARTMENTS), String.valueOf(prof.getDepartments()));    //Fehlerpotenzial
+
+        String departs = "";
+        for (String s : prof.getDepartments()) {
+            departs += "," + s;
+        }
+        departs.replaceFirst(",", "");
+        values.put(COL_PROF_DEPARTMENTS, departs);    //Fehlerpotenzial
 
         long _id = db.insert(TABLE_PROF, null, values);
         db.close();
@@ -132,10 +140,9 @@ public class ProfSQLiteOpenHelper extends SQLiteOpenHelper{
         String housenumber = c.getString(c.getColumnIndex(COL_PROF_HOUSENUMBER));
         String plz = c.getString(c.getColumnIndex(COL_PROF_POSTALCODE));
         String city = c.getString(c.getColumnIndex(COL_PROF_CITY));
-        List<String> departments = new Vector<>();
-        List<String> test = new ArrayList<>();
+        List<String> departments = Arrays.asList(c.getString(c.getColumnIndex(COL_PROF_DEPARTMENTS)).split(","));
 
-        return new Professors(email, firstName, lastName, birth, street, housenumber, plz, city, (ArrayList<String>) test, _id);
+        return new Professors(email, firstName, lastName, birth, street, housenumber, plz, city, (ArrayList<String>) departments, _id);
     }
 
 }

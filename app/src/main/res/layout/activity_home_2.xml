@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:background="@drawable/backgroud"
     android:clipToPadding="false"
-    tools:context="activity.HomeActivity"
     tools:ignore="HardcodedText">
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -15,8 +14,8 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:src="@drawable/ic_profile_picture"
-        app:civ_border_width="2dp"
-        app:civ_border_color="#FF000000"
+        app:border_width="2dp"
+        app:border_color="#FF000000"
         android:layout_marginStart="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="30dp"/>

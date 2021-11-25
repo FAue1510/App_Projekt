@@ -1,12 +1,8 @@
 package activity;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.location.Address;
-import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -16,11 +12,8 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
 import com.example.a21q4_app_projekt.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -34,8 +27,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
+import database.ProfSQLiteOpenHelper;
 import model.Professors;
 
 public class HomeActivity extends Activity {
@@ -51,7 +44,6 @@ public class HomeActivity extends Activity {
     String TAG = "PROFESSORS";
 
     private FusedLocationProviderClient fusedLocationClient;
-    int LOCATION_REQUEST_CODE = 10001;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,17 +56,16 @@ public class HomeActivity extends Activity {
         //sp_date = findViewById(R.id.sp_date);
         edt_fachbereich = findViewById(R.id.edt_fachbereich);
 
-        if ((ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) && (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED)) {
-            getGeolocation();
-        }else{
-            askLocationPermission();
-        }
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
+        Query search = db.collection("professors");
+        readData(search);
     }
 
     public void search_click(View view) {
         Query search = db.collection("professors");
         //Query for departments
-        if (!edt_fachbereich.getText().toString().equals(""))
+        /*if (!edt_fachbereich.getText().toString().equals(""))
             search = search.whereArrayContains("departments", edt_fachbereich.getText().toString());
         //Query for lat und long
         if (!edt_umkreis.getText().toString().equals("")) {
@@ -99,7 +90,7 @@ public class HomeActivity extends Activity {
                 startActivity(intent);
                 return;
             }
-        }
+        }*/
         readData(search);
         //go to next view
         Intent intent = new Intent(HomeActivity.this, DataViewActivity.class);
@@ -125,7 +116,7 @@ public class HomeActivity extends Activity {
                                 ((ArrayList<String>) document.get("departments")),
                                 document.getId()
                         );
-                        //Profs.add(prof);
+                        new ProfSQLiteOpenHelper(getApplicationContext()).insertProf(prof);
                     }
                 } else {
                     Log.d(TAG, "Error getting documents: ", task.getException());
@@ -135,12 +126,8 @@ public class HomeActivity extends Activity {
     }
 
     private Location getGeolocation() {
-        return null;
-    }
 
-    private void askLocationPermission(){
-        ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_REQUEST_CODE);
-        ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_COARSE_LOCATION}, LOCATION_REQUEST_CODE);
+        return null;
     }
 
     public void switchProfile_click(View view){
