@@ -31,7 +31,6 @@ import model.Professors;
 
 public class HomeActivity extends Activity {
 
-    EditText edt_search;
     DatePicker departmentPicker, circlingPicker;
 
     List<Professors> Profs;
