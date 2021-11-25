@@ -214,4 +214,13 @@
         <item>80km</item>
         <item>100km</item>
     </string-array>
+
+    <string-array name="departments">
+        <item>Alle</item>
+        <item>Angewandte Informatik</item>
+        <item>Wirtschaftsinformatik</item>
+        <item>Betriebswirtschaft</item>
+        <item>Mathematik</item>
+        <item>Elektrotechnik</item>
+    </string-array>
 </resources>

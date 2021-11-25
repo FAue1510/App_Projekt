@@ -1,16 +1,12 @@
 package activity;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.DatePicker;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
@@ -26,17 +22,17 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import classy.CustomDatePicker.DatePicker;
 import database.ProfSQLiteOpenHelper;
 import model.Professors;
 
 public class HomeActivity extends Activity {
 
     EditText edt_search;
-    EditText edt_umkreis;
-    DatePicker sp_date;
-    EditText edt_fachbereich;
+    DatePicker departmentPicker, circlingPicker;
 
     List<Professors> Profs;
 
@@ -51,10 +47,11 @@ public class HomeActivity extends Activity {
         setContentView(R.layout.activity_home);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        edt_search = findViewById(R.id.edt_search);
-        edt_umkreis = findViewById(R.id.edt_umkreis);
-        //sp_date = findViewById(R.id.sp_date);
-        edt_fachbereich = findViewById(R.id.edt_fachbereich);
+        departmentPicker = findViewById(R.id.id_department_picker);
+        circlingPicker = findViewById(R.id.id_circling_picker);
+
+        circlingPicker.setItems(Arrays.asList(getResources().getStringArray(R.array.km)));
+        departmentPicker.setItems(Arrays.asList(getResources().getStringArray(R.array.departments)));
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
