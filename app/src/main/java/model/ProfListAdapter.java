@@ -19,6 +19,7 @@ import java.util.List;
 import activity.ProfActivity;
 import de.hdodenhof.circleimageview.CircleImageView;
 import fontsUI.cairoEditText;
+import fontsUI.cairoTextView;
 
 public class ProfListAdapter extends RecyclerView.Adapter<ProfListAdapter.ViewHolder> {
 
@@ -46,7 +47,7 @@ public class ProfListAdapter extends RecyclerView.Adapter<ProfListAdapter.ViewHo
 
         holder.id_prof_name.setText(prof.getFirstName() + " " + prof.getLastName());
         holder.id_prof_city.setText(String.format("%s %s", prof.getPlz(), prof.getCity()));
-        holder.rb_prof_rating.setRating();
+        holder.rb_prof_rating.setRating(2.5f);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,8 +67,8 @@ public class ProfListAdapter extends RecyclerView.Adapter<ProfListAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public CircleImageView img_tutor_picture;
-        public cairoEditText id_prof_name;
-        public cairoEditText id_prof_city;
+        public cairoTextView id_prof_name;
+        public cairoTextView id_prof_city;
         public RatingBar rb_prof_rating;
 
         public ViewHolder(@NonNull View itemView) {
