@@ -14,7 +14,7 @@ public class ProfManager {
 
     private ProfManager() {
         list = new Vector<>();
-        //addTestData();
+        addTestData();
     }
 
     public static ProfManager getInstance() {

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import activity.ProfActivity;
+import de.hdodenhof.circleimageview.CircleImageView;
+import fontsUI.cairoEditText;
 
 public class ProfListAdapter extends RecyclerView.Adapter<ProfListAdapter.ViewHolder> {
 
@@ -32,7 +35,7 @@ public class ProfListAdapter extends RecyclerView.Adapter<ProfListAdapter.ViewHo
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View viewRowItem = inflater.inflate(R.layout.row_item_prof, parent, false);
+        View viewRowItem = inflater.inflate(R.layout.row_item_prof_2, parent, false);
 
         return new ViewHolder(viewRowItem);
     }
@@ -41,11 +44,9 @@ public class ProfListAdapter extends RecyclerView.Adapter<ProfListAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final Professors prof = values.get(position);
 
-        holder.tvName.setText(prof.getFirstName());
-        holder.tvAdress.setText(String.format("%s %s, %s, %s", prof.getStreet(), prof.getHouseNumber(),
-                                                                prof.getPlz(), prof.getCity()));
-        holder.tvSubject.setText(prof.getDepartments().get(0));
-        holder.tvEmail.setText(prof.getBirthday());
+        holder.id_prof_name.setText(prof.getFirstName() + " " + prof.getLastName());
+        holder.id_prof_city.setText(String.format("%s %s", prof.getPlz(), prof.getCity()));
+        holder.rb_prof_rating.setRating();
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,17 +65,17 @@ public class ProfListAdapter extends RecyclerView.Adapter<ProfListAdapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView tvName;
-        public TextView tvAdress;
-        public TextView tvSubject;
-        public TextView tvEmail;
+        public CircleImageView img_tutor_picture;
+        public cairoEditText id_prof_name;
+        public cairoEditText id_prof_city;
+        public RatingBar rb_prof_rating;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.tvName = itemView.findViewById(R.id.tvName);
-            this.tvAdress = itemView.findViewById(R.id.tvAdress);
-            this.tvSubject = itemView.findViewById(R.id.tvSubject);
-            this.tvEmail = itemView.findViewById(R.id.tvEmail);
+            this.img_tutor_picture = itemView.findViewById(R.id.img_tutor_picture);
+            this.id_prof_name = itemView.findViewById(R.id.id_prof_name);
+            this.id_prof_city = itemView.findViewById(R.id.id_prof_city);
+            this.rb_prof_rating = itemView.findViewById(R.id.rb_prof_rating);
         }
     }
 }

@@ -27,12 +27,14 @@ import java.util.List;
 
 import classy.CustomDatePicker.DatePicker;
 import database.ProfSQLiteOpenHelper;
+import fontsUI.cairoEditText;
 import model.ProfManager;
 import model.Professors;
 
 public class HomeActivity extends Activity {
 
     DatePicker departmentPicker, circlingPicker;
+    cairoEditText nameText;
 
     List<Professors> Profs;
     ProfManager manager;
@@ -135,5 +137,6 @@ public class HomeActivity extends Activity {
     public void switchProfile_click(View view){
         Intent intent = new Intent(HomeActivity.this, ProfileActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.from_right_in, R.anim.from_left_out);
     }
 }
