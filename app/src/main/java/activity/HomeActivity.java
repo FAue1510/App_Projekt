@@ -36,7 +36,6 @@ public class HomeActivity extends Activity {
     DatePicker departmentPicker, circlingPicker;
     cairoEditText nameText;
 
-    List<Professors> Profs;
     ProfManager manager;
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -51,6 +50,8 @@ public class HomeActivity extends Activity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         manager = ProfManager.getInstance();
+
+        nameText = findViewById(R.id.id_fullName_EditText);
 
         departmentPicker = findViewById(R.id.id_department_picker);
         circlingPicker = findViewById(R.id.id_circling_picker);
@@ -94,8 +95,8 @@ public class HomeActivity extends Activity {
             }
         }*/
         //readData(search);
-
-        manager.addProfList(new ProfSQLiteOpenHelper(getApplicationContext()).readAll());
+        manager.deleteList();
+        manager.addProfList(new ProfSQLiteOpenHelper(getApplicationContext()).readAll(nameText.getText().toString(), departmentPicker.getSeletedItem()));
         //go to next view
         Intent intent = new Intent(HomeActivity.this, DataViewActivity.class);
         startActivity(intent);
@@ -106,6 +107,9 @@ public class HomeActivity extends Activity {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
+                    ProfSQLiteOpenHelper helper = new ProfSQLiteOpenHelper(getApplicationContext());
+                    helper.deleteData();
+
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         Log.d(TAG, document.getId() + " => " + document.getData());
                         Professors prof = new Professors(
@@ -120,7 +124,7 @@ public class HomeActivity extends Activity {
                                 ((ArrayList<String>) document.get("departments")),
                                 document.getId()
                         );
-                        new ProfSQLiteOpenHelper(getApplicationContext()).insertProf(prof);
+                        helper.insertProf(prof);
                     }
                 } else {
                     Log.d(TAG, "Error getting documents: ", task.getException());

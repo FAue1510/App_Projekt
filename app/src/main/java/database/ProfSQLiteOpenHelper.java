@@ -120,26 +120,30 @@ public class ProfSQLiteOpenHelper extends SQLiteOpenHelper{
         }*/
     }
 
-    public List<Professors> readAll() {
+    public List<Professors> readAll(String name, String department) {
         //Toast.makeText(context, "Test", Toast.LENGTH_LONG).show();
         SQLiteDatabase db = getReadableDatabase();
         List<Professors> profs = new Vector<>();
 
-        Cursor c = db.query(TABLE_PROF, COLS_PROF, null, null, null, null, null);
+
+        Cursor c;
+        if (!name.contains(" ")) {
+            if (department.contains("Alle")) {
+                c = db.query(TABLE_PROF, COLS_PROF, COL_PROF_FIRSTNAME + " like '%" + name + "%' or " + COL_PROF_LASTNAME + " like '%" + name + "%'", null, null, null, null);
+            } else {
+                c = db.query(TABLE_PROF, COLS_PROF, COL_PROF_FIRSTNAME + " like '%" + name + "%' or " + COL_PROF_LASTNAME + " like '%" + name + "%' and " + COL_PROF_DEPARTMENTS + " like '%" + department + "%'", null, null, null, null);
+            }
+        } else {
+            if (department.contains("Alle")) {
+                c = db.query(TABLE_PROF, COLS_PROF, COL_PROF_FIRSTNAME + " like '%" + name.split(" ")[0] + "%' and " + COL_PROF_LASTNAME + " like '%" + name.split(" ")[1] + "%'", null, null, null, null);
+            } else {
+                c = db.query(TABLE_PROF, COLS_PROF, COL_PROF_FIRSTNAME + " like '%" + name.split(" ")[0] + "%' and " + COL_PROF_LASTNAME + " like '%" + name.split(" ")[1] + "%' and " + COL_PROF_DEPARTMENTS + " like '%" + department + "%'", null, null, null, null);
+            }
+        }
 
         c.moveToFirst();
-
-        int i = 1;
         while (!c.isAfterLast()) {
-            //try {
-            //    profs.add(convertToProf(c));
-            //} catch (Exception e) {
-            //    e.printStackTrace();
-            //    Toast.makeText(context, "Fehler readAll()", Toast.LENGTH_LONG).show();
-            //}
-            profs.add(convertToProf(c, i));
-            i++;
-
+            profs.add(convertToProf(c));
             c.moveToNext();
         }
         db.close();
@@ -147,9 +151,7 @@ public class ProfSQLiteOpenHelper extends SQLiteOpenHelper{
         return profs;
     }
 
-    private Professors convertToProf(Cursor c, int i) {
-        //Toast.makeText(context, "scheiße " + i, Toast.LENGTH_SHORT).show();
-
+    private Professors convertToProf(Cursor c) {
         String _id = c.getString(c.getColumnIndexOrThrow(COL_PROF_FIRSTNAME));
         String email = c.getString(c.getColumnIndexOrThrow(COL_PROF_EMAIL));
         String firstName = c.getString(c.getColumnIndexOrThrow(COL_PROF_FIRSTNAME));
@@ -161,7 +163,14 @@ public class ProfSQLiteOpenHelper extends SQLiteOpenHelper{
         String city = c.getString(c.getColumnIndexOrThrow(COL_PROF_CITY));
         List<String> departments = Arrays.asList(c.getString(c.getColumnIndexOrThrow(COL_PROF_DEPARTMENTS)).split(","));
 
+
         return new Professors(email, firstName, lastName, birth, street, housenumber, plz, city, departments, _id);
+    }
+
+    public void deleteData() {
+        SQLiteDatabase db = getWritableDatabase();
+
+        db.execSQL("delete from " + TABLE_PROF);
     }
 
 }
