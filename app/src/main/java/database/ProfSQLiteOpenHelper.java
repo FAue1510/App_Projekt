@@ -107,31 +107,23 @@ public class ProfSQLiteOpenHelper extends SQLiteOpenHelper{
         for (String s : prof.getDepartments()) {
             departs += "," + s;
         }
-        departs.replaceFirst(",", "");
+        departs = departs.replaceFirst(",", "");
         values.put(COL_PROF_DEPARTMENTS, departs);
 
         long _id = db.insert(TABLE_PROF, null, values);
         db.close();
-        /*
-        if (_id != 1) {
-            Toast.makeText(context, prof.getFirstName() + " hinzugefügt!", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(context, prof.getFirstName() + " nicht hinzugefügt!", Toast.LENGTH_SHORT).show();
-        }*/
     }
 
     public List<Professors> readAll(String name, String department) {
-        //Toast.makeText(context, "Test", Toast.LENGTH_LONG).show();
         SQLiteDatabase db = getReadableDatabase();
         List<Professors> profs = new Vector<>();
-
 
         Cursor c;
         if (!name.contains(" ")) {
             if (department.contains("Alle")) {
                 c = db.query(TABLE_PROF, COLS_PROF, COL_PROF_FIRSTNAME + " like '%" + name + "%' or " + COL_PROF_LASTNAME + " like '%" + name + "%'", null, null, null, null);
             } else {
-                c = db.query(TABLE_PROF, COLS_PROF, COL_PROF_FIRSTNAME + " like '%" + name + "%' or " + COL_PROF_LASTNAME + " like '%" + name + "%' and " + COL_PROF_DEPARTMENTS + " like '%" + department + "%'", null, null, null, null);
+                c = db.query(TABLE_PROF, COLS_PROF, "(" + COL_PROF_FIRSTNAME + " like '%" + name + "%' or " + COL_PROF_LASTNAME + " like '%" + name + "%') and " + COL_PROF_DEPARTMENTS + " like '%" + department + "%'", null, null, null, null);
             }
         } else {
             if (department.contains("Alle")) {

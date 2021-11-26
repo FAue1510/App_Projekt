@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -97,6 +98,7 @@ public class HomeActivity extends Activity {
         //readData(search);
         manager.deleteList();
         manager.addProfList(new ProfSQLiteOpenHelper(getApplicationContext()).readAll(nameText.getText().toString(), departmentPicker.getSeletedItem()));
+        //Toast.makeText(this, departmentPicker.getSeletedItem(), Toast.LENGTH_SHORT).show();
         //go to next view
         Intent intent = new Intent(HomeActivity.this, DataViewActivity.class);
         startActivity(intent);
