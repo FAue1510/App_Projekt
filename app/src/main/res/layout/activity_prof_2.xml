@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/backgroud"
+    tools:context="activity.ProfActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linear_profile_top"
+        android:orientation="horizontal">
+
+    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/img_tutor_picture"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="40dp"
+        android:src="@drawable/ic_profile_picture" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="60dp"
+            android:layout_marginLeft="@dimen/marign_10">
+
+
+        <fontsUI.cairoTextView
+            android:id="@+id/id_name_TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vor- Nachname"
+            android:textColor="@color/signupsignintextcolor"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <fontsUI.cairoTextView
+            android:id="@+id/id_email_TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="E-Mail"
+            android:textColor="@color/secondarytext"
+            android:textSize="@dimen/textsize_14"
+            android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/id_buchen_Button"
+        android:layout_below="@+id/linear_profile_top"
+        android:layout_gravity="center"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="27dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="27dp"
+        android:background="@drawable/rect"
+        android:contentDescription="For more visit www.materialuiux.com"
+        android:orientation="vertical">
+
+        <fontsUI.cairoTextView
+            android:id="@+id/id_street_housenumber_Label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Adresse"
+            android:textColor="@color/signupsignintextcolor"
+            android:textSize="@dimen/textsize_18"
+            android:textStyle="bold" />
+
+        <fontsUI.cairoTextView
+            android:id="@+id/id_street_housenumer_TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="fontsUI.cairoTextView" />
+
+        <fontsUI.cairoTextView
+            android:id="@+id/id_postalCode_city_Label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Stadt"
+            android:textColor="@color/signupsignintextcolor"
+            android:textSize="@dimen/textsize_18"
+            android:textStyle="bold" />
+
+        <fontsUI.cairoTextView
+            android:id="@+id/id_postalCode_city_TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="fontsUI.cairoTextView" />
+
+        <fontsUI.cairoTextView
+            android:id="@+id/id_mobilenumer_Label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Telefonnummer"
+            android:textColor="@color/signupsignintextcolor"
+            android:textSize="@dimen/textsize_18"
+            android:textStyle="bold" />
+
+        <fontsUI.cairoTextView
+            android:id="@+id/id_mobilenumer_TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="fontsUI.cairoTextView" />
+    </LinearLayout>
+
+    <fontsUI.cairoButton
+        android:id="@+id/id_buchen_Button"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="@dimen/marign_18"
+        android:background="@drawable/ic_cart_background"
+        android:onClick="order_OnClick"/>
+
+</RelativeLayout>
