@@ -13,6 +13,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import android.widget.Toast;
 
+import model.DepartmentManager;
 import model.Professors;
 
 public class ProfSQLiteOpenHelper extends SQLiteOpenHelper{
@@ -32,6 +33,9 @@ public class ProfSQLiteOpenHelper extends SQLiteOpenHelper{
     public static final String COL_PROF_CITY = "city";
     public static final String COL_PROF_DEPARTMENTS = "departments";
 
+    private DepartmentManager depManager;
+
+
     public static final String[] COLS_PROF = {COL_PROF_ID,
             COL_PROF_EMAIL,
             COL_PROF_FIRSTNAME,
@@ -49,6 +53,7 @@ public class ProfSQLiteOpenHelper extends SQLiteOpenHelper{
         super(context, DATABASE, null, CURRENT_VERSION);
         // TODO Auto-generated constructor stub
         this.context = context;
+        depManager = DepartmentManager.getInstance();
     }
 
 
@@ -114,6 +119,22 @@ public class ProfSQLiteOpenHelper extends SQLiteOpenHelper{
         db.close();
     }
 
+    public List<Professors> readAll() {
+        SQLiteDatabase db = getReadableDatabase();
+        List<Professors> profs = new Vector<>();
+
+        Cursor c = db.query(TABLE_PROF, COLS_PROF, null, null, null, null, null);
+
+        c.moveToFirst();
+        while (!c.isAfterLast()) {
+            profs.add(convertToProf(c));
+            c.moveToNext();
+        }
+        db.close();
+
+        return profs;
+    }
+
     public List<Professors> readAll(String name, String department) {
         SQLiteDatabase db = getReadableDatabase();
         List<Professors> profs = new Vector<>();
@@ -123,12 +144,14 @@ public class ProfSQLiteOpenHelper extends SQLiteOpenHelper{
             if (department.contains("Alle")) {
                 c = db.query(TABLE_PROF, COLS_PROF, COL_PROF_FIRSTNAME + " like '%" + name + "%' or " + COL_PROF_LASTNAME + " like '%" + name + "%'", null, null, null, null);
             } else {
+                department = depManager.getDepByName(department).getId();
                 c = db.query(TABLE_PROF, COLS_PROF, "(" + COL_PROF_FIRSTNAME + " like '%" + name + "%' or " + COL_PROF_LASTNAME + " like '%" + name + "%') and " + COL_PROF_DEPARTMENTS + " like '%" + department + "%'", null, null, null, null);
             }
         } else {
             if (department.contains("Alle")) {
                 c = db.query(TABLE_PROF, COLS_PROF, COL_PROF_FIRSTNAME + " like '%" + name.split(" ")[0] + "%' and " + COL_PROF_LASTNAME + " like '%" + name.split(" ")[1] + "%'", null, null, null, null);
             } else {
+                department = depManager.getDepByName(department).getId();
                 c = db.query(TABLE_PROF, COLS_PROF, COL_PROF_FIRSTNAME + " like '%" + name.split(" ")[0] + "%' and " + COL_PROF_LASTNAME + " like '%" + name.split(" ")[1] + "%' and " + COL_PROF_DEPARTMENTS + " like '%" + department + "%'", null, null, null, null);
             }
         }
@@ -144,7 +167,7 @@ public class ProfSQLiteOpenHelper extends SQLiteOpenHelper{
     }
 
     private Professors convertToProf(Cursor c) {
-        String _id = c.getString(c.getColumnIndexOrThrow(COL_PROF_FIRSTNAME));
+        String _id = c.getString(c.getColumnIndexOrThrow(COL_PROF_ID));
         String email = c.getString(c.getColumnIndexOrThrow(COL_PROF_EMAIL));
         String firstName = c.getString(c.getColumnIndexOrThrow(COL_PROF_FIRSTNAME));
         String lastName = c.getString(c.getColumnIndexOrThrow(COL_PROF_LASTNAME));

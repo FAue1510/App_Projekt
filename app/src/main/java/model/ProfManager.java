@@ -9,7 +9,6 @@ import java.util.Vector;
 public class ProfManager {
 
     private List<Professors> list;
-    private Context context;
     private static ProfManager instance;
 
     private ProfManager() {
@@ -58,6 +57,6 @@ public class ProfManager {
     }
 
     public String howMany() {
-        return "" + list.stream().count();
+        return "" + list.size();
     }
 }

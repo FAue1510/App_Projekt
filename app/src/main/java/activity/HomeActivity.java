@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -24,11 +23,13 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import classy.CustomDatePicker.DatePicker;
 import database.ProfSQLiteOpenHelper;
 import fontsUI.cairoEditText;
+import model.DepartmentManager;
+import model.Order;
+import model.OrderListAdapter;
 import model.ProfManager;
 import model.Professors;
 
@@ -37,7 +38,8 @@ public class HomeActivity extends Activity {
     DatePicker departmentPicker, circlingPicker;
     cairoEditText nameText;
 
-    ProfManager manager;
+    ProfManager profManager;
+    DepartmentManager depManager;
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     String TAG = "PROFESSORS";
@@ -50,7 +52,8 @@ public class HomeActivity extends Activity {
         setContentView(R.layout.activity_home);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        manager = ProfManager.getInstance();
+        profManager = ProfManager.getInstance();
+        depManager = DepartmentManager.getInstance();
 
         nameText = findViewById(R.id.id_fullName_EditText);
 
@@ -62,43 +65,15 @@ public class HomeActivity extends Activity {
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
+        getDepartments();
         Query search = db.collection("professors");
         readData(search);
     }
 
     public void search_click(View view) {
-        Query search = db.collection("professors");
-        //Query for departments
-        /*if (!edt_fachbereich.getText().toString().equals(""))
-            search = search.whereArrayContains("departments", edt_fachbereich.getText().toString());
-        //Query for lat und long
-        if (!edt_umkreis.getText().toString().equals("")) {
-            double r = Double.parseDouble(edt_umkreis.getText().toString())/110;
-            search = search.whereLessThanOrEqualTo("lat",getGeolocation().getLatitude() + r)
-                    .whereGreaterThanOrEqualTo("lat", getGeolocation().getLatitude() - r);
-            search = search.whereLessThanOrEqualTo("long", getGeolocation().getLongitude() + r)
-                    .whereGreaterThanOrEqualTo("long", getGeolocation().getLongitude() - r);
-        }
-        //Query for firstName and lastName
-        if (!edt_search.getText().toString().equals("")) {
-            //Search for firstName and lastName
-            if (edt_search.getText().toString().contains(" ")) {
-                search = search.whereEqualTo("firstName", edt_search.getText().toString().split(" ")[0]);
-                search = search.whereEqualTo("lastName", edt_search.getText().toString().split(" ")[1]);
-            } else {
-                //Search for firstName or lastName
-                readData(search.whereEqualTo("firstName", edt_search.getText().toString()));
-                readData(search.whereEqualTo("lastName", edt_search.getText().toString()));
-                //go to next view
-                Intent intent = new Intent(HomeActivity.this, DataViewActivity.class);
-                startActivity(intent);
-                return;
-            }
-        }*/
-        //readData(search);
-        manager.deleteList();
-        manager.addProfList(new ProfSQLiteOpenHelper(getApplicationContext()).readAll(nameText.getText().toString(), departmentPicker.getSeletedItem()));
-        //Toast.makeText(this, departmentPicker.getSeletedItem(), Toast.LENGTH_SHORT).show();
+        profManager.deleteList();
+        profManager.addProfList(new ProfSQLiteOpenHelper(getApplicationContext()).readAll(nameText.getText().toString(), departmentPicker.getSeletedItem()));
+
         //go to next view
         Intent intent = new Intent(HomeActivity.this, DataViewActivity.class);
         startActivity(intent);
@@ -130,6 +105,25 @@ public class HomeActivity extends Activity {
                     }
                 } else {
                     Log.d(TAG, "Error getting documents: ", task.getException());
+                }
+            }
+        });
+    }
+
+    private void getDepartments() {
+        db.collection("departments").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    depManager.deleteList();
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        depManager.addDep(new Department(
+                                document.getId(),
+                                document.get("departmentName").toString()
+                        ));
+                    }
+                } else {
+                    Toast.makeText(getApplicationContext(), "Error getting documents: ", Toast.LENGTH_LONG);
                 }
             }
         });

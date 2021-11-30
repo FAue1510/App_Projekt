@@ -218,9 +218,10 @@
     <string-array name="departments">
         <item>Alle</item>
         <item>Angewandte Informatik</item>
-        <item>Wirtschaftsinformatik</item>
         <item>Betriebswirtschaft</item>
-        <item>Mathematik</item>
-        <item>Elektrotechnik</item>
+        <item>Business Management</item>
+        <item>Marketing und Vertrieb</item>
+        <item>Wirtschaftsinformatik</item>
+        <item>Einkauf und Logistikmanagement</item>
     </string-array>
 </resources>
