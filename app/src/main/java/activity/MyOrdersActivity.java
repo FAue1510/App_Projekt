@@ -1,6 +1,8 @@
 package activity;
 
 import android.app.Activity;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -22,6 +24,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.List;
 import java.util.Vector;
 
+import Utility.NetworkChangeListener;
 import fontsUI.cairoTextView;
 import model.Order;
 import model.OrderListAdapter;
@@ -33,6 +36,8 @@ public class MyOrdersActivity extends Activity {
     FirebaseAuth Auth = FirebaseAuth.getInstance();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
+
     private RecyclerView recyclerView;
     private OrderListAdapter adapter;
 
@@ -42,6 +47,19 @@ public class MyOrdersActivity extends Activity {
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(R.anim.from_left_in, R.anim.from_right_out);
+    }
+
+    @Override
+    protected void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener, filter);
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListener);
+        super.onStop();
     }
 
     @Override

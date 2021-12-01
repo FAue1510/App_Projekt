@@ -4,18 +4,25 @@ import com.example.a21q4_app_projekt.R;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 
+import Utility.NetworkChangeListener;
 import de.hdodenhof.circleimageview.CircleImageView;
 import fontsUI.cairoTextView;
+import model.Department;
+import model.DepartmentManager;
 import model.ProfManager;
 import model.Professors;
 
 public class ProfActivity extends Activity {
+
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
 
     private cairoTextView id_name_TextView, id_email_TextView, id_street_housenumer_TextView, id_postalCode_city_TextView, id_mobilenumer_TextView, id_departments_TextView;
     private RatingBar rb_prof_rating;
@@ -28,6 +35,19 @@ public class ProfActivity extends Activity {
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(R.anim.from_left_in, R.anim.from_right_out);
+    }
+
+    @Override
+    protected void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener, filter);
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListener);
+        super.onStop();
     }
 
     @Override
@@ -54,7 +74,14 @@ public class ProfActivity extends Activity {
         id_street_housenumer_TextView.setText(prof.getStreet() + " " + prof.getHouseNumber());
         id_postalCode_city_TextView.setText(prof.getPlz() + " " + prof.getCity());
         id_mobilenumer_TextView.setText(prof.getMobileNumber());
-        id_departments_TextView.setText("TEST");
+
+        for (Department department: DepartmentManager.getInstance().getDepList()) {
+            if(prof.getDepartments().contains(department.getId())){
+                id_departments_TextView.setText(id_departments_TextView.getText() + department.getName() + "\n");
+            }
+        }
+
+        //id_departments_TextView.setText("TEST");
     }
     public void order_OnClick(View view){
         Intent intent = new Intent(ProfActivity.this, OrderActivity.class);

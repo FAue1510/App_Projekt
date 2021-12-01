@@ -150,8 +150,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/textsize_20"
-                    android:text="fontsUI.cairoTextView"
-                    android:textSize="@dimen/textsize_16"/>
+                    android:textSize="@dimen/textsize_16" />
 
                 <RatingBar
                     android:id="@+id/rb_prof_rating"
@@ -183,7 +182,7 @@
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <fontsUI.cairoButton
-                    android:id="@+id/id_call_Button"
+                    android:id="@+id/id_refresh_Button"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_alignParentBottom="true"

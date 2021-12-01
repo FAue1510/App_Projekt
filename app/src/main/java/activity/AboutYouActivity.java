@@ -3,6 +3,8 @@ package activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -16,6 +18,7 @@ import com.example.a21q4_app_projekt.R;
 
 import java.util.Arrays;
 
+import Utility.NetworkChangeListener;
 import classy.CustomDatePicker.DatePicker;
 import classy.CustomSwitch.customSwitch;
 import fontsUI.cairoButton;
@@ -32,6 +35,8 @@ public class AboutYouActivity extends Activity implements View.OnClickListener
     Button uploadPictureButton;
     customSwitch genderCustomSwitch;
 
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
+
     String fullName;
     String email;
     String password;
@@ -40,6 +45,19 @@ public class AboutYouActivity extends Activity implements View.OnClickListener
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(R.anim.from_left_in, R.anim.from_right_out);
+    }
+
+    @Override
+    protected void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener, filter);
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListener);
+        super.onStop();
     }
 
     @Override

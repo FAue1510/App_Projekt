@@ -2,6 +2,8 @@ package activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -17,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import Utility.NetworkChangeListener;
 import fontsUI.cairoButton;
 import fontsUI.cairoEditText;
 import model.Account;
@@ -27,6 +30,8 @@ public class AboutYouActivity2 extends Activity implements View.OnClickListener 
     
     FirebaseAuth Auth = FirebaseAuth.getInstance();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
 
     cairoEditText edt_street, edt_housenumber, edt_postalCode, edt_city;
     cairoButton btn_finishButton;
@@ -41,6 +46,19 @@ public class AboutYouActivity2 extends Activity implements View.OnClickListener 
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(R.anim.from_left_in, R.anim.from_right_out);
+    }
+
+    @Override
+    protected void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener, filter);
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListener);
+        super.onStop();
     }
 
     @Override

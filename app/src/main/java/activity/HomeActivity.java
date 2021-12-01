@@ -2,7 +2,9 @@ package activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.location.Location;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,6 +27,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import Utility.NetworkChangeListener;
 import classy.CustomDatePicker.DatePicker;
 import database.ProfSQLiteOpenHelper;
 import fontsUI.cairoEditText;
@@ -45,6 +48,8 @@ public class HomeActivity extends Activity {
     FirebaseAuth Auth = FirebaseAuth.getInstance();
     String TAG = "PROFESSORS";
 
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
+
     private FusedLocationProviderClient fusedLocationClient;
 
     @Override
@@ -54,6 +59,19 @@ public class HomeActivity extends Activity {
         Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.from_left_in, R.anim.from_right_out);
+    }
+
+    @Override
+    protected void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener, filter);
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListener);
+        super.onStop();
     }
 
     @Override

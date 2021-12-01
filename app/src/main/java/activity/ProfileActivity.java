@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -11,10 +13,13 @@ import android.view.WindowManager;
 import com.example.a21q4_app_projekt.R;
 import com.google.firebase.auth.FirebaseAuth;
 
+import Utility.NetworkChangeListener;
 import database.ProfSQLiteOpenHelper;
 import model.ProfManager;
 
 public class ProfileActivity extends Activity {
+
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
 
     FirebaseAuth Auth = FirebaseAuth.getInstance();
     ProfManager profManager;
@@ -23,6 +28,19 @@ public class ProfileActivity extends Activity {
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(R.anim.from_left_in, R.anim.from_right_out);
+    }
+
+    @Override
+    protected void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener, filter);
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListener);
+        super.onStop();
     }
 
     @Override
