@@ -1,4 +1,4 @@
-package activity;
+package model;
 
 public class Department {
     private String id;

@@ -14,9 +14,10 @@ public class Professors {
     private String houseNumber;
     private String plz;
     private String city;
+    private String mobileNumber;
     private List<String> departments;
 
-    public Professors(String email, String firstName, String lastName, String birthday, String street, String houseNumber, String plz, String city, List<String> departments, String id){
+    public Professors(String email, String firstName, String lastName, String birthday, String street, String houseNumber, String plz, String city, List<String> departments, String id, String mobileNumber){
 
         this.id = id;
         this.email = email;
@@ -28,6 +29,7 @@ public class Professors {
         this.plz = plz;
         this.city = city;
         this.departments = departments;
+        this.mobileNumber = mobileNumber;
 
     }
 
@@ -59,4 +61,7 @@ public class Professors {
         return city;
     }
     public List<String> getDepartments() { return departments; }
+    public String getMobileNumber() {
+        return mobileNumber;
+    }
 }

@@ -32,23 +32,15 @@ public class SignUpActivity extends Activity implements View.OnClickListener
         setContentView(R.layout.activity_sign_up);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        /////*     initialize view   */////
         login = findViewById(R.id.id_login_TextView);
         nameEditText = findViewById(R.id.id_fullName_EditText);
         emailEditText = findViewById(R.id.id_email_EditText);
         passwordEditText = findViewById(R.id.id_password_EditText);
         signUpButton = findViewById(R.id.id_signUp_Button);
 
-
-
-        /////*     On Click         */////
         login.setOnClickListener(this);
         signUpButton.setOnClickListener(this);
-
-
     }
-
-
 
     @Override
     public void onClick(View v)
@@ -63,20 +55,16 @@ public class SignUpActivity extends Activity implements View.OnClickListener
         {
             signupfunction();
         }
-
     }
 
 
 
     private void signupfunction()
     {
-
-        /////*   Get  Email  && Name  && Password    */////
         String fullName = nameEditText.getText().toString();
         String email = emailEditText.getText().toString();
         String password = passwordEditText.getText().toString();
 
-        /////*   Check if email and password written and valid   */////
         if (!validate())
         {
             return;
@@ -127,7 +115,6 @@ public class SignUpActivity extends Activity implements View.OnClickListener
     }
     private void signup(String fullName, String email, String password)
     {
-        /////*   Sign Up : success  */////
         Intent intent = new Intent(this, AboutYouActivity.class);
         intent.putExtra("email", emailEditText.getText().toString());
         intent.putExtra("full_name", nameEditText.getText().toString());

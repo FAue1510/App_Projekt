@@ -19,6 +19,13 @@ public class Splash extends Activity {
     private Handler handler = new Handler();
 
     @Override
+    public void onBackPressed() {
+        finish();
+        System.exit(0);
+        overridePendingTransition(R.anim.from_left_in, R.anim.from_right_out);
+    }
+
+    @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
         if (hasFocus) {
@@ -39,9 +46,7 @@ public class Splash extends Activity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         mProgressBar = (ProgressBar) findViewById (R.id.progress_bar);
-
     }
-
 
     @Override
     protected void onStart() {
@@ -57,25 +62,21 @@ public class Splash extends Activity {
     }
 
     private void startloading() {
-        // Start long running operation in a background thread
         new Thread(new Runnable() {
             public void run() {
                 while (progressStatus < 100) {
                     progressStatus += 4;
-                    // Update the progress bar and display the
-                    //current value in the text view
                     handler.post(new Runnable() {
                         public void run() {
                             mProgressBar.setProgress(progressStatus);
                             if (progressStatus == 100){
                                 Intent i = new Intent(Splash.this, SignInActivity.class);
                                 startActivity(i);
-
+                                overridePendingTransition(R.anim.from_right_in, R.anim.from_left_out);
                             }
                         }
                     });
                     try {
-                        // Sleep for 200 milliseconds.
                         Thread.sleep(200);
                     } catch (InterruptedException e) {
                         e.printStackTrace();

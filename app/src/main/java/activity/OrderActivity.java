@@ -53,6 +53,12 @@ public class OrderActivity extends Activity {
     private String curDate;
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.from_left_in, R.anim.from_right_out);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order);
@@ -98,6 +104,7 @@ public class OrderActivity extends Activity {
         Intent intent = new Intent(OrderActivity.this, ProfActivity.class);
         intent.putExtra("id", prof.getid());
         startActivity(intent);
+        overridePendingTransition(R.anim.from_left_in, R.anim.from_right_out);
     }
 
     public void order_OnClick2(View view)

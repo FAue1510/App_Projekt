@@ -29,6 +29,7 @@ public class ProfSQLiteOpenHelper extends SQLiteOpenHelper{
     public static final String COL_PROF_BIRTHDAY = "birthday";
     public static final String COL_PROF_STREET = "street";
     public static final String COL_PROF_HOUSENUMBER = "housenumber";
+    public static final String COL_PROF_MOBILENUMBER = "number";
     public static final String COL_PROF_POSTALCODE = "postalCode";
     public static final String COL_PROF_CITY = "city";
     public static final String COL_PROF_DEPARTMENTS = "departments";
@@ -45,7 +46,8 @@ public class ProfSQLiteOpenHelper extends SQLiteOpenHelper{
             COL_PROF_HOUSENUMBER,
             COL_PROF_POSTALCODE,
             COL_PROF_CITY,
-            COL_PROF_DEPARTMENTS
+            COL_PROF_DEPARTMENTS,
+            COL_PROF_MOBILENUMBER
     };
 
 
@@ -69,6 +71,7 @@ public class ProfSQLiteOpenHelper extends SQLiteOpenHelper{
                         + "%s TEXT NOT NULL, "
                         + "%s TEXT NOT NULL, "
                         + "%s TEXT NOT NULL, "
+                        + "%s TEXT NOT NULL, "
                         + "%s TEXT NOT NULL)",
                 TABLE_PROF,
                 COL_PROF_ID,
@@ -80,7 +83,8 @@ public class ProfSQLiteOpenHelper extends SQLiteOpenHelper{
                 COL_PROF_HOUSENUMBER,
                 COL_PROF_POSTALCODE,
                 COL_PROF_CITY,
-                COL_PROF_DEPARTMENTS);  //Fehlerpotenzial
+                COL_PROF_DEPARTMENTS,
+                COL_PROF_MOBILENUMBER);  //Fehlerpotenzial
 
         Log.i("CREATE", createTable);
         db.execSQL(createTable);
@@ -107,6 +111,7 @@ public class ProfSQLiteOpenHelper extends SQLiteOpenHelper{
         values.put(COL_PROF_HOUSENUMBER, prof.getHouseNumber());
         values.put(COL_PROF_POSTALCODE, prof.getPlz());
         values.put(COL_PROF_CITY, prof.getCity());
+        values.put(COL_PROF_MOBILENUMBER, prof.getMobileNumber());
 
         String departs = "";
         for (String s : prof.getDepartments()) {
@@ -177,9 +182,10 @@ public class ProfSQLiteOpenHelper extends SQLiteOpenHelper{
         String plz = c.getString(c.getColumnIndexOrThrow(COL_PROF_POSTALCODE));
         String city = c.getString(c.getColumnIndexOrThrow(COL_PROF_CITY));
         List<String> departments = Arrays.asList(c.getString(c.getColumnIndexOrThrow(COL_PROF_DEPARTMENTS)).split(","));
+        String number = c.getString(c.getColumnIndexOrThrow(COL_PROF_MOBILENUMBER));
 
 
-        return new Professors(email, firstName, lastName, birth, street, housenumber, plz, city, departments, _id);
+        return new Professors(email, firstName, lastName, birth, street, housenumber, plz, city, departments, _id, number);
     }
 
     public void deleteData() {

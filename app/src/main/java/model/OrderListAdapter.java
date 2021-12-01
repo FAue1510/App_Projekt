@@ -42,7 +42,6 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.View
         final Professors prof = profManager.getProf(order.getProfUID());
 
         holder.id_orderProf_name.setText(prof.getFirstName() + " " + prof.getLastName());
-        holder.id_orderProf_city.setText(String.format("%s %s", order.getPlz(), order.getCity()));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,13 +59,11 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.View
     public class ViewHolder extends RecyclerView.ViewHolder {
         public CircleImageView img_orderTutor_picture;
         public cairoTextView id_orderProf_name;
-        public cairoTextView id_orderProf_city;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             this.img_orderTutor_picture = itemView.findViewById(R.id.img_orderTutor_picture);
             this.id_orderProf_name = itemView.findViewById(R.id.id_orderProf_name);
-            this.id_orderProf_city = itemView.findViewById(R.id.id_orderProf_city);
         }
     }
 }

@@ -13,6 +13,12 @@ import com.example.a21q4_app_projekt.R;
 public class SettingsActivity extends Activity {
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.from_left_in, R.anim.from_right_out);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_activity);

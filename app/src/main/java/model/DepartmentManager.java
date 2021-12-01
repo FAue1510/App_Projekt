@@ -3,8 +3,6 @@ package model;
 import java.util.List;
 import java.util.Vector;
 
-import activity.Department;
-
 public class DepartmentManager {
     private List<Department> list;
     private static DepartmentManager instance;

@@ -16,6 +16,7 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -27,9 +28,8 @@ import java.util.Arrays;
 import classy.CustomDatePicker.DatePicker;
 import database.ProfSQLiteOpenHelper;
 import fontsUI.cairoEditText;
+import model.Department;
 import model.DepartmentManager;
-import model.Order;
-import model.OrderListAdapter;
 import model.ProfManager;
 import model.Professors;
 
@@ -42,9 +42,19 @@ public class HomeActivity extends Activity {
     DepartmentManager depManager;
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    FirebaseAuth Auth = FirebaseAuth.getInstance();
     String TAG = "PROFESSORS";
 
     private FusedLocationProviderClient fusedLocationClient;
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Auth.signOut();
+        Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.from_left_in, R.anim.from_right_out);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +87,7 @@ public class HomeActivity extends Activity {
         //go to next view
         Intent intent = new Intent(HomeActivity.this, DataViewActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.from_right_in, R.anim.from_left_out);
     }
 
     private void readData(Query query) {
@@ -99,7 +110,8 @@ public class HomeActivity extends Activity {
                                 document.get("postalCode").toString(),
                                 document.get("city").toString(),
                                 ((ArrayList<String>) document.get("departments")),
-                                document.getId()
+                                document.getId(),
+                                document.get("number").toString()
                         );
                         helper.insertProf(prof);
                     }

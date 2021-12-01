@@ -90,7 +90,6 @@ public class AboutYouActivity2 extends Activity implements View.OnClickListener 
     }
 
     private void signUp(String street, String housenumber, String postalCode, String city){
-        //Creates User in Firebase database
         Auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {

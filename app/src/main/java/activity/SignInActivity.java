@@ -3,7 +3,9 @@ package activity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -23,6 +25,7 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import Utility.NetworkChangeListener;
 import fontsUI.cairoButton;
 import fontsUI.cairoEditText;
 import fontsUI.cairoTextView;
@@ -34,6 +37,8 @@ public class SignInActivity extends Activity implements View.OnClickListener {
     static {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
     }
+
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
 
     cairoButton signInButton;
     cairoEditText emailEditText, passwordEditText;
@@ -50,6 +55,20 @@ public class SignInActivity extends Activity implements View.OnClickListener {
     public void onBackPressed() {
         finish();
         System.exit(0);
+        overridePendingTransition(R.anim.from_left_in, R.anim.from_right_out);
+    }
+
+    @Override
+    protected void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener, filter);
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListener);
+        super.onStop();
     }
 
     @Override
@@ -61,14 +80,12 @@ public class SignInActivity extends Activity implements View.OnClickListener {
         prefs = this.getPreferences(Context.MODE_PRIVATE);
         prefs.edit().putBoolean("signedin", false).commit();
 
-        //References
         signInButton = findViewById(R.id.id_signIn_Button);
         emailEditText = findViewById(R.id.id_email_EditText);
         passwordEditText = findViewById(R.id.id_password_EditText);
         forgetPasswordTextView = findViewById(R.id.id_forgetPassword_TextView);
         signUpTextView = findViewById(R.id.id_SignUP_TextView);
 
-        //On Click Listener
         signInButton.setOnClickListener(this);
         forgetPasswordTextView.setOnClickListener(this);
         signUpTextView.setOnClickListener(this);
@@ -93,10 +110,9 @@ public class SignInActivity extends Activity implements View.OnClickListener {
 
 
     private void signinfunction() {
-        /////*   Get  Email && Password    */////
         String emailS = emailEditText.getText().toString();
         String passwordS = passwordEditText.getText().toString();
-        /////*   Check if email and password written  valid   */////
+
         if (!validate(emailS, passwordS)) {
             return;
         } else {

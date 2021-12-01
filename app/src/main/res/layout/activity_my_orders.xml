@@ -14,7 +14,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="60dp"
-        android:text="45 Bestellungen"
+        android:text="0 Bestellungen:"
         android:textColor="@color/secondarytext"
         android:textSize="@dimen/textsize_16"
         android:textStyle="bold" />

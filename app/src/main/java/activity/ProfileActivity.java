@@ -20,6 +20,12 @@ public class ProfileActivity extends Activity {
     ProfManager profManager;
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.from_left_in, R.anim.from_right_out);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
@@ -31,6 +37,7 @@ public class ProfileActivity extends Activity {
     public void switchToPersonalData(View view) {
         Intent intent = new Intent(getApplicationContext(), PersonalDataActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.from_right_in, R.anim.from_left_out);
     }
 
     public void switchToOrder(View view) {
@@ -39,16 +46,19 @@ public class ProfileActivity extends Activity {
 
         Intent intent = new Intent(getApplicationContext(), MyOrdersActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.from_right_in, R.anim.from_left_out);
     }
 
     public void switchToSettings(View view) {
         Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.from_right_in, R.anim.from_left_out);
     }
 
     public void logout_OnClick(View view) {
         Auth.signOut();
         Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.from_left_in, R.anim.from_right_out);
     }
 }

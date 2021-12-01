@@ -1,5 +1,6 @@
 package model;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import com.example.a21q4_app_projekt.R;
 
 import java.util.List;
 
+import activity.DataViewActivity;
 import activity.ProfActivity;
 import de.hdodenhof.circleimageview.CircleImageView;
 import fontsUI.cairoTextView;
@@ -24,10 +26,12 @@ public class ProfListAdapter extends RecyclerView.Adapter<ProfListAdapter.ViewHo
 
     private List<Professors> values;
     private Context context;
+    private Activity mActivity;
 
-    public ProfListAdapter(Context context, List<Professors> values) {
+    public ProfListAdapter(Context context, List<Professors> values, Activity mActivity) {
         this.values = values;
         this.context = context;
+        this.mActivity = mActivity;
     }
 
 
@@ -55,6 +59,7 @@ public class ProfListAdapter extends RecyclerView.Adapter<ProfListAdapter.ViewHo
                 Intent intent = new Intent(context, ProfActivity.class);
                 intent.putExtra("id", prof.getid());
                 context.startActivity(intent);
+                mActivity.overridePendingTransition(R.anim.from_right_in, R.anim.from_left_out);
             }
         });
     }

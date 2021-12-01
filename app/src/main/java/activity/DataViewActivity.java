@@ -21,6 +21,12 @@ public class DataViewActivity extends Activity{
     private ProfManager manager;
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.from_left_in, R.anim.from_right_out);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dataview);
@@ -36,7 +42,7 @@ public class DataViewActivity extends Activity{
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
-        adapter = new ProfListAdapter(getApplicationContext(), manager.getDozentenList());
+        adapter = new ProfListAdapter(getApplicationContext(), manager.getDozentenList(), this);
         recyclerView.setAdapter(adapter);
     }
 

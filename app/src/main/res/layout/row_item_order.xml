@@ -7,11 +7,11 @@
     <LinearLayout
         android:id="@+id/id_rowOrder_item_LinearLayout"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="120dp"
+        android:layout_marginBottom="@dimen/marign_10"
         android:background="@drawable/rect"
         android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:layout_marginBottom="@dimen/marign_10">
+        android:orientation="horizontal">
 
         <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/img_orderTutor_picture"
@@ -24,9 +24,9 @@
             android:id="@+id/id_order_info_LinearLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/marign_10"
             android:gravity="center_vertical"
-            android:orientation="vertical"
-            android:layout_marginLeft="@dimen/marign_10">
+            android:orientation="vertical">
 
             <fontsUI.cairoTextView
                 android:id="@+id/id_orderProf_name"
@@ -34,19 +34,40 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="20dp"
                 android:text="James"
                 android:textColor="@color/black"
                 android:textSize="@dimen/textsize_20"
                 android:textStyle="bold" />
 
             <fontsUI.cairoTextView
-                android:id="@+id/id_orderProf_city"
+                android:id="@+id/id_orderDate_city"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginLeft="30dp"
-                android:text="33106 Paderborn"
+                android:text="Bestellt am: 01.12.2021"
+                android:textColor="@color/secondarytext"
+                android:textSize="@dimen/textsize_16"
+                android:textStyle="bold" />
+
+            <fontsUI.cairoTextView
+                android:id="@+id/id_alreadyRated_city"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="30dp"
+                android:text="Bewertung offen: Ja"
+                android:textColor="@color/secondarytext"
+                android:textSize="@dimen/textsize_16"
+                android:textStyle="bold" />
+
+            <fontsUI.cairoTextView
+                android:id="@+id/id_orderedOnDate_city"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="30dp"
+                android:text="Zeitraum: 02.12.2021-16.12.2021"
                 android:textColor="@color/secondarytext"
                 android:textSize="@dimen/textsize_16"
                 android:textStyle="bold" />

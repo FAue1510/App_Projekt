@@ -39,6 +39,12 @@ public class MyOrdersActivity extends Activity {
     List<Order> orders;
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.from_left_in, R.anim.from_right_out);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_orders);
@@ -86,7 +92,12 @@ public class MyOrdersActivity extends Activity {
                         ));
                         adapter = new OrderListAdapter(getApplicationContext(), orders);
                         recyclerView.setAdapter(adapter);
-                        id_myOrders_TextView.setText(orders.size() + " Bestellungen");
+                        if(orders.size() == 1){
+                            id_myOrders_TextView.setText(orders.size() + " Bestellung");
+                        }else{
+                            id_myOrders_TextView.setText(orders.size() + " Bestellungen");
+                        }
+
                     }
                 } else {
                     Toast.makeText(getApplicationContext(), "Error getting documents: ", Toast.LENGTH_LONG);
