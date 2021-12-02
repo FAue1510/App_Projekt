@@ -28,5 +28,8 @@
         <item name="backgroundTint">@color/linecolor</item>
     </style>
 
-
+    <style name="ratingBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorControlActivated">@android:color/holo_orange_dark</item>
+        <item name="colorControlNormal">@android:color/holo_green_light</item>
+    </style>
 </resources>

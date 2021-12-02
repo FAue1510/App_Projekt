@@ -1,5 +1,7 @@
 package database;
 
+import java.io.ByteArrayOutputStream;
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -10,9 +12,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.widget.Toast;
 
+import model.DepartmentManager;
 import model.Professors;
 
 public class ProfSQLiteOpenHelper extends SQLiteOpenHelper{
@@ -28,9 +33,14 @@ public class ProfSQLiteOpenHelper extends SQLiteOpenHelper{
     public static final String COL_PROF_BIRTHDAY = "birthday";
     public static final String COL_PROF_STREET = "street";
     public static final String COL_PROF_HOUSENUMBER = "housenumber";
+    public static final String COL_PROF_MOBILENUMBER = "number";
     public static final String COL_PROF_POSTALCODE = "postalCode";
     public static final String COL_PROF_CITY = "city";
     public static final String COL_PROF_DEPARTMENTS = "departments";
+    public static final String COL_PROF_IMAGE = "image";
+
+    private DepartmentManager depManager;
+
 
     public static final String[] COLS_PROF = {COL_PROF_ID,
             COL_PROF_EMAIL,
@@ -41,7 +51,9 @@ public class ProfSQLiteOpenHelper extends SQLiteOpenHelper{
             COL_PROF_HOUSENUMBER,
             COL_PROF_POSTALCODE,
             COL_PROF_CITY,
-            COL_PROF_DEPARTMENTS
+            COL_PROF_DEPARTMENTS,
+            COL_PROF_MOBILENUMBER,
+            COL_PROF_IMAGE
     };
 
 
@@ -49,6 +61,7 @@ public class ProfSQLiteOpenHelper extends SQLiteOpenHelper{
         super(context, DATABASE, null, CURRENT_VERSION);
         // TODO Auto-generated constructor stub
         this.context = context;
+        depManager = DepartmentManager.getInstance();
     }
 
 
@@ -64,7 +77,9 @@ public class ProfSQLiteOpenHelper extends SQLiteOpenHelper{
                         + "%s TEXT NOT NULL, "
                         + "%s TEXT NOT NULL, "
                         + "%s TEXT NOT NULL, "
-                        + "%s TEXT NOT NULL)",
+                        + "%s TEXT NOT NULL, "
+                        + "%s TEXT NOT NULL, "
+                        + "%s BLOB)",
                 TABLE_PROF,
                 COL_PROF_ID,
                 COL_PROF_EMAIL,
@@ -75,7 +90,9 @@ public class ProfSQLiteOpenHelper extends SQLiteOpenHelper{
                 COL_PROF_HOUSENUMBER,
                 COL_PROF_POSTALCODE,
                 COL_PROF_CITY,
-                COL_PROF_DEPARTMENTS);  //Fehlerpotenzial
+                COL_PROF_DEPARTMENTS,
+                COL_PROF_MOBILENUMBER,
+                COL_PROF_IMAGE);
 
         Log.i("CREATE", createTable);
         db.execSQL(createTable);
@@ -88,7 +105,7 @@ public class ProfSQLiteOpenHelper extends SQLiteOpenHelper{
 
     }
 
-    public void insertProf(Professors prof) {
+    public void insertProf(Professors prof, byte[] bytes) {
         SQLiteDatabase db = getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -102,6 +119,8 @@ public class ProfSQLiteOpenHelper extends SQLiteOpenHelper{
         values.put(COL_PROF_HOUSENUMBER, prof.getHouseNumber());
         values.put(COL_PROF_POSTALCODE, prof.getPlz());
         values.put(COL_PROF_CITY, prof.getCity());
+        values.put(COL_PROF_MOBILENUMBER, prof.getMobileNumber());
+        values.put(COL_PROF_IMAGE, bytes);
 
         String departs = "";
         for (String s : prof.getDepartments()) {
@@ -114,6 +133,22 @@ public class ProfSQLiteOpenHelper extends SQLiteOpenHelper{
         db.close();
     }
 
+    public List<Professors> readAll() {
+        SQLiteDatabase db = getReadableDatabase();
+        List<Professors> profs = new Vector<>();
+
+        Cursor c = db.query(TABLE_PROF, COLS_PROF, null, null, null, null, null);
+
+        c.moveToFirst();
+        while (!c.isAfterLast()) {
+            profs.add(convertToProf(c));
+            c.moveToNext();
+        }
+        db.close();
+
+        return profs;
+    }
+
     public List<Professors> readAll(String name, String department) {
         SQLiteDatabase db = getReadableDatabase();
         List<Professors> profs = new Vector<>();
@@ -123,12 +158,14 @@ public class ProfSQLiteOpenHelper extends SQLiteOpenHelper{
             if (department.contains("Alle")) {
                 c = db.query(TABLE_PROF, COLS_PROF, COL_PROF_FIRSTNAME + " like '%" + name + "%' or " + COL_PROF_LASTNAME + " like '%" + name + "%'", null, null, null, null);
             } else {
+                department = depManager.getDepByName(department).getId();
                 c = db.query(TABLE_PROF, COLS_PROF, "(" + COL_PROF_FIRSTNAME + " like '%" + name + "%' or " + COL_PROF_LASTNAME + " like '%" + name + "%') and " + COL_PROF_DEPARTMENTS + " like '%" + department + "%'", null, null, null, null);
             }
         } else {
             if (department.contains("Alle")) {
                 c = db.query(TABLE_PROF, COLS_PROF, COL_PROF_FIRSTNAME + " like '%" + name.split(" ")[0] + "%' and " + COL_PROF_LASTNAME + " like '%" + name.split(" ")[1] + "%'", null, null, null, null);
             } else {
+                department = depManager.getDepByName(department).getId();
                 c = db.query(TABLE_PROF, COLS_PROF, COL_PROF_FIRSTNAME + " like '%" + name.split(" ")[0] + "%' and " + COL_PROF_LASTNAME + " like '%" + name.split(" ")[1] + "%' and " + COL_PROF_DEPARTMENTS + " like '%" + department + "%'", null, null, null, null);
             }
         }
@@ -154,9 +191,22 @@ public class ProfSQLiteOpenHelper extends SQLiteOpenHelper{
         String plz = c.getString(c.getColumnIndexOrThrow(COL_PROF_POSTALCODE));
         String city = c.getString(c.getColumnIndexOrThrow(COL_PROF_CITY));
         List<String> departments = Arrays.asList(c.getString(c.getColumnIndexOrThrow(COL_PROF_DEPARTMENTS)).split(","));
+        String number = c.getString(c.getColumnIndexOrThrow(COL_PROF_MOBILENUMBER));
+        Bitmap image = byteArrayToBitmap(c.getBlob(c.getColumnIndexOrThrow(COL_PROF_IMAGE)));
 
+        return new Professors(email, firstName, lastName, birth, street, housenumber, plz, city, departments, _id, number, image);
+    }
 
-        return new Professors(email, firstName, lastName, birth, street, housenumber, plz, city, departments, _id);
+    private byte[] bitmapToByteArray(Bitmap bitmap) {
+        int size = bitmap.getRowBytes() * bitmap.getHeight();
+        ByteBuffer byteBuffer = ByteBuffer.allocate(size);
+        bitmap.copyPixelsToBuffer(byteBuffer);
+
+        return byteBuffer.array();
+    }
+
+    private Bitmap byteArrayToBitmap(byte[] bArray) {
+        return BitmapFactory.decodeByteArray(bArray, 0, bArray.length);
     }
 
     public void deleteData() {
@@ -164,7 +214,6 @@ public class ProfSQLiteOpenHelper extends SQLiteOpenHelper{
 
         db.execSQL("delete from " + TABLE_PROF);
     }
-
 }
 
 

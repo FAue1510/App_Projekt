@@ -1,34 +1,47 @@
 package activity;
 
+import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Location;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 
 import com.example.a21q4_app_projekt.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
+import Utility.NetworkChangeListener;
 import classy.CustomDatePicker.DatePicker;
 import database.ProfSQLiteOpenHelper;
 import fontsUI.cairoEditText;
+import model.Department;
+import model.DepartmentManager;
 import model.ProfManager;
 import model.Professors;
 
@@ -37,20 +50,58 @@ public class HomeActivity extends Activity {
     DatePicker departmentPicker, circlingPicker;
     cairoEditText nameText;
 
-    ProfManager manager;
+    ProfManager profManager;
+    DepartmentManager depManager;
+    SharedPreferences prefs;
 
+    FirebaseStorage storage = FirebaseStorage.getInstance();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    FirebaseAuth Auth = FirebaseAuth.getInstance();
     String TAG = "PROFESSORS";
 
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
+
+    //Bitmap bitmap;
+
     private FusedLocationProviderClient fusedLocationClient;
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Auth.signOut();
+        Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.from_left_in, R.anim.from_right_out);
+    }
+
+    @Override
+    protected void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener, filter);
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListener);
+        super.onStop();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
-        manager = ProfManager.getInstance();
+        ActivityCompat.requestPermissions(HomeActivity.this,
+                new String[]{Manifest.permission.SEND_SMS, Manifest.permission.READ_PHONE_STATE},
+                1);
+
+        prefs = getSharedPreferences("myPrefs", Context.MODE_PRIVATE);
+
+        profManager = ProfManager.getInstance();
+        depManager = DepartmentManager.getInstance();
 
         nameText = findViewById(R.id.id_fullName_EditText);
 
@@ -62,46 +113,19 @@ public class HomeActivity extends Activity {
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
+        getDepartments();
         Query search = db.collection("professors");
         readData(search);
     }
 
     public void search_click(View view) {
-        Query search = db.collection("professors");
-        //Query for departments
-        /*if (!edt_fachbereich.getText().toString().equals(""))
-            search = search.whereArrayContains("departments", edt_fachbereich.getText().toString());
-        //Query for lat und long
-        if (!edt_umkreis.getText().toString().equals("")) {
-            double r = Double.parseDouble(edt_umkreis.getText().toString())/110;
-            search = search.whereLessThanOrEqualTo("lat",getGeolocation().getLatitude() + r)
-                    .whereGreaterThanOrEqualTo("lat", getGeolocation().getLatitude() - r);
-            search = search.whereLessThanOrEqualTo("long", getGeolocation().getLongitude() + r)
-                    .whereGreaterThanOrEqualTo("long", getGeolocation().getLongitude() - r);
-        }
-        //Query for firstName and lastName
-        if (!edt_search.getText().toString().equals("")) {
-            //Search for firstName and lastName
-            if (edt_search.getText().toString().contains(" ")) {
-                search = search.whereEqualTo("firstName", edt_search.getText().toString().split(" ")[0]);
-                search = search.whereEqualTo("lastName", edt_search.getText().toString().split(" ")[1]);
-            } else {
-                //Search for firstName or lastName
-                readData(search.whereEqualTo("firstName", edt_search.getText().toString()));
-                readData(search.whereEqualTo("lastName", edt_search.getText().toString()));
-                //go to next view
-                Intent intent = new Intent(HomeActivity.this, DataViewActivity.class);
-                startActivity(intent);
-                return;
-            }
-        }*/
-        //readData(search);
-        manager.deleteList();
-        manager.addProfList(new ProfSQLiteOpenHelper(getApplicationContext()).readAll(nameText.getText().toString(), departmentPicker.getSeletedItem()));
-        //Toast.makeText(this, departmentPicker.getSeletedItem(), Toast.LENGTH_SHORT).show();
+        profManager.deleteList();
+        profManager.addProfList(new ProfSQLiteOpenHelper(getApplicationContext()).readAll(nameText.getText().toString(), departmentPicker.getSeletedItem()));
+        prefs.edit().putString("selected_department", departmentPicker.getSeletedItem()).apply();
         //go to next view
         Intent intent = new Intent(HomeActivity.this, DataViewActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.from_right_in, R.anim.from_left_out);
     }
 
     private void readData(Query query) {
@@ -124,9 +148,10 @@ public class HomeActivity extends Activity {
                                 document.get("postalCode").toString(),
                                 document.get("city").toString(),
                                 ((ArrayList<String>) document.get("departments")),
-                                document.getId()
+                                document.getId(),
+                                document.get("number").toString()
                         );
-                        helper.insertProf(prof);
+                        downloadImage(prof, helper);
                     }
                 } else {
                     Log.d(TAG, "Error getting documents: ", task.getException());
@@ -135,9 +160,39 @@ public class HomeActivity extends Activity {
         });
     }
 
+    private void getDepartments() {
+        db.collection("departments").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    depManager.deleteList();
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        depManager.addDep(new Department(
+                                document.getId(),
+                                document.get("departmentName").toString()
+                        ));
+                    }
+                } else {
+                    Toast.makeText(getApplicationContext(), "Error getting documents: ", Toast.LENGTH_LONG);
+                }
+            }
+        });
+    }
+
     private Location getGeolocation() {
 
         return null;
+    }
+
+    private void downloadImage(Professors prof, ProfSQLiteOpenHelper helper) {
+        StorageReference imageRef = storage.getReference().child("Image").child(prof.getid());
+
+        imageRef.getBytes(1024*1024).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+            @Override
+            public void onSuccess(byte[] bytes) {
+                helper.insertProf(prof, bytes);
+            }
+        });
     }
 
     public void switchProfile_click(View view){

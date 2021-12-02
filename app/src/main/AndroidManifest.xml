@@ -5,8 +5,12 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <application
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
+    <application
         android:allowBackup="true"
         android:icon="@drawable/logo_start"
         android:label="Find a Tutor"
@@ -15,14 +19,16 @@
         android:theme="@style/Theme.21Q4_App_Projekt"
         android:usesCleartextTraffic="true">
         <activity
-            android:name="activity.ProfActivity"
+            android:name="activity.OrderOverview"
             android:exported="false" />
         <activity
-            android:name="activity.ProfileActivity"
+            android:name="activity.MyOrderActivity"
             android:exported="false" />
-        <activity
-            android:name="activity.AboutYouActivity2"
-            android:exported="false" />
+        <activity android:name="activity.ProfActivity" />
+        <activity android:name="activity.PersonalDataActivity" />
+        <activity android:name="activity.SettingsActivity" />
+        <activity android:name="activity.ProfileActivity" />
+        <activity android:name="activity.AboutYouActivity2" />
         <activity android:name="activity.HomeActivity" />
         <activity android:name="activity.DataViewActivity" />
         <activity android:name="activity.SignUpActivity" />

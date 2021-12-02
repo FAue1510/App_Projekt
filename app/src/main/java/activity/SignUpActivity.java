@@ -2,12 +2,15 @@ package activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 
 import com.example.a21q4_app_projekt.R;
 
+import Utility.NetworkChangeListener;
 import fontsUI.cairoButton;
 import fontsUI.cairoEditText;
 import fontsUI.cairoTextView;
@@ -15,6 +18,8 @@ import fontsUI.cairoTextView;
 
 public class SignUpActivity extends Activity implements View.OnClickListener
 {
+
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
 
     cairoEditText nameEditText, emailEditText, passwordEditText;
     cairoButton signUpButton;
@@ -27,28 +32,33 @@ public class SignUpActivity extends Activity implements View.OnClickListener
     }
 
     @Override
+    protected void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener, filter);
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListener);
+        super.onStop();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        /////*     initialize view   */////
         login = findViewById(R.id.id_login_TextView);
         nameEditText = findViewById(R.id.id_fullName_EditText);
         emailEditText = findViewById(R.id.id_email_EditText);
         passwordEditText = findViewById(R.id.id_password_EditText);
         signUpButton = findViewById(R.id.id_signUp_Button);
 
-
-
-        /////*     On Click         */////
         login.setOnClickListener(this);
         signUpButton.setOnClickListener(this);
-
-
     }
-
-
 
     @Override
     public void onClick(View v)
@@ -63,20 +73,16 @@ public class SignUpActivity extends Activity implements View.OnClickListener
         {
             signupfunction();
         }
-
     }
 
 
 
     private void signupfunction()
     {
-
-        /////*   Get  Email  && Name  && Password    */////
         String fullName = nameEditText.getText().toString();
         String email = emailEditText.getText().toString();
         String password = passwordEditText.getText().toString();
 
-        /////*   Check if email and password written and valid   */////
         if (!validate())
         {
             return;
@@ -127,7 +133,6 @@ public class SignUpActivity extends Activity implements View.OnClickListener
     }
     private void signup(String fullName, String email, String password)
     {
-        /////*   Sign Up : success  */////
         Intent intent = new Intent(this, AboutYouActivity.class);
         intent.putExtra("email", emailEditText.getText().toString());
         intent.putExtra("full_name", nameEditText.getText().toString());
