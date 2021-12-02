@@ -18,8 +18,10 @@ public class Order implements Serializable {
     private String description;
     private String order_date;
     private String pattern = "dd.MM.yyyy";
+    private String orderUID;
     DateFormat df = new SimpleDateFormat(pattern);
     private long number;
+    private boolean rated;
 
     public Order(String userUID, String profUID, String street, String houseNumber, String plz, String city, String date, String description, long number) {
         this.userUID = userUID;
@@ -32,6 +34,7 @@ public class Order implements Serializable {
         this.description = description;
         this.order_date = df.format(Calendar.getInstance().getTime());
         this.number = number;
+        this.rated = false;
     }
 
     public long getNumber() {
@@ -64,5 +67,13 @@ public class Order implements Serializable {
     }
     public String getDescription() {
         return description;
+    }
+
+    public void setRated(boolean rated) {
+        this.rated = rated;
+    }
+
+    public boolean isRated() {
+        return rated;
     }
 }

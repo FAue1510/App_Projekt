@@ -21,9 +21,6 @@
         <activity
             android:name="activity.OrderOverview"
             android:exported="false" />
-        <activity
-            android:name="activity.MyOrderActivity"
-            android:exported="false" />
         <activity android:name="activity.ProfActivity" />
         <activity android:name="activity.PersonalDataActivity" />
         <activity android:name="activity.SettingsActivity" />
@@ -36,6 +33,7 @@
         <activity android:name="activity.AboutYouActivity" />
         <activity android:name="activity.OrderActivity" />
         <activity android:name="activity.MyOrdersActivity" />
+        <activity android:name="activity.MyOrderActivity" />
         <activity
             android:name="activity.Splash"
             android:exported="true">
