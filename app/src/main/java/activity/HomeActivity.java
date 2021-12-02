@@ -3,6 +3,8 @@ package activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
@@ -17,12 +19,15 @@ import com.example.a21q4_app_projekt.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -44,11 +49,14 @@ public class HomeActivity extends Activity {
     ProfManager profManager;
     DepartmentManager depManager;
 
+    FirebaseStorage storage = FirebaseStorage.getInstance();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseAuth Auth = FirebaseAuth.getInstance();
     String TAG = "PROFESSORS";
 
     NetworkChangeListener networkChangeListener = new NetworkChangeListener();
+
+    //Bitmap bitmap;
 
     private FusedLocationProviderClient fusedLocationClient;
 
@@ -131,7 +139,7 @@ public class HomeActivity extends Activity {
                                 document.getId(),
                                 document.get("number").toString()
                         );
-                        helper.insertProf(prof);
+                        downloadImage(prof, helper);
                     }
                 } else {
                     Log.d(TAG, "Error getting documents: ", task.getException());
@@ -162,6 +170,17 @@ public class HomeActivity extends Activity {
     private Location getGeolocation() {
 
         return null;
+    }
+
+    private void downloadImage(Professors prof, ProfSQLiteOpenHelper helper) {
+        StorageReference imageRef = storage.getReference().child("Image").child(prof.getid());
+
+        imageRef.getBytes(1024*1024).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+            @Override
+            public void onSuccess(byte[] bytes) {
+                helper.insertProf(prof, bytes);
+            }
+        });
     }
 
     public void switchProfile_click(View view){

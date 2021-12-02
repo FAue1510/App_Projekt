@@ -3,6 +3,7 @@ package model;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,6 +52,7 @@ public class ProfListAdapter extends RecyclerView.Adapter<ProfListAdapter.ViewHo
         holder.id_prof_name.setText(prof.getFirstName() + " " + prof.getLastName());
         holder.id_prof_city.setText(String.format("%s %s", prof.getPlz(), prof.getCity()));
         holder.rb_prof_rating.setRating(2.5f);
+        holder.img_tutor_picture.setImageBitmap(prof.getImage());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

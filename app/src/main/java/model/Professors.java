@@ -1,5 +1,7 @@
 package model;
 
+import android.graphics.Bitmap;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +19,8 @@ public class Professors {
     private String mobileNumber;
     private List<String> departments;
 
+    private Bitmap image;
+
     public Professors(String email, String firstName, String lastName, String birthday, String street, String houseNumber, String plz, String city, List<String> departments, String id, String mobileNumber){
 
         this.id = id;
@@ -30,7 +34,34 @@ public class Professors {
         this.city = city;
         this.departments = departments;
         this.mobileNumber = mobileNumber;
+        this.image = null;
 
+    }
+
+    public Professors(String email, String firstName, String lastName, String birthday, String street, String houseNumber, String plz, String city, List<String> departments, String id, String mobileNumber, Bitmap image){
+
+        this.id = id;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthday = birthday;
+        this.street = street;
+        this.houseNumber = houseNumber;
+        this.plz = plz;
+        this.city = city;
+        this.departments = departments;
+        this.mobileNumber = mobileNumber;
+        this.image = image;
+    }
+
+
+
+    public Bitmap getImage() {
+        return image;
+    }
+
+    public void setImage(Bitmap image) {
+        this.image = image;
     }
 
     public String getid() {

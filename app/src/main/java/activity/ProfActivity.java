@@ -74,6 +74,7 @@ public class ProfActivity extends Activity {
         id_street_housenumer_TextView.setText(prof.getStreet() + " " + prof.getHouseNumber());
         id_postalCode_city_TextView.setText(prof.getPlz() + " " + prof.getCity());
         id_mobilenumer_TextView.setText(prof.getMobileNumber());
+        img_tutor_picture.setImageBitmap(prof.getImage());
 
         for (Department department: DepartmentManager.getInstance().getDepList()) {
             if(prof.getDepartments().contains(department.getId())){

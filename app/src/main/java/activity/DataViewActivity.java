@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.a21q4_app_projekt.R;
 
 import Utility.NetworkChangeListener;
+import fontsUI.cairoTextView;
 import model.ProfListAdapter;
 import model.ProfManager;
 
@@ -22,6 +23,8 @@ public class DataViewActivity extends Activity{
     private RecyclerView recyclerView;
     private ProfListAdapter adapter;
     private ProfManager manager;
+
+    cairoTextView dataview_TextView;
 
     NetworkChangeListener networkChangeListener = new NetworkChangeListener();
 
@@ -51,6 +54,9 @@ public class DataViewActivity extends Activity{
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         manager = ProfManager.getInstance();
+
+        dataview_TextView = findViewById(R.id.id_dataview_TextView);
+        dataview_TextView.setText("Gefundene Dozenten: " + manager.getDozentenList().size());
 
         recyclerView = findViewById(R.id.rvProfs);
         recyclerView.setHasFixedSize(false);    //erhöht etwas die Performance

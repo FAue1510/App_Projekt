@@ -42,6 +42,7 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.View
         final Professors prof = profManager.getProf(order.getProfUID());
 
         holder.id_orderProf_name.setText(prof.getFirstName() + " " + prof.getLastName());
+        holder.img_orderTutor_picture.setImageBitmap(prof.getImage());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
