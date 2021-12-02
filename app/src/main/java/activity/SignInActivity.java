@@ -77,8 +77,7 @@ public class SignInActivity extends Activity implements View.OnClickListener {
         setContentView(R.layout.activity_sign_in);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        prefs = this.getPreferences(Context.MODE_PRIVATE);
-        prefs.edit().putBoolean("signedin", false).commit();
+        prefs = getSharedPreferences("myPrefs",Context.MODE_PRIVATE);
 
         signInButton = findViewById(R.id.id_signIn_Button);
         emailEditText = findViewById(R.id.id_email_EditText);
@@ -89,6 +88,14 @@ public class SignInActivity extends Activity implements View.OnClickListener {
         signInButton.setOnClickListener(this);
         forgetPasswordTextView.setOnClickListener(this);
         signUpTextView.setOnClickListener(this);
+
+        if(prefs.getBoolean("signedin",false) == true){
+            readUser(db.collection("users").whereEqualTo("userUID",prefs.getString("userUID","")));
+            Intent intent = new Intent(SignInActivity.this, HomeActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.from_right_in, R.anim.from_left_out);
+        }
+
     }
 
     @Override
@@ -156,6 +163,8 @@ public class SignInActivity extends Activity implements View.OnClickListener {
 
     private void Login() {
         readUser(db.collection("users").whereEqualTo("userUID",Auth.getCurrentUser().getUid()));
+        prefs.edit().putBoolean("signedin", true).apply();
+        prefs.edit().putString("userUID", Auth.getCurrentUser().getUid()).apply();
         Intent intent = new Intent(SignInActivity.this, HomeActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.from_right_in, R.anim.from_left_out);

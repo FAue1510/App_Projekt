@@ -6,6 +6,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:allowBackup="true"
@@ -15,6 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.21Q4_App_Projekt"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name="activity.OrderOverview"
+            android:exported="false" />
         <activity
             android:name="activity.MyOrderActivity"
             android:exported="false" />

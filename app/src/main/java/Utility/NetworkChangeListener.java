@@ -18,7 +18,7 @@ public class NetworkChangeListener extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         if (!Common.isConnectedToInternet(context)) {
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            View layout_dialog = LayoutInflater.from(context).inflate(R.layout.activity_no_connection, null);
+            View layout_dialog = LayoutInflater.from(context).inflate(R.layout.view_no_connection, null);
             builder.setView(layout_dialog);
 
             Button btnRetry = layout_dialog.findViewById(R.id.id_refresh_Button);

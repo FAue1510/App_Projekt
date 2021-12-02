@@ -1,8 +1,11 @@
 package activity;
 
+import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.location.Location;
@@ -14,6 +17,7 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 
 import com.example.a21q4_app_projekt.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -48,6 +52,7 @@ public class HomeActivity extends Activity {
 
     ProfManager profManager;
     DepartmentManager depManager;
+    SharedPreferences prefs;
 
     FirebaseStorage storage = FirebaseStorage.getInstance();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -87,6 +92,13 @@ public class HomeActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+
+        ActivityCompat.requestPermissions(HomeActivity.this,
+                new String[]{Manifest.permission.SEND_SMS, Manifest.permission.READ_PHONE_STATE},
+                1);
+
+        prefs = getSharedPreferences("myPrefs", Context.MODE_PRIVATE);
 
         profManager = ProfManager.getInstance();
         depManager = DepartmentManager.getInstance();
@@ -109,7 +121,7 @@ public class HomeActivity extends Activity {
     public void search_click(View view) {
         profManager.deleteList();
         profManager.addProfList(new ProfSQLiteOpenHelper(getApplicationContext()).readAll(nameText.getText().toString(), departmentPicker.getSeletedItem()));
-
+        prefs.edit().putString("selected_department", departmentPicker.getSeletedItem()).apply();
         //go to next view
         Intent intent = new Intent(HomeActivity.this, DataViewActivity.class);
         startActivity(intent);

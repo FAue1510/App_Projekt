@@ -2,10 +2,11 @@ package model;
 
 import android.graphics.Bitmap;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Professors {
+public class Professors implements Serializable {
 
     private String id;
     private String email;
@@ -19,7 +20,7 @@ public class Professors {
     private String mobileNumber;
     private List<String> departments;
 
-    private Bitmap image;
+    private transient Bitmap image;
 
     public Professors(String email, String firstName, String lastName, String birthday, String street, String houseNumber, String plz, String city, List<String> departments, String id, String mobileNumber){
 

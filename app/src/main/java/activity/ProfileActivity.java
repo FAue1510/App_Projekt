@@ -3,8 +3,10 @@ package activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.View;
@@ -23,10 +25,13 @@ public class ProfileActivity extends Activity {
 
     FirebaseAuth Auth = FirebaseAuth.getInstance();
     ProfManager profManager;
+    SharedPreferences prefs;
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+        startActivity(intent);
         overridePendingTransition(R.anim.from_left_in, R.anim.from_right_out);
     }
 
@@ -48,6 +53,7 @@ public class ProfileActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        prefs = getSharedPreferences("myPrefs",Context.MODE_PRIVATE);
 
         profManager = ProfManager.getInstance();
     }
@@ -75,6 +81,8 @@ public class ProfileActivity extends Activity {
 
     public void logout_OnClick(View view) {
         Auth.signOut();
+        prefs.edit().putBoolean("signedin", false).apply();
+        prefs.edit().putString("userUID", "");
         Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.from_left_in, R.anim.from_right_out);

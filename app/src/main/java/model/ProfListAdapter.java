@@ -58,9 +58,9 @@ public class ProfListAdapter extends RecyclerView.Adapter<ProfListAdapter.ViewHo
             @Override
             public void onClick(View view) {
                 //Toast.makeText(context, "Klicken funktioniert", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(context, ProfActivity.class);
+                Intent intent = new Intent(view.getContext(), ProfActivity.class);
                 intent.putExtra("id", prof.getid());
-                context.startActivity(intent);
+                view.getContext().startActivity(intent);
                 mActivity.overridePendingTransition(R.anim.from_right_in, R.anim.from_left_out);
             }
         });

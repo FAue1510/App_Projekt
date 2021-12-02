@@ -1,8 +1,13 @@
 package model;
 
+import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.function.Predicate;
 
-public class Order {
+public class Order implements Serializable {
     private String userUID;
     private String profUID;
     private String street;
@@ -11,6 +16,9 @@ public class Order {
     private String city;
     private String date;
     private String description;
+    private String order_date;
+    private String pattern = "dd.MM.yyyy";
+    DateFormat df = new SimpleDateFormat(pattern);
 
     public Order(String userUID, String profUID, String street, String houseNumber, String plz, String city, String date, String description) {
         this.userUID = userUID;
@@ -21,7 +29,11 @@ public class Order {
         this.city = city;
         this.date = date;
         this.description = description;
+        this.order_date = df.format(Calendar.getInstance().getTime());
+    }
 
+    public String getOrder_date() {
+        return order_date;
     }
     public String getProfUID() {
         return profUID;

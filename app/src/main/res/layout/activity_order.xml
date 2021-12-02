@@ -1,117 +1,169 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="activity.OrderActivity">
+    tools:context="activity.OrderActivity"
+    android:background="@drawable/backgroud"
+    tools:ignore="HardcodedText">
 
-  <LinearLayout
+  <fontsUI.cairoTextView
+      android:id="@+id/id_address_TextView"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="30dp"
+      android:layout_marginTop="60dp"
+      android:text="Bestellung"
+      android:textColor="@color/signupsignintextcolor"
+      android:textSize="@dimen/textsize_30"
+      android:textStyle="bold" />
+
+
+  <ScrollView
       android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:orientation="vertical">
-
-    <EditText
-        android:id="@+id/edt_street_b"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/edittext_start_layout"
-        android:ems="10"
-        android:hint="Straße"
-        android:importantForAutofill="no"
-        android:inputType="text"
-        android:minHeight="48dp"
-        android:padding="10dip"
-        android:textAlignment="inherit"
-        android:textSize="18sp"
-        tools:ignore="TextContrastCheck" />
-
-    <EditText
-        android:id="@+id/edt_houseNumbere_b"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/edittext_start_layout"
-        android:ems="10"
-        android:hint="Hausnummer"
-        android:importantForAutofill="no"
-        android:inputType="text"
-        android:minHeight="48dp"
-        android:padding="10dip"
-        android:textAlignment="inherit"
-        android:textSize="18sp"
-        tools:ignore="TextContrastCheck" />
-
-    <EditText
-        android:id="@+id/edt_plz_b"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/edittext_start_layout"
-        android:ems="10"
-        android:hint="Postleitzahl"
-        android:importantForAutofill="no"
-        android:inputType="text"
-        android:minHeight="48dp"
-        android:padding="10dip"
-        android:textAlignment="inherit"
-        android:textSize="18sp"
-        tools:ignore="TextContrastCheck" />
-
-    <EditText
-        android:id="@+id/edt_city_b"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/edittext_start_layout"
-        android:ems="10"
-        android:hint="Stadt"
-        android:importantForAutofill="no"
-        android:inputType="text"
-        android:minHeight="48dp"
-        android:padding="10dip"
-        android:textAlignment="inherit"
-        android:textSize="18sp"
-        tools:ignore="TextContrastCheck" />
-
-    <CalendarView
-        android:id="@+id/cv_clender"
-        android:layout_width="match_parent"
-        android:layout_height="294dp" />
-
-    <EditText
-        android:id="@+id/edt_description_b"
-        android:layout_width="match_parent"
-        android:layout_height="144dp"
-        android:background="@drawable/edittext_start_layout"
-        android:ems="10"
-        android:hint="Bemerkung"
-        android:importantForAutofill="no"
-        android:inputType="text"
-        android:minHeight="48dp"
-        android:padding="10dip"
-        android:textAlignment="inherit"
-        android:textSize="18sp"
-        tools:ignore="TextContrastCheck" />
+      android:layout_height="wrap_content"
+      android:layout_above="@+id/id_button_container"
+      android:layout_below="@+id/id_address_TextView"
+      android:layout_gravity="center"
+      android:layout_marginLeft="30dp"
+      android:layout_marginTop="11dp"
+      android:layout_marginRight="30dp"
+      android:background="@drawable/rect">
 
     <LinearLayout
+        android:id="@+id/id_container_scrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-      <Button
-          android:id="@+id/b_cancel_b"
-          android:layout_width="209dp"
-          android:layout_height="wrap_content"
-          android:onClick="cancel_OnClick"
-          android:text="Abrechen" />
-
-      <Button
-          android:id="@+id/b_order_b"
+      <fontsUI.cairoTextView
+          android:id="@+id/id_street_housenumber_Label"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_weight="1"
-          android:onClick="order_OnClick2"
-          android:text="Buchen" />
+          android:layout_marginLeft="@dimen/textsize_20"
+          android:layout_marginTop="@dimen/textsize_20"
+          android:text="Adresse"
+          android:textColor="@color/signupsignintextcolor"
+          android:textSize="22sp"
+          android:textStyle="bold" />
+
+      <fontsUI.cairoTextView
+          android:id="@+id/id_street_housenumer_TextView"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="@dimen/textsize_20"
+          android:text="fontsUI.cairoTextView"
+          android:textSize="@dimen/textsize_16" />
+
+      <fontsUI.cairoTextView
+          android:id="@+id/id_postalCode_city_Label"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="@dimen/textsize_20"
+          android:layout_marginTop="@dimen/textsize_20"
+          android:text="Stadt"
+          android:textColor="@color/signupsignintextcolor"
+          android:textSize="22sp"
+          android:textStyle="bold" />
+
+      <fontsUI.cairoTextView
+          android:id="@+id/id_postalCode_city_TextView"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="@dimen/textsize_20"
+          android:text="fontsUI.cairoTextView"
+          android:textSize="@dimen/textsize_16" />
+
+      <fontsUI.cairoTextView
+          android:id="@+id/id_calendar_Label"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="@dimen/textsize_20"
+          android:layout_marginTop="@dimen/textsize_20"
+          android:text="Mieten am"
+          android:textColor="@color/signupsignintextcolor"
+          android:textSize="22sp"
+          android:textStyle="bold" />
+
+      <CalendarView
+          android:id="@+id/cv_clender"
+          android:layout_width="match_parent"
+          android:layout_height="294dp"
+          android:layout_marginLeft="@dimen/textsize_20"
+          android:layout_marginRight="@dimen/textsize_20" />
+
+      <fontsUI.cairoTextView
+          android:id="@+id/id_number_Label"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="@dimen/textsize_20"
+          android:layout_marginTop="@dimen/textsize_20"
+          android:text="Mobilnummer "
+          android:textColor="@color/signupsignintextcolor"
+          android:textSize="22sp"
+          android:textStyle="bold" />
+
+      <fontsUI.cairoEditText
+          android:id="@+id/id_number_EditText"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="@dimen/textsize_20"
+          android:layout_marginRight="@dimen/textsize_20"
+          android:hint="49/0XXX XXXXXXXX"
+          android:inputType="number"/>
+
+      <fontsUI.cairoTextView
+          android:id="@+id/id_comment_Label"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="@dimen/textsize_20"
+          android:layout_marginTop="@dimen/textsize_20"
+          android:text="Bemerkung "
+          android:textColor="@color/signupsignintextcolor"
+          android:textSize="22sp"
+          android:textStyle="bold" />
+
+      <fontsUI.cairoEditText
+          android:id="@+id/id_comment_EditText"
+          android:layout_width="match_parent"
+          android:layout_height="120dp"
+          android:layout_marginLeft="@dimen/textsize_20"
+          android:layout_marginRight="@dimen/textsize_20"
+          android:layout_marginBottom="40dp" />
+
     </LinearLayout>
+  </ScrollView>
+
+  <LinearLayout
+      android:id="@+id/id_button_container"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentBottom="true"
+      android:layout_centerInParent="true"
+      android:layout_marginBottom="@dimen/marign_18"
+      android:layout_marginTop="@dimen/marign_18">
+
+  <fontsUI.cairoButton
+      android:id="@+id/id_order_cancel_Button"
+      android:layout_width="60dp"
+      android:layout_height="60dp"
+      android:layout_alignParentBottom="true"
+      android:layout_centerInParent="true"
+      android:background="@drawable/ic_cancel_background"
+      tools:ignore="SpeakableTextPresentCheck"
+      android:onClick="cancel_OnClick"/>
+
+  <fontsUI.cairoButton
+      android:id="@+id/id_order_next_Button"
+      android:layout_width="60dp"
+      android:layout_height="60dp"
+      android:layout_alignParentBottom="true"
+      android:layout_centerInParent="true"
+      android:background="@drawable/ic_next_background"
+      tools:ignore="SpeakableTextPresentCheck"
+      android:onClick="order_OnClick2"/>
 
   </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</RelativeLayout>

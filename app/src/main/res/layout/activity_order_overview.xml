@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="activity.OrderOverview"
+    android:background="@drawable/backgroud"
+    tools:ignore="HardcodedText">
+
+    <fontsUI.cairoTextView
+        android:id="@+id/id_address_TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="60dp"
+        android:text="@string/orderOverview"
+        android:textColor="@color/signupsignintextcolor"
+        android:textSize="@dimen/textsize_30"
+        android:textStyle="bold" />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/id_order_Button"
+        android:layout_below="@+id/id_address_TextView"
+        android:layout_gravity="center"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/rect">
+
+        <LinearLayout
+            android:id="@+id/id_container_scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <fontsUI.cairoTextView
+                android:id="@+id/id_user_overview_Label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/textsize_20"
+                android:layout_marginTop="@dimen/textsize_20"
+                android:text="Persönliche Daten"
+                android:textColor="@color/signupsignintextcolor"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <fontsUI.cairoTextView
+                android:id="@+id/id_name_TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/textsize_20"
+                android:text="fontsUI.cairoTextView"
+                android:textSize="@dimen/textsize_16" />
+
+            <fontsUI.cairoTextView
+                android:id="@+id/id_street_housenumer_TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/textsize_20"
+                android:text="fontsUI.cairoTextView"
+                android:textSize="@dimen/textsize_16" />
+
+            <fontsUI.cairoTextView
+                android:id="@+id/id_postalCode_city_TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/textsize_20"
+                android:text="fontsUI.cairoTextView"
+                android:textSize="@dimen/textsize_16" />
+
+            <fontsUI.cairoTextView
+                android:id="@+id/id_birthday_TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/textsize_20"
+                android:text="fontsUI.cairoTextView"
+                android:textSize="@dimen/textsize_16" />
+
+            <fontsUI.cairoTextView
+                android:id="@+id/id_email_TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/textsize_20"
+                android:text="fontsUI.cairoTextView"
+                android:textSize="@dimen/textsize_16" />
+
+            <fontsUI.cairoTextView
+                android:id="@+id/id_tutor_overview_Label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/textsize_20"
+                android:layout_marginTop="@dimen/textsize_20"
+                android:text="Tutorübersicht"
+                android:textColor="@color/signupsignintextcolor"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <fontsUI.cairoTextView
+                android:id="@+id/id_prof_name_TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/textsize_20"
+                android:text="fontsUI.cairoTextView"
+                android:textSize="@dimen/textsize_16" />
+
+            <fontsUI.cairoTextView
+                android:id="@+id/id_prof_address_TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/textsize_20"
+                android:text="fontsUI.cairoTextView"
+                android:textSize="@dimen/textsize_16" />
+
+            <fontsUI.cairoTextView
+                android:id="@+id/id_prof_city_TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/textsize_20"
+                android:text="fontsUI.cairoTextView"
+                android:textSize="@dimen/textsize_16" />
+
+            <fontsUI.cairoTextView
+                android:id="@+id/id_prof_birthday_TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/textsize_20"
+                android:text="fontsUI.cairoTextView"
+                android:textSize="@dimen/textsize_16" />
+
+            <fontsUI.cairoTextView
+                android:id="@+id/id_prof_email_TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/textsize_20"
+                android:text="fontsUI.cairoTextView"
+                android:textSize="@dimen/textsize_16" />
+
+            <fontsUI.cairoTextView
+                android:id="@+id/id_order_overview_Label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/textsize_20"
+                android:layout_marginTop="@dimen/textsize_20"
+                android:text="Tutorübersicht"
+                android:textColor="@color/signupsignintextcolor"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <fontsUI.cairoTextView
+                android:id="@+id/id_order_date_TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/textsize_20"
+                android:text="fontsUI.cairoTextView"
+                android:textSize="@dimen/textsize_16" />
+
+            <fontsUI.cairoTextView
+                android:id="@+id/id_order_department_TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/textsize_20"
+                android:text="fontsUI.cairoTextView"
+                android:textSize="@dimen/textsize_16" />
+
+            <fontsUI.cairoTextView
+                android:id="@+id/id_ordered_for_TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/textsize_20"
+                android:text="fontsUI.cairoTextView"
+                android:textSize="@dimen/textsize_16" />
+
+            <fontsUI.cairoTextView
+                android:id="@+id/id_order_price_TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/textsize_20"
+                android:text="Gesamtpreis: 92€"
+                android:textSize="@dimen/textsize_16" />
+
+            <fontsUI.cairoTextView
+                android:id="@+id/id_comment_TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/textsize_20"
+                android:text="fontsUI.cairoTextView"
+                android:textSize="@dimen/textsize_16" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <fontsUI.cairoButton
+        android:id="@+id/id_order_Button"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="@dimen/marign_18"
+        android:layout_marginBottom="@dimen/marign_18"
+        android:background="@drawable/ic_cart_background"
+        android:onClick="order_OnClick"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+
+</RelativeLayout>
