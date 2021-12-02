@@ -109,7 +109,8 @@ public class MyOrdersActivity extends Activity {
                                 document.get("plz").toString(),
                                 document.get("city").toString(),
                                 document.get("date").toString(),
-                                document.get("description").toString()
+                                document.get("description").toString(),
+                                0
                         ));
                         adapter = new OrderListAdapter(getApplicationContext(), orders);
                         recyclerView.setAdapter(adapter);

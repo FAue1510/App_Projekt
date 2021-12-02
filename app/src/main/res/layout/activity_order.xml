@@ -110,8 +110,8 @@
           android:layout_height="wrap_content"
           android:layout_marginLeft="@dimen/textsize_20"
           android:layout_marginRight="@dimen/textsize_20"
-          android:hint="49/0XXX XXXXXXXX"
-          android:inputType="number"/>
+          android:hint="49XXX XXXXXXXX"
+          android:inputType="number" />
 
       <fontsUI.cairoTextView
           android:id="@+id/id_comment_Label"
@@ -152,7 +152,8 @@
       android:layout_centerInParent="true"
       android:background="@drawable/ic_cancel_background"
       tools:ignore="SpeakableTextPresentCheck"
-      android:onClick="cancel_OnClick"/>
+      android:onClick="cancel_OnClick"
+      android:layout_marginRight="20dp"/>
 
   <fontsUI.cairoButton
       android:id="@+id/id_order_next_Button"

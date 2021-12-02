@@ -142,8 +142,8 @@ public class OrderOverview extends Activity {
                     @Override
                     public void run() {
                         SmsManager m = SmsManager.getDefault();
-                        String destination = "+4917652080898";
-                        String text = "Bestellbestätigung\n\nBestätigung vom Tutor:";
+                        String destination = "+" + order.getNumber();
+                        String text = "Bestellbestätigung\n\nBestätigung vom Tutor:\nBestelldatum: " + order.getOrder_date() + "\nBestellt für den: " +  order.getDate() + "\nBestellter Tutor: " + prof.getFirstName() + " " + prof.getLastName();
                         m.sendTextMessage(destination, null, text, null, null);
 
                         Intent intent = new Intent(getApplicationContext(), MyOrdersActivity.class);

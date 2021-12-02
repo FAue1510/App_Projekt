@@ -34,7 +34,7 @@ public class OrderActivity extends Activity {
 
     cairoTextView id_street_housenumer_TextView;
     cairoTextView id_postalCode_city_TextView;
-    cairoEditText id_comment_EditText;
+    cairoEditText id_comment_EditText, id_number_EditText;
 
     CalendarView cv_calender;
 
@@ -71,6 +71,7 @@ public class OrderActivity extends Activity {
         id_street_housenumer_TextView = findViewById(R.id.id_street_housenumer_TextView);
         id_postalCode_city_TextView = findViewById(R.id.id_postalCode_city_TextView);
         id_comment_EditText = findViewById(R.id.id_comment_EditText);
+        id_number_EditText = findViewById(R.id.id_number_EditText);
 
         cv_calender = findViewById(R.id.cv_clender);
 
@@ -107,12 +108,18 @@ public class OrderActivity extends Activity {
 
     public void order_OnClick2(View view)
     {
-        order = new Order(Auth.getCurrentUser().getUid(), prof.getid(), ac.getStreet(), ac.getHouseNumber(), ac.getPlz(), ac.getCity(), curDate, id_comment_EditText.getText().toString());
-        Intent intent = new Intent(getApplicationContext(), OrderOverview.class);
-        intent.putExtra("order", order);
-        intent.putExtra("professor", prof);
-        startActivity(intent);
-        overridePendingTransition(R.anim.from_right_in, R.anim.from_left_out);
+        if(id_number_EditText.getText().toString().isEmpty()){
+            id_number_EditText.setError("Mobilnummer eingeben!");
+        }else if(id_number_EditText.getText().toString().length() != 13){
+            id_number_EditText.setError("Mobilnummer nicht korrekt!");
+        }else{
+            order = new Order(Auth.getCurrentUser().getUid(), prof.getid(), ac.getStreet(), ac.getHouseNumber(), ac.getPlz(), ac.getCity(), curDate, id_comment_EditText.getText().toString(), Long.parseLong(id_number_EditText.getText().toString()));
+            Intent intent = new Intent(getApplicationContext(), OrderOverview.class);
+            intent.putExtra("order", order);
+            intent.putExtra("professor", prof);
+            startActivity(intent);
+            overridePendingTransition(R.anim.from_right_in, R.anim.from_left_out);
+        }
     }
 
     private void disableOrderedDates(){

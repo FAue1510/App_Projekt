@@ -19,8 +19,9 @@ public class Order implements Serializable {
     private String order_date;
     private String pattern = "dd.MM.yyyy";
     DateFormat df = new SimpleDateFormat(pattern);
+    private long number;
 
-    public Order(String userUID, String profUID, String street, String houseNumber, String plz, String city, String date, String description) {
+    public Order(String userUID, String profUID, String street, String houseNumber, String plz, String city, String date, String description, long number) {
         this.userUID = userUID;
         this.profUID = profUID;
         this.street = street;
@@ -30,6 +31,11 @@ public class Order implements Serializable {
         this.date = date;
         this.description = description;
         this.order_date = df.format(Calendar.getInstance().getTime());
+        this.number = number;
+    }
+
+    public long getNumber() {
+        return number;
     }
 
     public String getOrder_date() {

@@ -2,15 +2,21 @@ package activity;
 
 import com.example.a21q4_app_projekt.R;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
+
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import Utility.NetworkChangeListener;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -89,5 +95,16 @@ public class ProfActivity extends Activity {
         intent.putExtra("id",prof.getid());
         startActivity(intent);
         overridePendingTransition(R.anim.from_right_in, R.anim.from_left_out);
+    }
+
+    public void call_onClick(View view) {
+        if (ContextCompat.checkSelfPermission(this,android.Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(ProfActivity.this,
+                    new String[]{Manifest.permission.CALL_PHONE},1);
+
+        } else {
+            Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + prof.getMobileNumber()));
+            startActivity(intent);
+        }
     }
 }

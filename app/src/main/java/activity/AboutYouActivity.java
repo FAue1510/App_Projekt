@@ -2,13 +2,21 @@ package activity;
 
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDelegate;
+
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -16,6 +24,9 @@ import android.widget.Toast;
 
 import com.example.a21q4_app_projekt.R;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Arrays;
 
 import Utility.NetworkChangeListener;
@@ -125,6 +136,38 @@ public class AboutYouActivity extends Activity implements View.OnClickListener
         startActivityForResult(Intent.createChooser(intent, "Foto auswählen"), PICK_IMAGE);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        Log.i("foto_finished", "ActivityResult get in Method");
+        if(resultCode==RESULT_OK)
+        {
+            Uri selectedimg = data.getData();
+            try { //Getting the Bitmap from Gallery
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedimg);
+                String root = Environment.getExternalStorageDirectory().getAbsolutePath();
+                File myDir = new File(root + "/saved_images");
+                myDir.mkdirs();
+
+                String fname = "profile.jpg";
+                File file = new File (myDir, fname);
+                if (file.exists ()) file.delete ();
+                try {
+                    FileOutputStream out = new FileOutputStream(file);
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
+                    out.flush();
+                    out.close();
+                    Log.i("foto_finished", "FOTO FINISHED");
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     private void complete()
     {
         /////*   Get  Email && Password    */////
@@ -186,9 +229,5 @@ public class AboutYouActivity extends Activity implements View.OnClickListener
 
         return valid;
     }
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data)
-    {
-        super.onActivityResult(requestCode, resultCode, data);
-    }
+
 }
