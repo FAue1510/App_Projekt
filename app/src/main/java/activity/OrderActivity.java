@@ -10,7 +10,11 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.CalendarView;
 
+import androidx.annotation.NonNull;
+
 import com.example.a21q4_app_projekt.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -22,6 +26,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import Utility.NetworkChangeListener;
+import fontsUI.cairoButton;
 import fontsUI.cairoEditText;
 import fontsUI.cairoTextView;
 import database.ProfSQLiteOpenHelper;
@@ -40,6 +45,8 @@ public class OrderActivity extends Activity {
     cairoTextView id_street_housenumer_TextView;
     cairoTextView id_postalCode_city_TextView;
     cairoEditText id_comment_EditText, id_number_EditText;
+
+    cairoButton id_order_next_Button;
 
     CalendarView cv_calender;
 
@@ -77,6 +84,7 @@ public class OrderActivity extends Activity {
         id_postalCode_city_TextView = findViewById(R.id.id_postalCode_city_TextView);
         id_comment_EditText = findViewById(R.id.id_comment_EditText);
         id_number_EditText = findViewById(R.id.id_number_EditText);
+        id_order_next_Button = findViewById(R.id.id_order_next_Button);
 
         cv_calender = findViewById(R.id.cv_clender);
 
@@ -93,7 +101,6 @@ public class OrderActivity extends Activity {
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
                 curDate = new StringBuilder().append(dayOfMonth).append(".").append(month+1).append(".").append(year).toString();
-                curDate = new StringBuilder().append(dayOfMonth).append(".").append(month).append(".").append(year).toString();
                 checkDate(db.collection("order").whereEqualTo("profUID",prof.getid()).whereEqualTo("date",curDate));
             }
         });
@@ -147,7 +154,7 @@ public class OrderActivity extends Activity {
 
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         Log.d("TAG", document.getId() + " => " + document.getData());
-                        b_order.setEnabled(false);
+                        id_order_next_Button.setEnabled(false);
                         return;
                     }
                 } else {
@@ -155,7 +162,7 @@ public class OrderActivity extends Activity {
                 }
             }
         });
-        b_order.setEnabled(true);
+        id_order_next_Button.setEnabled(true);
     }
 
 }
