@@ -4,8 +4,8 @@ import androidx.annotation.NonNull;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -19,13 +19,15 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
+import database.ProfSQLiteOpenHelper;
 import model.Account;
 import model.Order;
 import model.ProfManager;
@@ -76,11 +78,12 @@ public class OrderActivity extends Activity {
 
         DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
         curDate = dateFormat.format(cv_calender.getDate());
+        checkDate(db.collection("order").whereEqualTo("profUID",prof.getid()).whereEqualTo("date",curDate));
         cv_calender.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
                 curDate = new StringBuilder().append(dayOfMonth).append(".").append(month).append(".").append(year).toString();
+                checkDate(db.collection("order").whereEqualTo("profUID",prof.getid()).whereEqualTo("date",curDate));
             }
         });
         disableOrderedDates();
@@ -116,6 +119,27 @@ public class OrderActivity extends Activity {
         calendar.set(Calendar.HOUR_OF_DAY, Calendar.getInstance().getActualMinimum(Calendar.HOUR_OF_DAY));
         long date = calendar.getTime().getTime();
         cv_calender.setMinDate(date);
+    }
+
+    private void checkDate(Query query) {
+        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    ProfSQLiteOpenHelper helper = new ProfSQLiteOpenHelper(getApplicationContext());
+                    helper.deleteData();
+
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Log.d("TAG", document.getId() + " => " + document.getData());
+                        b_order.setEnabled(false);
+                        return;
+                    }
+                } else {
+                    Log.d("TAG", "Error getting documents: ", task.getException());
+                }
+            }
+        });
+        b_order.setEnabled(true);
     }
 
 }

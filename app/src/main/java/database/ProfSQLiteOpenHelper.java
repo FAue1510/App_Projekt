@@ -144,7 +144,7 @@ public class ProfSQLiteOpenHelper extends SQLiteOpenHelper{
     }
 
     private Professors convertToProf(Cursor c) {
-        String _id = c.getString(c.getColumnIndexOrThrow(COL_PROF_FIRSTNAME));
+        String _id = c.getString(c.getColumnIndexOrThrow(COL_PROF_ID));
         String email = c.getString(c.getColumnIndexOrThrow(COL_PROF_EMAIL));
         String firstName = c.getString(c.getColumnIndexOrThrow(COL_PROF_FIRSTNAME));
         String lastName = c.getString(c.getColumnIndexOrThrow(COL_PROF_LASTNAME));
