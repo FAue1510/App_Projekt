@@ -20,9 +20,13 @@ public class Professors implements Serializable {
     private String mobileNumber;
     private List<String> departments;
 
+    private String longi;
+    private String lati;
+    private int price;
+
     private transient Bitmap image;
 
-    public Professors(String email, String firstName, String lastName, String birthday, String street, String houseNumber, String plz, String city, List<String> departments, String id, String mobileNumber){
+    public Professors(String email, String firstName, String lastName, String birthday, String street, String houseNumber, String plz, String city, List<String> departments, String id, String mobileNumber, String lati, String longi, int price) {
 
         this.id = id;
         this.email = email;
@@ -35,11 +39,14 @@ public class Professors implements Serializable {
         this.city = city;
         this.departments = departments;
         this.mobileNumber = mobileNumber;
+        this.longi = longi;
+        this.lati = lati;
+        this.price = price;
         this.image = null;
 
     }
 
-    public Professors(String email, String firstName, String lastName, String birthday, String street, String houseNumber, String plz, String city, List<String> departments, String id, String mobileNumber, Bitmap image){
+    public Professors(String email, String firstName, String lastName, String birthday, String street, String houseNumber, String plz, String city, List<String> departments, String id, String mobileNumber, String lati, String longi, int price, Bitmap image){
 
         this.id = id;
         this.email = email;
@@ -52,6 +59,9 @@ public class Professors implements Serializable {
         this.city = city;
         this.departments = departments;
         this.mobileNumber = mobileNumber;
+        this.longi = longi;
+        this.lati = lati;
+        this.price = price;
         this.image = image;
     }
 
@@ -95,5 +105,17 @@ public class Professors implements Serializable {
     public List<String> getDepartments() { return departments; }
     public String getMobileNumber() {
         return mobileNumber;
+    }
+
+    public String getLongi() {
+        return longi;
+    }
+
+    public String getLati() {
+        return lati;
+    }
+
+    public int getPrice() {
+        return price;
     }
 }

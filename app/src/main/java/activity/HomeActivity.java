@@ -120,7 +120,7 @@ public class HomeActivity extends Activity {
 
     public void search_click(View view) {
         profManager.deleteList();
-        profManager.addProfList(new ProfSQLiteOpenHelper(getApplicationContext()).readAll(nameText.getText().toString(), departmentPicker.getSeletedItem()));
+        profManager.addProfList(new ProfSQLiteOpenHelper(getApplicationContext()).readAll(nameText.getText().toString(), departmentPicker.getSeletedItem(), circlingPicker.getSeletedItem()));
         prefs.edit().putString("selected_department", departmentPicker.getSeletedItem()).apply();
         //go to next view
         Intent intent = new Intent(HomeActivity.this, DataViewActivity.class);
@@ -149,7 +149,10 @@ public class HomeActivity extends Activity {
                                 document.get("city").toString(),
                                 ((ArrayList<String>) document.get("departments")),
                                 document.getId(),
-                                document.get("number").toString()
+                                document.get("number").toString(),
+                                document.get("lat").toString(),
+                                document.get("long").toString(),
+                                Integer.parseInt(document.get("price").toString())
                         );
                         downloadImage(prof, helper);
                     }
