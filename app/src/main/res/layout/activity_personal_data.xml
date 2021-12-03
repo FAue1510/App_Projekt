@@ -4,69 +4,214 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="activity.PersonalDataActivity">
+    tools:context="activity.PersonalDataActivity"
+    android:background="@drawable/backgroud">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:gravity="center"
-        android:orientation="vertical"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        android:layout_marginTop="40dp">
 
-        <TextView
-            android:id="@+id/txt_firstName"
+        <LinearLayout
+            android:id="@+id/id_container_personal_data"
             android:layout_width="match_parent"
-            android:layout_height="58dp"
-            android:text="Vorname"
-            android:textAppearance="@style/editText" />
+            android:layout_height="wrap_content"
 
-        <TextView
-            android:id="@+id/txt_lastName"
-            android:layout_width="match_parent"
-            android:layout_height="58dp"
-            android:text="Nachname"
-            android:textAppearance="@style/editText" />
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/txt_date"
-            android:layout_width="match_parent"
-            android:layout_height="58dp"
-            android:text="Geburtsdatum"
-            android:textAppearance="@style/editText" />
+            <fontsUI.cairoTextView
+                android:id="@+id/id_first_name_Label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/textsize_20"
+                android:layout_marginTop="@dimen/textsize_20"
+                android:layout_marginRight="@dimen/textsize_20"
+                android:text="Vorname"
+                android:textAlignment="viewStart"
+                android:textColor="@color/signupsignintextcolor"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/txt_street"
-            android:layout_width="match_parent"
-            android:layout_height="58dp"
-            android:text="Strasse"
-            android:textAppearance="@style/editText" />
+            <fontsUI.cairoEditText
+                android:id="@+id/id_first_name_EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/textsize_20"
+                android:layout_marginRight="@dimen/textsize_20"
+                android:minHeight="48dp"
+                android:textSize="@dimen/textsize_16" />
 
-        <TextView
-            android:id="@+id/txt_houseNumber"
-            android:layout_width="match_parent"
-            android:layout_height="58dp"
-            android:text="Hausnummer"
-            android:textAppearance="@style/editText" />
+            <fontsUI.cairoTextView
+                android:id="@+id/id_last_name_Label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/textsize_20"
+                android:layout_marginTop="@dimen/textsize_20"
+                android:layout_marginRight="@dimen/textsize_20"
+                android:text="Nachname"
+                android:textAlignment="viewStart"
+                android:textColor="@color/signupsignintextcolor"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/txt_plz"
-            android:layout_width="match_parent"
-            android:layout_height="58dp"
-            android:text="PLZ"
-            android:textAppearance="@style/editText" />
+            <fontsUI.cairoEditText
+                android:id="@+id/id_last_name_EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/textsize_20"
+                android:layout_marginRight="@dimen/textsize_20"
+                android:minHeight="48dp"
+                android:textSize="@dimen/textsize_16" />
 
-        <TextView
-            android:id="@+id/txt_city"
-            android:layout_width="match_parent"
-            android:layout_height="58dp"
-            android:text="Stadt"
-            android:textAppearance="@style/editText" />
-    </LinearLayout>
+            <fontsUI.cairoTextView
+                android:id="@+id/id_birthday_Label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/textsize_20"
+                android:layout_marginTop="@dimen/textsize_20"
+                android:layout_marginRight="@dimen/textsize_20"
+                android:text="Geburtsdatum"
+                android:textAlignment="viewStart"
+                android:textColor="@color/signupsignintextcolor"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
+            <LinearLayout
+                android:id="@+id/id_pickYourDate_LinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:layout_below="@+id/id_pickYourDate_TextView"
+                android:layout_marginLeft="@dimen/textsize_20"
+                android:layout_marginRight="@dimen/textsize_20"
+                android:background="@drawable/rect"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <classy.CustomDatePicker.DatePicker
+                    android:id="@+id/id_day_DatePicker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+
+                <classy.CustomDatePicker.DatePicker
+                    android:id="@+id/id_month_DatePicker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+
+                <classy.CustomDatePicker.DatePicker
+                    android:id="@+id/id_year_DatePicker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+            <fontsUI.cairoTextView
+                android:id="@+id/id_street_Label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/textsize_20"
+                android:layout_marginTop="@dimen/textsize_20"
+                android:layout_marginRight="@dimen/textsize_20"
+                android:text="Straße"
+                android:textAlignment="viewStart"
+                android:textColor="@color/signupsignintextcolor"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <fontsUI.cairoEditText
+                android:id="@+id/id_street_EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/textsize_20"
+                android:layout_marginRight="@dimen/textsize_20"
+                android:minHeight="48dp"
+                android:textSize="@dimen/textsize_16" />
+
+            <fontsUI.cairoTextView
+                android:id="@+id/id_housenumber_Label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/textsize_20"
+                android:layout_marginTop="@dimen/textsize_20"
+                android:layout_marginRight="@dimen/textsize_20"
+                android:text="Hausnummer"
+                android:textAlignment="viewStart"
+                android:textColor="@color/signupsignintextcolor"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <fontsUI.cairoEditText
+                android:id="@+id/id_housenumber_EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/textsize_20"
+                android:layout_marginRight="@dimen/textsize_20"
+                android:inputType="number"
+                android:minHeight="48dp"
+                android:textSize="@dimen/textsize_16" />
+
+
+            <fontsUI.cairoTextView
+                android:id="@+id/id_postal_code_Label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/textsize_20"
+                android:layout_marginTop="@dimen/textsize_20"
+                android:layout_marginRight="@dimen/textsize_20"
+                android:text="Postleitzahl"
+                android:textAlignment="viewStart"
+                android:textColor="@color/signupsignintextcolor"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <fontsUI.cairoEditText
+                android:id="@+id/id_postal_code_EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/textsize_20"
+                android:layout_marginRight="@dimen/textsize_20"
+                android:inputType="number"
+                android:minHeight="48dp"
+                android:textSize="@dimen/textsize_16" />
+
+            <fontsUI.cairoTextView
+                android:id="@+id/id_city_Label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/textsize_20"
+                android:layout_marginTop="@dimen/textsize_20"
+                android:layout_marginRight="@dimen/textsize_20"
+                android:text="Stadt"
+                android:textAlignment="viewStart"
+                android:textColor="@color/signupsignintextcolor"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <fontsUI.cairoEditText
+                android:id="@+id/id_city_EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/textsize_20"
+                android:layout_marginRight="@dimen/textsize_20"
+                android:minHeight="48dp"
+                android:textSize="@dimen/textsize_16" />
+
+            <fontsUI.cairoButton
+                android:id="@+id/id_order_next_Button"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/ic_save_background"
+                tools:ignore="SpeakableTextPresentCheck"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:onClick="save_onClick"/>
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

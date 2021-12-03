@@ -1,7 +1,5 @@
 package activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -11,12 +9,14 @@ import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.example.a21q4_app_projekt.R;
 import com.google.firebase.auth.FirebaseAuth;
 
 import Utility.NetworkChangeListener;
 import database.ProfSQLiteOpenHelper;
+import model.Account;
 import model.ProfManager;
 
 public class ProfileActivity extends Activity {
@@ -26,6 +26,8 @@ public class ProfileActivity extends Activity {
     FirebaseAuth Auth = FirebaseAuth.getInstance();
     ProfManager profManager;
     SharedPreferences prefs;
+
+    Account ac = Account.getInstance();
 
     @Override
     public void onBackPressed() {
@@ -56,6 +58,7 @@ public class ProfileActivity extends Activity {
         prefs = getSharedPreferences("myPrefs",Context.MODE_PRIVATE);
 
         profManager = ProfManager.getInstance();
+
     }
 
     public void switchToPersonalData(View view) {

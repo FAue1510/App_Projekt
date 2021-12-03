@@ -14,6 +14,7 @@ import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -31,6 +32,18 @@ public class DatePicker extends ScrollView {
         }
     }
 
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev)
+    {
+        if (ev.getActionMasked() == MotionEvent.ACTION_DOWN)
+        {
+            ViewParent p = getParent();
+            if (p != null)
+                p.requestDisallowInterceptTouchEvent(true);
+        }
+
+        return false;
+    }
 
     private Context context;
 //    private ScrollView scrollView;

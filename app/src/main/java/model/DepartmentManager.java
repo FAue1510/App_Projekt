@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
@@ -16,6 +17,15 @@ public class DepartmentManager {
             instance = new DepartmentManager();
         }
         return instance;
+    }
+
+    public List<String> getDepListString(){
+        List<String> depStrings = new ArrayList<>();
+        depStrings.add("Alle");
+        for (Department d:list) {
+            depStrings.add(d.getName());
+        }
+        return depStrings;
     }
 
     public void addDep(Department newDep) {

@@ -1,5 +1,8 @@
 package model;
 
+import android.util.Log;
+import android.widget.Toast;
+
 import java.time.LocalDate;
 
 public class Account {
@@ -14,6 +17,7 @@ public class Account {
     private String plz;
     private String city;
     private static Account OBJ;
+    private String docid;
 
     private Account(String userUID, String username, String email) {
         this.userUID = userUID;
@@ -30,6 +34,26 @@ public class Account {
         }
 
         return OBJ;
+    }
+
+    public void setDocId(String docid){
+        this.docid = docid;
+    }
+
+    public String getDocid(){
+        return docid;
+    }
+
+    public int getDay(){
+        return Integer.parseInt(birthday.split("\\.")[0]);
+    }
+
+    public int getMonth(){
+        return Integer.parseInt(birthday.split("\\.")[1]);
+    }
+
+    public int getYear(){
+        return Integer.parseInt(birthday.split("\\.")[2]);
     }
 
     public String getUsername() {
@@ -113,5 +137,6 @@ public class Account {
         this.street = street;
         this.houseNumber = houseNumber;
         this.plz = plz;
+        Log.i("BIRTHDAY", birthday);
     }
 }

@@ -187,6 +187,8 @@ public class SignInActivity extends Activity implements View.OnClickListener {
                                 document.get("houseNumber").toString(),
                                 document.get("plz").toString()
                         );
+                        ac.setDocId(document.getId());
+
                     }
                 } else {
                     Toast.makeText(getApplicationContext(), "Error getting documents: ", Toast.LENGTH_LONG);

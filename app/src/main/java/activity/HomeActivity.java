@@ -35,6 +35,7 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import Utility.NetworkChangeListener;
 import classy.CustomDatePicker.DatePicker;
@@ -60,8 +61,6 @@ public class HomeActivity extends Activity {
     String TAG = "PROFESSORS";
 
     NetworkChangeListener networkChangeListener = new NetworkChangeListener();
-
-    //Bitmap bitmap;
 
     private FusedLocationProviderClient fusedLocationClient;
 
@@ -109,7 +108,9 @@ public class HomeActivity extends Activity {
         circlingPicker = findViewById(R.id.id_circling_picker);
 
         circlingPicker.setItems(Arrays.asList(getResources().getStringArray(R.array.km)));
-        departmentPicker.setItems(Arrays.asList(getResources().getStringArray(R.array.departments)));
+
+        List<String> circs = Arrays.asList(this.getResources().getStringArray(R.array.km));
+        circlingPicker.setSeletion(circs.indexOf(prefs.getString("prefCirc", "Unbegrenzt")));
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
@@ -178,6 +179,9 @@ public class HomeActivity extends Activity {
                 } else {
                     Toast.makeText(getApplicationContext(), "Error getting documents: ", Toast.LENGTH_LONG);
                 }
+                departmentPicker.setItems(DepartmentManager.getInstance().getDepListString());
+                List<String> deps = DepartmentManager.getInstance().getDepListString();
+                departmentPicker.setSeletion(deps.indexOf(prefs.getString("prefDep", "Alle")));
             }
         });
     }
