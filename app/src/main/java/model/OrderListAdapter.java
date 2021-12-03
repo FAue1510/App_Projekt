@@ -10,6 +10,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.a21q4_app_projekt.R;
 import java.util.List;
+
+import activity.DataViewActivity;
+import activity.HomeActivity;
+import activity.MyOrderActivity;
+import activity.ProfActivity;
 import de.hdodenhof.circleimageview.CircleImageView;
 import fontsUI.cairoTextView;
 
@@ -48,6 +53,9 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.View
             @Override
             public void onClick(View view) {
                 Toast.makeText(context, "test", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(view.getContext(), MyOrderActivity.class);
+                intent.putExtra("order", order);
+                view.getContext().startActivity(intent);
             }
         });
     }
