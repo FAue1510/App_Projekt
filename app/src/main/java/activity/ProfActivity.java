@@ -102,8 +102,8 @@ public class ProfActivity extends Activity {
                 id_departments_TextView.setText(id_departments_TextView.getText() + department.getName() + "\n");
             }
         }
-        documentReference = db.collection("professors").document(prof.getid());
-        readData(documentReference);
+        //documentReference = db.collection("professors").document(prof.getid());
+        //readData(documentReference);
 
         //id_departments_TextView.setText("TEST");
     }
