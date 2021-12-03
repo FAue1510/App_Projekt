@@ -8,8 +8,6 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.location.Address;
-import android.location.Geocoder;
 import android.location.Location;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
@@ -35,16 +33,13 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Locale;
 
 import Utility.NetworkChangeListener;
 import classy.CustomDatePicker.DatePicker;
 import database.ProfSQLiteOpenHelper;
 import fontsUI.cairoEditText;
-import model.Account;
 import model.Department;
 import model.DepartmentManager;
 import model.ProfManager;
@@ -65,6 +60,8 @@ public class HomeActivity extends Activity {
     String TAG = "PROFESSORS";
 
     NetworkChangeListener networkChangeListener = new NetworkChangeListener();
+
+    //Bitmap bitmap;
 
     private FusedLocationProviderClient fusedLocationClient;
 
@@ -123,9 +120,8 @@ public class HomeActivity extends Activity {
 
     public void search_click(View view) {
         profManager.deleteList();
-        profManager.addProfList(new ProfSQLiteOpenHelper(getApplicationContext()).readAll(nameText.getText().toString(), departmentPicker.getSeletedItem(), circlingPicker.getSeletedItem()));
+        profManager.addProfList(new ProfSQLiteOpenHelper(getApplicationContext()).readAll(nameText.getText().toString(), departmentPicker.getSeletedItem()));
         prefs.edit().putString("selected_department", departmentPicker.getSeletedItem()).apply();
-
         //go to next view
         Intent intent = new Intent(HomeActivity.this, DataViewActivity.class);
         startActivity(intent);
@@ -153,10 +149,7 @@ public class HomeActivity extends Activity {
                                 document.get("city").toString(),
                                 ((ArrayList<String>) document.get("departments")),
                                 document.getId(),
-                                document.get("number").toString(),
-                                document.get("long").toString(),
-                                document.get("lat").toString(),
-                                Integer.parseInt(document.get("price").toString())
+                                document.get("number").toString()
                         );
                         downloadImage(prof, helper);
                     }
@@ -187,20 +180,7 @@ public class HomeActivity extends Activity {
     }
 
     private Location getGeolocation() {
-        Account ac = Account.getInstance();
-        Geocoder coder = new Geocoder(this, Locale.GERMANY);
 
-        String ad = ac.getStreet() + " " + ac.getHouseNumber() + " " + ac.getPlz() + " " + ac.getCity();
-        String longi = "";
-        String lati = "";
-        try {
-            Address address = coder.getFromLocationName(ad, 1).get(0);
-            longi = address.getLongitude() + "";
-            lati = address.getLatitude() + "";
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        //Toast.makeText(getApplicationContext(), longi + " " + lati, Toast.LENGTH_LONG).show();
         return null;
     }
 

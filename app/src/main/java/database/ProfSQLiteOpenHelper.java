@@ -1,12 +1,10 @@
 package database;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
 import java.util.Vector;
 
 import android.content.ContentValues;
@@ -16,13 +14,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.location.Address;
-import android.location.Geocoder;
-import android.location.Location;
 import android.util.Log;
 import android.widget.Toast;
 
-import model.Account;
 import model.DepartmentManager;
 import model.Professors;
 
@@ -43,15 +37,10 @@ public class ProfSQLiteOpenHelper extends SQLiteOpenHelper{
     public static final String COL_PROF_POSTALCODE = "postalCode";
     public static final String COL_PROF_CITY = "city";
     public static final String COL_PROF_DEPARTMENTS = "departments";
-    public static final String COL_PROF_LATI = "lati";
-    public static final String COL_PROF_LONGI = "longi";
-    public static final String COL_PROF_PRICE = "price";
     public static final String COL_PROF_IMAGE = "image";
 
     private DepartmentManager depManager;
 
-    private double longi;
-    private double lati;
 
     public static final String[] COLS_PROF = {COL_PROF_ID,
             COL_PROF_EMAIL,
@@ -64,9 +53,6 @@ public class ProfSQLiteOpenHelper extends SQLiteOpenHelper{
             COL_PROF_CITY,
             COL_PROF_DEPARTMENTS,
             COL_PROF_MOBILENUMBER,
-            COL_PROF_LATI,
-            COL_PROF_LONGI,
-            COL_PROF_PRICE,
             COL_PROF_IMAGE
     };
 
@@ -93,9 +79,6 @@ public class ProfSQLiteOpenHelper extends SQLiteOpenHelper{
                         + "%s TEXT NOT NULL, "
                         + "%s TEXT NOT NULL, "
                         + "%s TEXT NOT NULL, "
-                        + "%s TEXT NOT NULL, "
-                        + "%s TEXT NOT NULL, "
-                        + "%s INTEGER, "
                         + "%s BLOB)",
                 TABLE_PROF,
                 COL_PROF_ID,
@@ -109,9 +92,6 @@ public class ProfSQLiteOpenHelper extends SQLiteOpenHelper{
                 COL_PROF_CITY,
                 COL_PROF_DEPARTMENTS,
                 COL_PROF_MOBILENUMBER,
-                COL_PROF_LATI,
-                COL_PROF_LONGI,
-                COL_PROF_PRICE,
                 COL_PROF_IMAGE);
 
         Log.i("CREATE", createTable);
@@ -140,9 +120,6 @@ public class ProfSQLiteOpenHelper extends SQLiteOpenHelper{
         values.put(COL_PROF_POSTALCODE, prof.getPlz());
         values.put(COL_PROF_CITY, prof.getCity());
         values.put(COL_PROF_MOBILENUMBER, prof.getMobileNumber());
-        values.put(COL_PROF_LATI, prof.getLati());
-        values.put(COL_PROF_LONGI, prof.getLongi());
-        values.put(COL_PROF_PRICE, prof.getPrice());
         values.put(COL_PROF_IMAGE, bytes);
 
         String departs = "";
@@ -172,24 +149,9 @@ public class ProfSQLiteOpenHelper extends SQLiteOpenHelper{
         return profs;
     }
 
-    public List<Professors> readAll(String name, String department, String radius) {
+    public List<Professors> readAll(String name, String department) {
         SQLiteDatabase db = getReadableDatabase();
         List<Professors> profs = new Vector<>();
-        getGeolocation();
-
-        double rad = 0;
-        switch (radius) {
-            case "Unbegrent": rad = 0; break;
-            case "1km": rad = 1.0; break;
-            case "4km": rad = 4.0; break;
-            case "8km": rad = 8.0; break;
-            case "10km": rad = 10.0; break;
-            case "20km": rad = 20.0; break;
-            case "40km": rad = 40.0; break;
-            case "80km": rad = 80.0; break;
-            case "100km": rad = 100.0; break;
-
-        }
 
         Cursor c;
         if (!name.contains(" ")) {
@@ -210,15 +172,7 @@ public class ProfSQLiteOpenHelper extends SQLiteOpenHelper{
 
         c.moveToFirst();
         while (!c.isAfterLast()) {
-            Professors prof = convertToProf(c);
-
-            if (rad != 0) {
-                if (distFrom(lati, longi, Double.parseDouble(prof.getLati()), Double.parseDouble(prof.getLongi())) <= rad) {
-                    profs.add(prof);
-                }
-            } else {
-                profs.add(prof);
-            }
+            profs.add(convertToProf(c));
             c.moveToNext();
         }
         db.close();
@@ -238,44 +192,21 @@ public class ProfSQLiteOpenHelper extends SQLiteOpenHelper{
         String city = c.getString(c.getColumnIndexOrThrow(COL_PROF_CITY));
         List<String> departments = Arrays.asList(c.getString(c.getColumnIndexOrThrow(COL_PROF_DEPARTMENTS)).split(","));
         String number = c.getString(c.getColumnIndexOrThrow(COL_PROF_MOBILENUMBER));
-        String lati = c.getString(c.getColumnIndexOrThrow(COL_PROF_LATI));
-        String longi = c.getString(c.getColumnIndexOrThrow(COL_PROF_LONGI));
-        int price = c.getInt(c.getColumnIndexOrThrow(COL_PROF_PRICE));
-
         Bitmap image = byteArrayToBitmap(c.getBlob(c.getColumnIndexOrThrow(COL_PROF_IMAGE)));
 
-        return new Professors(email, firstName, lastName, birth, street, housenumber, plz, city, departments, _id, number, lati, longi, price, image);
+        return new Professors(email, firstName, lastName, birth, street, housenumber, plz, city, departments, _id, number, image);
+    }
+
+    private byte[] bitmapToByteArray(Bitmap bitmap) {
+        int size = bitmap.getRowBytes() * bitmap.getHeight();
+        ByteBuffer byteBuffer = ByteBuffer.allocate(size);
+        bitmap.copyPixelsToBuffer(byteBuffer);
+
+        return byteBuffer.array();
     }
 
     private Bitmap byteArrayToBitmap(byte[] bArray) {
         return BitmapFactory.decodeByteArray(bArray, 0, bArray.length);
-    }
-
-    private void getGeolocation() {
-        Account ac = Account.getInstance();
-        Geocoder coder = new Geocoder(context, Locale.GERMANY);
-
-        String ad = ac.getStreet() + " " + ac.getHouseNumber() + " " + ac.getPlz() + " " + ac.getCity();
-        try {
-            Address address = coder.getFromLocationName(ad, 1).get(0);
-            longi = address.getLongitude();
-            lati = address.getLatitude();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static double distFrom(double lat1, double lng1, double lat2, double lng2) {
-        double earthRadius = 6371000; //meters
-        double dLat = Math.toRadians(lat2-lat1);
-        double dLng = Math.toRadians(lng2-lng1);
-        double a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-                Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) *
-                        Math.sin(dLng/2) * Math.sin(dLng/2);
-        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-        double dist = (float) (earthRadius * c);
-
-        return Math.abs(dist) / 1000;
     }
 
     public void deleteData() {
