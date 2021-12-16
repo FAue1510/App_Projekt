@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.CalendarView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -154,12 +153,12 @@ public class OrderActivity extends Activity {
                     helper.deleteData();
 
                     for (QueryDocumentSnapshot document : task.getResult()) {
-                        Log.d("TAG", document.getId() + " => " + document.getData());
+                        Log.d("ERROR", document.getId() + " => " + document.getData());
                         id_order_next_Button.setEnabled(false);
                         return;
                     }
                 } else {
-                    Log.d("TAG", "Error getting documents: ", task.getException());
+                    Log.d("ERROR", "Error getting documents: ", task.getException());
                 }
             }
         });

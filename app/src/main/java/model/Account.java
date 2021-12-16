@@ -1,9 +1,6 @@
 package model;
 
 import android.util.Log;
-import android.widget.Toast;
-
-import java.time.LocalDate;
 
 public class Account {
     private String userUID;
@@ -19,11 +16,6 @@ public class Account {
     private static Account OBJ;
     private String docid;
 
-    private Account(String userUID, String username, String email) {
-        this.userUID = userUID;
-        this.username = username;
-        this.email = email;
-    }
 
     public Account() {
     }

@@ -97,8 +97,6 @@ public class AboutYouActivity2 extends Activity implements View.OnClickListener 
 
     private void complete()
     {
-        String gender = "";
-
         String addressS = edt_street.getText().toString();
         String housenumberS = edt_housenumber.getText().toString();
         String postalCodeS = edt_postalCode.getText().toString();

@@ -19,17 +19,11 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
 import Utility.NetworkChangeListener;
-import database.ProfSQLiteOpenHelper;
 import model.Order;
-import model.OrderListAdapter;
-import model.Professors;
 
 public class MyOrderActivity extends Activity {
 
@@ -40,7 +34,6 @@ public class MyOrderActivity extends Activity {
     NetworkChangeListener networkChangeListener = new NetworkChangeListener();
 
     Order order;
-    OrderListAdapter orderListAdapter;
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private DocumentReference documentReference;

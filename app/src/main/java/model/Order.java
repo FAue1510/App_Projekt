@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.function.Predicate;
 
 public class Order implements Serializable {
     private String userUID;
@@ -18,7 +16,6 @@ public class Order implements Serializable {
     private String description;
     private String order_date;
     private String pattern = "dd.MM.yyyy";
-    private String orderUID;
     DateFormat df = new SimpleDateFormat(pattern);
     private long number;
     private boolean rated;

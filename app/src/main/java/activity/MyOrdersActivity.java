@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.WindowManager;
 import android.widget.Toast;
 
@@ -122,7 +123,7 @@ public class MyOrdersActivity extends Activity {
 
                     }
                 } else {
-                    Toast.makeText(getApplicationContext(), "Error getting documents: ", Toast.LENGTH_LONG);
+                    Log.d("ERROR", "Error getting documents: ", task.getException());
                 }
             }
         });

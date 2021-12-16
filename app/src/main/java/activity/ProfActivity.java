@@ -1,11 +1,6 @@
 package activity;
 
 import com.example.a21q4_app_projekt.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import android.Manifest;
 import android.app.Activity;
@@ -15,13 +10,11 @@ import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 
-import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -46,8 +39,6 @@ public class ProfActivity extends Activity {
     private ProfManager manager;
     private Professors prof;
     private ArrayList ratings;
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private DocumentReference documentReference;
 
     @Override
     public void onBackPressed() {
@@ -102,10 +93,6 @@ public class ProfActivity extends Activity {
                 id_departments_TextView.setText(id_departments_TextView.getText() + department.getName() + "\n");
             }
         }
-        //documentReference = db.collection("professors").document(prof.getid());
-        //readData(documentReference);
-
-        //id_departments_TextView.setText("TEST");
     }
     public void order_OnClick(View view){
         Intent intent = new Intent(ProfActivity.this, OrderActivity.class);
@@ -123,29 +110,5 @@ public class ProfActivity extends Activity {
             Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + prof.getMobileNumber()));
             startActivity(intent);
         }
-    }
-
-    private void readData(DocumentReference documentReference) {
-        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        ratings = (ArrayList) document.get("valuation");
-                        long rating = 0;
-                        for ( Object r : ratings) {
-                            rating += (long)r;
-                        }
-                        rb_prof_rating.setRating(rating / (ratings.toArray().length + 1));
-                    }
-                    else{
-
-                    }
-                } else {
-                    Log.d("TAG", "Error getting documents: ", task.getException());
-                }
-            }
-        });
     }
 }

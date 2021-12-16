@@ -6,15 +6,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.location.Location;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -177,18 +173,13 @@ public class HomeActivity extends Activity {
                         ));
                     }
                 } else {
-                    Toast.makeText(getApplicationContext(), "Error getting documents: ", Toast.LENGTH_LONG);
+                    Log.d(TAG, "Error getting documents: ", task.getException());
                 }
                 departmentPicker.setItems(DepartmentManager.getInstance().getDepListString());
                 List<String> deps = DepartmentManager.getInstance().getDepListString();
                 departmentPicker.setSeletion(deps.indexOf(prefs.getString("prefDep", "Alle")));
             }
         });
-    }
-
-    private Location getGeolocation() {
-
-        return null;
     }
 
     private void downloadImage(Professors prof, ProfSQLiteOpenHelper helper) {

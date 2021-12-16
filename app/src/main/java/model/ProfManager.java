@@ -1,8 +1,5 @@
 package model;
 
-import android.content.Context;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
@@ -13,7 +10,6 @@ public class ProfManager {
 
     private ProfManager() {
         list = new Vector<>();
-        //addTestData();
     }
 
     public static ProfManager getInstance() {
