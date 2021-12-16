@@ -187,7 +187,7 @@ public class SignInActivity extends Activity implements View.OnClickListener {
                                 document.get("houseNumber").toString(),
                                 document.get("plz").toString()
                         );
-                        ac.setDocId(document.getId());
+                        ac.setdocid(document.getId());
 
                     }
                 } else {

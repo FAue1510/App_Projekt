@@ -114,7 +114,7 @@ public class PersonalDataActivity extends Activity {
         acc.setBirthday(dayDatePicker.getSeletedItem() + "." + monthDatePicker.getSeletedItem() + "." + yearDatePicker.getSeletedItem());
 
 
-        DocumentReference userRef = db.collection("users").document(acc.getDocid());
+        DocumentReference userRef = db.collection("users").document(acc.getdocid());
 
         userRef.update(
                 "firstName",id_first_name_EditText.getText().toString(),

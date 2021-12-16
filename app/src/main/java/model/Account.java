@@ -36,11 +36,10 @@ public class Account {
         return OBJ;
     }
 
-    public void setDocId(String docid){
+    public void setdocid(String docid){
         this.docid = docid;
     }
-
-    public String getDocid(){
+    public String getdocid(){
         return docid;
     }
 

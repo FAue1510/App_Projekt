@@ -46,6 +46,12 @@ public class MyOrderActivity extends Activity {
     private DocumentReference documentReference;
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.from_left_in, R.anim.from_right_out);
+    }
+
+    @Override
     protected void onStart() {
         IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
         registerReceiver(networkChangeListener, filter);
@@ -81,6 +87,8 @@ public class MyOrderActivity extends Activity {
             ratings.add(ratingBar.getRating());
             documentReference.update("valuation", FieldValue.arrayUnion(ratings.toArray()));
             order.setRated(true);
+            finish();
+            overridePendingTransition(R.anim.from_left_in, R.anim.from_right_out);
         }
     }
 

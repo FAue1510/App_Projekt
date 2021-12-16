@@ -10,7 +10,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:gravity="center">
 
         <RatingBar
             android:id="@+id/rb_prof_rating_order"
@@ -19,18 +20,16 @@
             android:isIndicator="false"
             android:numStars="5"
             android:rating="3.5"
-            android:scaleX="0.5"
-            android:scaleY="0.5"
-            android:theme="@style/ratingBar"
-            android:transformPivotX="0dp"
-            android:transformPivotY="0dp" />
+            android:theme="@style/ratingBar"/>
 
         <Button
             android:id="@+id/b_rate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="rateOnClick"
-            android:text="Bewerten" />
+            android:text="Bewerten"
+            android:background="@drawable/button_background"
+            android:layout_marginTop="40dp"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

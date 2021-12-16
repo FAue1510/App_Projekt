@@ -146,7 +146,7 @@ public class OrderOverview extends Activity {
                         String text = "Bestellbestätigung\n\nBestätigung vom Tutor:\nBestelldatum: " + order.getOrder_date() + "\nBestellt für den: " +  order.getDate() + "\nBestellter Tutor: " + prof.getFirstName() + " " + prof.getLastName();
                         m.sendTextMessage(destination, null, text, null, null);
 
-                        Intent intent = new Intent(getApplicationContext(), MyOrdersActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                         startActivity(intent);
                     }
                 }, 3000);
